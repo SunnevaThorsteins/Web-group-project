@@ -2,8 +2,8 @@ STORT VERKEFNI 2
 
 SKIPULAG 0G VERKASKIPTING: 
 
-  *Ásdís: 
+  Ásdís: 
   
-  *Helga: 
+  Helga: 
   
-  *Sunneva: 
+  Sunneva: 
