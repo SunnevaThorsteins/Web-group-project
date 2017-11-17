@@ -1,4 +1,5 @@
 #STORT VERKEFNI 2
+****************************************************************************
 
 SKIPULAG 0G VERKASKIPTING: 
 
@@ -9,6 +10,7 @@ SKIPULAG 0G VERKASKIPTING:
   - Sunneva: 
   
   
+  **************************************************************************
   1. git add .
   2. git commit -m "einhver skilaboð um það sem þú varst að gera"
   3. git pull (passa uppá conflict)
