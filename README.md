@@ -1,6 +1,21 @@
 #STORT VERKEFNI 2
 
 ****************************************************************************
+LISTI YFIR VERKEFNI:
+
+  - html síða
+  - almenn css síða
+  - sass síður
+    - button
+    - cardlist
+    - til baka button
+    -heading
+    -header
+  - JavaScript
+    - setja inn myndböndin með JSON
+    - 
+
+****************************************************************************
 
 SKIPULAG 0G VERKASKIPTING: 
 
