@@ -17,6 +17,7 @@ class videosite {
     /*sér um að byggju upp síðuna, búa til öll elementin sem við þurfum
      og appenda þau rétt fyrir rent*/
     createRent() {
+      
 
     }
 
