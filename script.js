@@ -73,11 +73,12 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
      *langt er síðan myndbandið var birt*/
     function sincePosted(created){
       /*þarf að setja betur upp en þetta er svona í grófum dráttum
-       *gæti varið að við gætum notað const*/
-      var sec = parseInt(created /1000);
-      var min = parseInt(sec/60);
-      var klst = parseInt(min/60);
-      var day = parseInt(klst/24);
+       *gæti verið að við gætum notað const
+       *fæ alltaf út undefined þegar og það tengist eitthvað var gæjunum en veit ekki hvernig á að laga það*/
+      var sec = created/1000;
+      var min = sec/60;
+      var klst = min/60;
+      var day = klst/24;
       var week;
       var month;
       var year;
@@ -86,47 +87,49 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
       if (day >= 365) {
         year = parseInt(day/365);
         if (year === 1){
-          return "Fyrir" + year + "ári síðan";
+          return 'Fyrir ' + year + ' ári síðan';
         }
         else {
-          return "Fyrir" + year + "árum síðan";
+          return 'Fyrir ' + year + ' árum síðan';
         }
       }
       /*ef meiri en 30 dagar síðan "created"*/
       else if (day >= 30){
         month = parseInt(day/30);
         if (month === 1){
-          return "Fyrir" + month + "mánuði síðan";
+          return 'Fyrir ' + month + ' mánuði síðan';
         }
         else {
-          return "Fyrir" + month + "mánuðum síðan";
+          return 'Fyrir ' + month + ' mánuðum síðan';
         }
       }
       /*ef meira en 7 dagae er síðan "created"*/
       else if (day >= 7){
         week = parseInt(day/7);
         if(week === 1){
-          return "Fyrir" + week + "viku síðan";
+          return 'Fyrir ' + week + ' viku síðan';
         }
         else {
-          return "Fyrir" + week + "vikum síðan";
+          return 'Fyrir ' + week + ' vikum síðan';
         }
       }
       /*ef meira en 24klst síðan "created"*/
       else if (klst >= 24){
+        day = parseInt(day);
         if (day === 1){
-          return "Fyrir" + day + "degi síðan";
+          return 'Fyrir ' + day + ' degi síðan';
         }
         else {
-          return "Fyrir" + day + "dögum síðan";
+          return 'Fyrir ' + day + ' dögum síðan';
         }
       }
       else {
+        klst = parseInt(klst);
         if (klst === 1){
-          return "Fyrir" + klst + "klukkustund síðan";
+          return 'Fyrir ' + klst + 'klukkustund síðan';
         }
         else {
-          return "Fyrir" + klst + "klukkustundum síðan";
+          return 'Fyrir ' + klst + 'klukkustundum síðan';
         }
       }
     }
