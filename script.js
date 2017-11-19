@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
     //listi yfir breytur? Það virðist vera gert oft
 
 
+
     /*síðan undir venjulegum kringumstæðum. Sér um að kalla á föll
     og/eða allt það sem þarf til þess að búa til síðuna áður en eitthvað
     er leigt af henni */
@@ -43,18 +44,91 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
      og appenda þau rétt fyrir rent*/
     function createRent() {
     createRent() {
+      video(/*kallar á ákveðið myndband*/);
+      video(/*kallar á eitthvað annað myndband*/);
+      video(/*kallar á enn annað myndband*/);
 
     }
 
-    /*nær í gögnin sem við fáum fyrir myndböndin og setur þau inn setur inn
-    svona loading gæja ef það er bið á því að þetta loadist*/
+    /*sér um að kalla á öll föllin fyrir myndbandið, videoLegth, sincePosted, load ofl.
+     *setur einnig card klasa á viðeigandi gæja */
+     function video(/*myndbanda jason fylkið eða hvað?*/){
+
+       load(); //geri ráð fyrir að það eigi að vera eitthvað gildi sem fer inn í þetta fall
+       videoLenght();
+     }
+
+    /*nær í gögnin sem við fáum fyrir myndböndin og setur svona loading gæja ef það er bið á því að þetta loadist*/
     function load() {
 
     }
 
-    /*sér um að myndböndin líti rétt út, setur overlay klasa á */
-    function videoApperance() {
+    /*sér um að littli kassinn sem er með lengd myndbandsins sé settur rétt inn*/
+    function videoLenght() {
 
+    }
+
+    /*sér um að það sé rétt lengd frá því myndbandið var birt.
+     *fær inn lengdina í millisekúndum og skilar streng sem segir til um hversu
+     *langt er síðan myndbandið var birt*/
+    function sincePosted(created){
+      /*þarf að setja betur upp en þetta er svona í grófum dráttum
+       *gæti varið að við gætum notað const*/
+      var sec = parseInt(created /1000);
+      var min = parseInt(sec/60);
+      var klst = parseInt(min/60);
+      var day = parseInt(klst/24);
+      var week;
+      var month;
+      var year;
+
+      /*ef meira en 365 dagar síðan "created"*/
+      if (day >= 365) {
+        year = parseInt(day/365);
+        if (year === 1){
+          return "Fyrir" + year + "ári síðan";
+        }
+        else {
+          return "Fyrir" + year + "árum síðan";
+        }
+      }
+      /*ef meiri en 30 dagar síðan "created"*/
+      else if (day >= 30){
+        month = parseInt(day/30);
+        if (month === 1){
+          return "Fyrir" + month + "mánuði síðan";
+        }
+        else {
+          return "Fyrir" + month + "mánuðum síðan";
+        }
+      }
+      /*ef meira en 7 dagae er síðan "created"*/
+      else if (day >= 7){
+        week = parseInt(day/7);
+        if(week === 1){
+          return "Fyrir" + week + "viku síðan";
+        }
+        else {
+          return "Fyrir" + week + "vikum síðan";
+        }
+      }
+      /*ef meira en 24klst síðan "created"*/
+      else if (klst >= 24){
+        if (day === 1){
+          return "Fyrir" + day + "degi síðan";
+        }
+        else {
+          return "Fyrir" + day + "dögum síðan";
+        }
+      }
+      else {
+        if (klst === 1){
+          return "Fyrir" + klst + "klukkustund síðan";
+        }
+        else {
+          return "Fyrir" + klst + "klukkustundum síðan";
+        }
+      }
     }
 
     /*útfærir það sem gerist þegar ýtt er á myndbönd*/
