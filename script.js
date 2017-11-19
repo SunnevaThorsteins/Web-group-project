@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
      og appenda þau rétt fyrir rent*/
     function createRent() {
     createRent() {
+      /*ætti líklega að kalla í sectionin eða eitthvað?*/
       video(/*kallar á ákveðið myndband*/);
       video(/*kallar á eitthvað annað myndband*/);
       video(/*kallar á enn annað myndband*/);
@@ -63,9 +64,21 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
 
     }
 
-    /*sér um að littli kassinn sem er með lengd myndbandsins sé settur rétt inn*/
-    function videoLenght() {
-
+    /*sér um að littli kassinn sem er með lengd myndbandsins sé settur rétt inn, fær inn lengdina í sekúndum og skilar
+     *á forminu mín:sek*/
+     /*þetta fall er á mjög miklu tilraunarstigi*/
+    function videoLenght(duration) {
+      if (duration < 60){
+        if (duration < 10){
+          return "0:0" + duration;
+        }
+        else {
+          return "0:" + duration;
+        }
+      }
+      else {
+      }
+      return min + ":" + sec;
     }
 
     /*sér um að það sé rétt lengd frá því myndbandið var birt.
