@@ -156,20 +156,22 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
       row.classList.add('cardlist__row');
       const col = document.createElement('div');
       col.classList.add('cardlist__col');
-      col.appendChild(document.createElement(...));
+      col.appendChild(document.createElement(blabla));
       row.appendChild(col);
 
       const card = document.createElement('div');
       card.classList.add('card');
-      const cardImage = document.createElement('div');
+      const cardImage = document.createElement('img');
       cardImage.classList.add('card__img');
-      cardImage.appendChild(document.createElement(poster)); // create image??
+      cardImage.src = 'poster'; // ?????
+      cardImage.setAttribute('src', poster); // ???????
+      //cardImage.appendChild(document.createElement(poster));
       const cardContent = document.createElement('div');
       cardContent.classList.add('card__content');
-      cardContent.appendChild(document.createElement(...));
+      cardContent.appendChild(document.createElement(blalba));
       const cardHeading = document.createElement('div');
       cardHeading.classList.add('card__heading');
-      cardContent.appendChild(document.createTextNode(title));
+      cardHeading.appendChild(document.createTextNode(title));
       card.appendChild(cardImage); //???
       card.appendChild(cardContent);
       card.appendChild(cardHeading);
