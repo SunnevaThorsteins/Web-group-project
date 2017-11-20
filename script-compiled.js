@@ -1,2 +1,223 @@
+<<<<<<< HEAD
+=======
+'use strict';
+
+document.addEventListener('DOMContentLoaded', function () {
+  //þeeeetta á kannski að vera hérna, er allavega í verkefni 9 og 8 :
+  var main = document.querySelector('main');
+  console.log(main);
+  program.init(main);
+});
+
+var program = function () {
+
+  function getJson() {
+    var r = new XMLHttpRequest();
+
+    r.open('GET', 'videos.json', true);
+
+    r.onload = function () {
+      console.log(r.status);
+
+      if (r.status >= 200 && r.status < 400) {
+<<<<<<< HEAD
+        obj = JSON.parse(r.response);
+        createVideos(obj);
+        createCategories(obj);
+=======
+        console.log(r.response);
+>>>>>>> 0e405e12fc26de71f9ce5725b40103a24d9e1913
+      } else {
+        console.log('villa!', r);
+      }
+    };
+
+    r.onerror = function () {
+      console.log('villa í tengingu');
+    };
+
+    r.send();
+  }
+
+<<<<<<< HEAD
+  //Sækir videos í json hlut
+  function createVideos(data) {
+    var videos = data.videos;
+    console.log('VIDEOS FRÁ JSON', videos);
+  }
+
+  //Sækir categories í json hlut
+  function createCategories(data) {
+    var categories = data.categories;
+    console.log('CATEGORIES FRÁ JSON', categories);
+  }
+
+=======
+>>>>>>> 0e405e12fc26de71f9ce5725b40103a24d9e1913
+  //listi yfir breytur? Það virðist vera gert oft
+
+
+  /*síðan undir venjulegum kringumstæðum. Sér um að kalla á föll
+  og/eða allt það sem þarf til þess að búa til síðuna áður en eitthvað
+  er leigt af henni */
+
+  function videoRent() {}
+
+  /*sér um að byggju upp síðuna, búa til öll elementin sem við þurfum
+   og appenda þau rétt fyrir rent*/
+  function createRent() {
+    /*ætti líklega að kalla í sectionin eða eitthvað?*/
+    video();
+    video();
+    video();
+  }
+
+  /*sér um að kalla á öll föllin fyrir myndbandið, videoLegth, sincePosted, load ofl.
+   *setur einnig card klasa á viðeigandi gæja */
+  function video() /*myndbanda jason fylkið eða hvað?*/{
+
+    load(); //geri ráð fyrir að það eigi að vera eitthvað gildi sem fer inn í þetta fall
+<<<<<<< HEAD
+    videoLenght();
+=======
+    videoLength();
+>>>>>>> 0e405e12fc26de71f9ce5725b40103a24d9e1913
+  }
+
+  /*nær í gögnin sem við fáum fyrir myndböndin og setur svona loading gæja ef það er bið á því að þetta loadist*/
+  function load() {}
+
+  /*sér um að littli kassinn sem er með lengd myndbandsins sé settur rétt inn, fær inn lengdina í sekúndum og skilar
+   *á forminu mín:sek*/
+  /*þetta fall er á mjög miklu tilraunarstigi*/
+<<<<<<< HEAD
+  function videoLenght(duration) {
+=======
+  function videoLength(duration) {
+>>>>>>> 0e405e12fc26de71f9ce5725b40103a24d9e1913
+    if (duration < 60) {
+      if (duration < 10) {
+        return "0:0" + duration;
+      } else {
+        return "0:" + duration;
+      }
+    } else {}
+    return min + ":" + sec;
+  }
+
+  /*sér um að það sé rétt lengd frá því myndbandið var birt.
+   *fær inn lengdina í millisekúndum og skilar streng sem segir til um hversu
+   *langt er síðan myndbandið var birt*/
+  function sincePosted(created) {
+    /*þarf að setja betur upp en þetta er svona í grófum dráttum
+     *gæti verið að við gætum notað const
+     *fæ alltaf út undefined þegar og það tengist eitthvað var gæjunum en veit ekki hvernig á að laga það*/
+    var sec = created / 1000;
+    var min = sec / 60;
+    var klst = min / 60;
+    var day = klst / 24;
+    var week;
+    var month;
+    var year;
+
+    /*ef meira en 365 dagar síðan "created"*/
+    if (day >= 365) {
+      year = parseInt(day / 365);
+      if (year === 1) {
+        return 'Fyrir ' + year + ' ári síðan';
+      } else {
+        return 'Fyrir ' + year + ' árum síðan';
+      }
+    }
+    /*ef meiri en 30 dagar síðan "created"*/
+    else if (day >= 30) {
+        month = parseInt(day / 30);
+        if (month === 1) {
+          return 'Fyrir ' + month + ' mánuði síðan';
+        } else {
+          return 'Fyrir ' + month + ' mánuðum síðan';
+        }
+      }
+      /*ef meira en 7 dagae er síðan "created"*/
+      else if (day >= 7) {
+          week = parseInt(day / 7);
+          if (week === 1) {
+            return 'Fyrir ' + week + ' viku síðan';
+          } else {
+            return 'Fyrir ' + week + ' vikum síðan';
+          }
+        }
+        /*ef meira en 24klst síðan "created"*/
+        else if (klst >= 24) {
+            day = parseInt(day);
+            if (day === 1) {
+              return 'Fyrir ' + day + ' degi síðan';
+            } else {
+              return 'Fyrir ' + day + ' dögum síðan';
+            }
+          } else {
+            klst = parseInt(klst);
+            if (klst === 1) {
+              return 'Fyrir ' + klst + 'klukkustund síðan';
+            } else {
+              return 'Fyrir ' + klst + 'klukkustundum síðan';
+            }
+          }
+  }
+
+  /*útfærir það sem gerist þegar ýtt er á myndbönd*/
+  function watch() {}
+
+<<<<<<< HEAD
+  /*útfærir controles gæjan, það sem kemur undir þegar
+  maður er að horfa á myndand*/
+  function controles() {}
+
+  function init(main) {
+    getJson();
+=======
+  function createElement(poster, /* video? ,*/title) {
+    var row = document.createElement('div');
+    row.classList.add('cardlist__row');
+    var col = document.createElement('div');
+    col.classList.add('cardlist__col');
+    col.appendChild(document.createElement(blabla));
+    row.appendChild(col);
+
+    var card = document.createElement('div');
+    card.classList.add('card');
+    var cardImage = document.createElement('img');
+    cardImage.classList.add('card__img');
+    cardImage.src = 'poster'; // ?????
+    cardImage.setAttribute('src', poster); // ???????
+    //cardImage.appendChild(document.createElement(poster));
+    var cardContent = document.createElement('div');
+    cardContent.classList.add('card__content');
+    cardContent.appendChild(document.createElement(blalba));
+    var cardHeading = document.createElement('div');
+    cardHeading.classList.add('card__heading');
+    cardHeading.appendChild(document.createTextNode(title));
+    card.appendChild(cardImage); //???
+    card.appendChild(cardContent);
+    card.appendChild(cardHeading);
+
+    row.appendChild(card);
+
+    return row;
+  }
+
+  /*útfærir control gæjann, það sem kemur undir þegar
+  maður er að horfa á myndand*/
+  function controls() {}
+
+  function init(main) {
+    console.log(getJson());
+>>>>>>> 0e405e12fc26de71f9ce5725b40103a24d9e1913
+  }
+  return {
+    init: init
+  };
+}();
+>>>>>>> abe474599fb3007551c3c1667b29666f6c653c63
 
 //# sourceMappingURL=script-compiled.js.map
