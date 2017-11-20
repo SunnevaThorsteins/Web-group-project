@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kannski að vera hérna, er allavega í verkefni 9 og 8 :)
+document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kannski að vera hérna, er allavega í verkefni 9 og 8 :
   const main = document.querySelector('main');
   console.log(main);
   program.init(main);
@@ -8,11 +8,12 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
 
     function getJson() {
       var r = new XMLHttpRequest();
-      //var jsonVideos = 'video.json';
 
       r.open('GET', 'videos.json' , true);
 
       r.onload = function() {
+        console.log(r.status);
+
         if (r.status >= 200 && r.status < 400) {
           console.log(r.response);
         } else {
@@ -42,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
     /*sér um að byggju upp síðuna, búa til öll elementin sem við þurfum
      og appenda þau rétt fyrir rent*/
     function createRent() {
-    createRent() {
 
     }
 
