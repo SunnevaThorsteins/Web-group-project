@@ -67,6 +67,8 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
      *á forminu mín:sek*/
      /*þetta fall er á mjög miklu tilraunarstigi*/
     function videoLenght(duration) {
+      var min;
+      var sec;
       if (duration < 60){
         if (duration < 10){
           return "0:0" + duration;
@@ -76,8 +78,13 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
         }
       }
       else {
+        min = parseInt(duration/60);
+        sec = duration -(min*60);
+        if (sec < 10){
+          sec = "0" + sec;
+        }
+        return min + ":" + sec;
       }
-      return min + ":" + sec;
     }
 
     /*sér um að það sé rétt lengd frá því myndbandið var birt.
@@ -87,6 +94,9 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
       /*þarf að setja betur upp en þetta er svona í grófum dráttum
        *gæti verið að við gætum notað const
        *fæ alltaf út undefined þegar og það tengist eitthvað var gæjunum en veit ekki hvernig á að laga það*/
+      //const diff = created - new Date();
+      var current = new Date().getTime();
+      var created = current - created;
       var sec = created/1000;
       var min = sec/60;
       var klst = min/60;
@@ -94,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
       var week;
       var month;
       var year;
-
+debugger
       /*ef meira en 365 dagar síðan "created"*/
       if (day >= 365) {
         year = parseInt(day/365);
@@ -138,17 +148,38 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
       else {
         klst = parseInt(klst);
         if (klst === 1){
-          return 'Fyrir ' + klst + 'klukkustund síðan';
+          return 'Fyrir ' + klst + ' klukkustund síðan';
         }
         else {
-          return 'Fyrir ' + klst + 'klukkustundum síðan';
+          return 'Fyrir ' + klst + ' klukkustundum síðan';
         }
       }
     }
 
-    /*útfærir það sem gerist þegar ýtt er á myndbönd*/
+    /*útfærir það sem gerist þegar ýtt er á myndbönd á rent síðunni*/
     function watch(){
 
+    }
+
+    /*fær inn id af myndbandi og annaðhvort byrjar að spila það
+     *eða setur það á pásu. Ætti líklega líka að breyta play takkanum
+     *í pause takka og öfugt*/
+    function playPause(videoId){
+      var video = videoId;
+      if(video.paused){
+        /*held ég sé að finna takkann sem er að hafa þetta á pásu og breyta honum í play takka*/
+        var pauseButton = button.querySelector('.button--pause');
+        pauseButton.classList.remove('.button--pause');
+        pauseButton.classList.add('.button--play');
+        video.play();
+      }
+      else {
+        video.pause();
+        var playButton = button.querySelector('.button--play');
+        playButton.classList.remove('.button--play');
+        playButton.classList.add('.button--pause');
+      }
+      return;
     }
 
     /*útfærir controles gæjan, það sem kemur undir þegar
