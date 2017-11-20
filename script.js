@@ -36,9 +36,9 @@ class videosite {
 
     }
 
-    /*útfærir controles gæjan, það sem kemur undir þegar
+    /*útfærir controle gæjan, það sem kemur undir þegar
     maður er að horfa á myndand*/
-    Controles() {
+    Controls() {
 
     }
 
