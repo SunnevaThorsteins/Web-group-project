@@ -157,17 +157,26 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
       const col = document.createElement('div');
       col.classList.add('cardlist__col');
       col.appendChild(document.createElement(...));
+      row.appendChild(col);
+
       const card = document.createElement('div');
       card.classList.add('card');
+      const cardImage = document.createElement('div');
+      cardImage.classList.add('card__img');
+      cardImage.appendChild(document.createElement(poster)); // create image??
       const cardContent = document.createElement('div');
-      cardContent.appendChild(document.createElement(poster)); // create image??
-      const cardContent = document.createElement('div');
+      cardContent.classList.add('card__content');
       cardContent.appendChild(document.createElement(...));
       const cardHeading = document.createElement('div');
+      cardHeading.classList.add('card__heading');
       cardContent.appendChild(document.createTextNode(title));
       card.appendChild(cardImage); //???
       card.appendChild(cardContent);
       card.appendChild(cardHeading);
+
+      row.appendChild(card);
+
+      return row;
     }
 
     /*útfærir control gæjann, það sem kemur undir þegar
