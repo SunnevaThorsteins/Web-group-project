@@ -13,22 +13,25 @@ LISTI YFIR VERKEFNI:
     -header
   - JavaScript
     - setja inn myndböndin með JSON
-    - 
+    -
 
 ****************************************************************************
 
-SKIPULAG 0G VERKASKIPTING: 
+SKIPULAG 0G VERKASKIPTING:
 
-  - Ásdís: 
-  
-  - Helga: 
-  
-  - Sunneva: 
-  
-  
+  - Ásdís:
+
+  - Helga:
+      1. sækja json skrá gegnum script.js file
+      2. finna einstaka hluti í json skránni og búa til breytur
+      3. finna einnig staðsetningu fyrir þessa hluti í html skjalinu í dom tréð.
+
+  - Sunneva:
+
+
 **************************************************************************
 
-GIT SKIPANIR Í COMMAND PROMT: 
+GIT SKIPANIR Í COMMAND PROMT:
 
   1. git add .
   2. git commit -m "einhver skilaboð um það sem þú varst að gera"
