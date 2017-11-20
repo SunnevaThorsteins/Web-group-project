@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
     function getJson() {
       const r = new XMLHttpRequest();
 
-      r.open('GET', 'videos.json' , true);
+      r.open('GET', 'videos.json', true);
 
       r.onload = function() {
         console.log(r.status);
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
      function video(/*myndbanda jason fylkið eða hvað?*/){
 
        load(); //geri ráð fyrir að það eigi að vera eitthvað gildi sem fer inn í þetta fall
-       videoLenght();
+       videoLength();
      }
 
     /*nær í gögnin sem við fáum fyrir myndböndin og setur svona loading gæja ef það er bið á því að þetta loadist*/
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
     /*sér um að littli kassinn sem er með lengd myndbandsins sé settur rétt inn, fær inn lengdina í sekúndum og skilar
      *á forminu mín:sek*/
      /*þetta fall er á mjög miklu tilraunarstigi*/
-    function videoLenght(duration) {
+    function videoLength(duration) {
       if (duration < 60){
         if (duration < 10){
           return "0:0" + duration;
@@ -166,9 +166,39 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
 
     }
 
-    /*útfærir controles gæjan, það sem kemur undir þegar
+    function createElement(poster, /* video? ,*/ title) {
+      const row = document.createElement('div');
+      row.classList.add('cardlist__row');
+      const col = document.createElement('div');
+      col.classList.add('cardlist__col');
+      col.appendChild(document.createElement(blabla));
+      row.appendChild(col);
+
+      const card = document.createElement('div');
+      card.classList.add('card');
+      const cardImage = document.createElement('img');
+      cardImage.classList.add('card__img');
+      cardImage.src = 'poster'; // ?????
+      cardImage.setAttribute('src', poster); // ???????
+      //cardImage.appendChild(document.createElement(poster));
+      const cardContent = document.createElement('div');
+      cardContent.classList.add('card__content');
+      cardContent.appendChild(document.createElement(blalba));
+      const cardHeading = document.createElement('div');
+      cardHeading.classList.add('card__heading');
+      cardHeading.appendChild(document.createTextNode(title));
+      card.appendChild(cardImage); //???
+      card.appendChild(cardContent);
+      card.appendChild(cardHeading);
+
+      row.appendChild(card);
+
+      return row;
+    }
+
+    /*útfærir control gæjann, það sem kemur undir þegar
     maður er að horfa á myndand*/
-    function controles() {
+    function controls() {
 
     }
 

@@ -1,3 +1,10 @@
-.cardlist{
+.cardlist {
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
+  &__col {
+    display: flex;
+  }
 }

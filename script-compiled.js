@@ -18,9 +18,13 @@ var program = function () {
       console.log(r.status);
 
       if (r.status >= 200 && r.status < 400) {
+<<<<<<< HEAD
         obj = JSON.parse(r.response);
         createVideos(obj);
         createCategories(obj);
+=======
+        console.log(r.response);
+>>>>>>> 0e405e12fc26de71f9ce5725b40103a24d9e1913
       } else {
         console.log('villa!', r);
       }
@@ -33,6 +37,7 @@ var program = function () {
     r.send();
   }
 
+<<<<<<< HEAD
   //Sækir videos í json hlut
   function createVideos(data) {
     var videos = data.videos;
@@ -45,6 +50,8 @@ var program = function () {
     console.log('CATEGORIES FRÁ JSON', categories);
   }
 
+=======
+>>>>>>> 0e405e12fc26de71f9ce5725b40103a24d9e1913
   //listi yfir breytur? Það virðist vera gert oft
 
 
@@ -68,7 +75,11 @@ var program = function () {
   function video() /*myndbanda jason fylkið eða hvað?*/{
 
     load(); //geri ráð fyrir að það eigi að vera eitthvað gildi sem fer inn í þetta fall
+<<<<<<< HEAD
     videoLenght();
+=======
+    videoLength();
+>>>>>>> 0e405e12fc26de71f9ce5725b40103a24d9e1913
   }
 
   /*nær í gögnin sem við fáum fyrir myndböndin og setur svona loading gæja ef það er bið á því að þetta loadist*/
@@ -77,7 +88,11 @@ var program = function () {
   /*sér um að littli kassinn sem er með lengd myndbandsins sé settur rétt inn, fær inn lengdina í sekúndum og skilar
    *á forminu mín:sek*/
   /*þetta fall er á mjög miklu tilraunarstigi*/
+<<<<<<< HEAD
   function videoLenght(duration) {
+=======
+  function videoLength(duration) {
+>>>>>>> 0e405e12fc26de71f9ce5725b40103a24d9e1913
     if (duration < 60) {
       if (duration < 10) {
         return "0:0" + duration;
@@ -151,12 +166,51 @@ var program = function () {
   /*útfærir það sem gerist þegar ýtt er á myndbönd*/
   function watch() {}
 
+<<<<<<< HEAD
   /*útfærir controles gæjan, það sem kemur undir þegar
   maður er að horfa á myndand*/
   function controles() {}
 
   function init(main) {
     getJson();
+=======
+  function createElement(poster, /* video? ,*/title) {
+    var row = document.createElement('div');
+    row.classList.add('cardlist__row');
+    var col = document.createElement('div');
+    col.classList.add('cardlist__col');
+    col.appendChild(document.createElement(blabla));
+    row.appendChild(col);
+
+    var card = document.createElement('div');
+    card.classList.add('card');
+    var cardImage = document.createElement('img');
+    cardImage.classList.add('card__img');
+    cardImage.src = 'poster'; // ?????
+    cardImage.setAttribute('src', poster); // ???????
+    //cardImage.appendChild(document.createElement(poster));
+    var cardContent = document.createElement('div');
+    cardContent.classList.add('card__content');
+    cardContent.appendChild(document.createElement(blalba));
+    var cardHeading = document.createElement('div');
+    cardHeading.classList.add('card__heading');
+    cardHeading.appendChild(document.createTextNode(title));
+    card.appendChild(cardImage); //???
+    card.appendChild(cardContent);
+    card.appendChild(cardHeading);
+
+    row.appendChild(card);
+
+    return row;
+  }
+
+  /*útfærir control gæjann, það sem kemur undir þegar
+  maður er að horfa á myndand*/
+  function controls() {}
+
+  function init(main) {
+    console.log(getJson());
+>>>>>>> 0e405e12fc26de71f9ce5725b40103a24d9e1913
   }
   return {
     init: init
