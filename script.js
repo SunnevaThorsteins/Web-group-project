@@ -4,10 +4,10 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
   program.init(main);
 });
 
-  var program = function () {
+  const program = function () {
 
     function getJson() {
-      var r = new XMLHttpRequest();
+      const r = new XMLHttpRequest();
 
       r.open('GET', 'videos.json' , true);
 
@@ -15,7 +15,10 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
         console.log(r.status);
 
         if (r.status >= 200 && r.status < 400) {
-          console.log(r.response);
+          obj = JSON.parse(r.response);
+          createVideos(obj);
+          createCategories(obj);
+
         } else {
           console.log('villa!', r);
         }
@@ -26,6 +29,18 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
       };
 
       r.send();
+    }
+
+    //Sækir videos í json hlut
+    function createVideos(data) {
+      var videos = data.videos;
+      console.log('VIDEOS FRÁ JSON', videos);
+    }
+
+    //Sækir categories í json hlut
+    function createCategories(data) {
+      var categories = data.categories;
+      console.log('CATEGORIES FRÁ JSON', categories);
     }
 
     //listi yfir breytur? Það virðist vera gert oft
@@ -43,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
 
     /*sér um að byggju upp síðuna, búa til öll elementin sem við þurfum
      og appenda þau rétt fyrir rent*/
-    function createRent(
+    function createRent() {
       /*ætti líklega að kalla í sectionin eða eitthvað?*/
       video(/*kallar á ákveðið myndband*/);
       video(/*kallar á eitthvað annað myndband*/);
@@ -158,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
     }
 
     function init(main) {
-        console.log(getJson());
+        getJson();
     }
     return {
       init: init
