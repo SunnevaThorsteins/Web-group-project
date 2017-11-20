@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -65,5 +66,7 @@ var program = function () {
         init: init
     };
 }();
+=======
+>>>>>>> 8de90f49a6f7aeaede1462f6368f1ff5139fe8d6
 
 //# sourceMappingURL=script-compiled.js.map
