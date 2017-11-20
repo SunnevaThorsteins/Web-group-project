@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
     function getJson() {
       var r = new XMLHttpRequest();
 
-      r.open('GET', 'videos.json' , true);
+      r.open('GET', 'videos.json', true);
 
       r.onload = function() {
         console.log(r.status);
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
 
     /*sér um að byggju upp síðuna, búa til öll elementin sem við þurfum
      og appenda þau rétt fyrir rent*/
-    function createRent(
+    function createRent() {
       /*ætti líklega að kalla í sectionin eða eitthvað?*/
       video(/*kallar á ákveðið myndband*/);
       video(/*kallar á eitthvað annað myndband*/);
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
      function video(/*myndbanda jason fylkið eða hvað?*/){
 
        load(); //geri ráð fyrir að það eigi að vera eitthvað gildi sem fer inn í þetta fall
-       videoLenght();
+       videoLength();
      }
 
     /*nær í gögnin sem við fáum fyrir myndböndin og setur svona loading gæja ef það er bið á því að þetta loadist*/
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
     /*sér um að littli kassinn sem er með lengd myndbandsins sé settur rétt inn, fær inn lengdina í sekúndum og skilar
      *á forminu mín:sek*/
      /*þetta fall er á mjög miklu tilraunarstigi*/
-    function videoLenght(duration) {
+    function videoLength(duration) {
       if (duration < 60){
         if (duration < 10){
           return "0:0" + duration;
@@ -149,6 +149,25 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
     /*útfærir það sem gerist þegar ýtt er á myndbönd*/
     function watch(){
 
+    }
+
+    function createElement(poster, /* video? ,*/ title) {
+      const row = document.createElement('div');
+      row.classList.add('cardlist__row');
+      const col = document.createElement('div');
+      col.classList.add('cardlist__col');
+      col.appendChild(document.createElement(...));
+      const card = document.createElement('div');
+      card.classList.add('card');
+      const cardContent = document.createElement('div');
+      cardContent.appendChild(document.createElement(poster)); // create image??
+      const cardContent = document.createElement('div');
+      cardContent.appendChild(document.createElement(...));
+      const cardHeading = document.createElement('div');
+      cardContent.appendChild(document.createTextNode(title));
+      card.appendChild(cardImage); //???
+      card.appendChild(cardContent);
+      card.appendChild(cardHeading);
     }
 
     /*útfærir control gæjann, það sem kemur undir þegar
