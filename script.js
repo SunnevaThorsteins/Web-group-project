@@ -12,10 +12,9 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
       r.open('GET', 'videos.json', true);
 
       r.onload = function() {
-        console.log(r.status);
 
         if (r.status >= 200 && r.status < 400) {
-          obj = JSON.parse(r.response);
+          const obj = JSON.parse(r.response);
           createVideos(obj);
           createCategories(obj);
 
@@ -33,14 +32,17 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
 
     //Sækir videos í json hlut
     function createVideos(data) {
-      var videos = data.videos;
+      const videos = data.videos;
       console.log('VIDEOS FRÁ JSON', videos);
     }
 
     //Sækir categories í json hlut
     function createCategories(data) {
-      var categories = data.categories;
+      const categories = data.categories;
+      //const prufa = data.videos[0].created;
+      //data['videos'][0]['created'];
       console.log('CATEGORIES FRÁ JSON', categories);
+      //console.log('PRUFA', prufa);
     }
 
     //listi yfir breytur? Það virðist vera gert oft
