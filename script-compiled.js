@@ -194,5 +194,3 @@ var program = function () {
     init: init
   };
 }();
-
-//# sourceMappingURL=script-compiled.js.map
