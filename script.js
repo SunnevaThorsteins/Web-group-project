@@ -51,35 +51,6 @@ class VideoRentSite{
       //console.log('title FRÁ FALLI', title);
     }
 
-
-    /*síðan undir venjulegum kringumstæðum. Sér um að kalla á föll
-    og/eða allt það sem þarf til þess að búa til síðuna áður en eitthvað
-    er leigt af henni */
-
-    videoRent() {
-
-    }
-
-
-    /*sér um að byggju upp síðuna, búa til öll elementin sem við þurfum
-     og appenda þau rétt fyrir rent*/
-    createRent() {
-
-    }
-
-    /*sér um að kalla á öll föllin fyrir myndbandið, videoLegth, sincePosted, load ofl.
-     *setur einnig card klasa á viðeigandi gæja */
-     video(/*myndbanda jason fylkið eða hvað?*/){
-
-       load(); //geri ráð fyrir að það eigi að vera eitthvað gildi sem fer inn í þetta fall
-       videoLength();
-     }
-
-    /*nær í gögnin sem við fáum fyrir myndböndin og setur svona loading gæja ef það er bið á því að þetta loadist*/
-    load() {
-
-    }
-
     /*sér um að littli kassinn sem er með lengd myndbandsins sé settur rétt inn, fær inn lengdina í sekúndum og skilar
      *á forminu mín:sek*/
      /*þetta fall er á mjög miklu tilraunarstigi*/
