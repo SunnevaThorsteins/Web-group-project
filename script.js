@@ -1,87 +1,88 @@
 
-class VideoRentSite{
-
+class VideoRentSite {
+  /* hérna setjum við inn allar breytur sem þarf að upphasstilla, fer í gang um leið
+   * og við notum new */
   constructor() {
     this.keyName = '';
   }
-  //listi yfir breytur? Það virðist vera gert oft
 
-    getJson() {
-      const r = new XMLHttpRequest();
-      r.open('GET', 'videos.json', true);
-      r.onload = function() {
-        if (r.status >= 200 && r.status < 400) {
-          const obj = JSON.parse(r.response);
-          createVideos(obj);
-          createCategories(obj);
-        } else {
-          console.log('villa!', r);
-        }
-      };
-      r.onerror = function() {
-        console.log('villa í tengingu');
-      };
-      r.send();
-    }
+  /* þetta er fallið sem vil lendum fyrst í þegar við byrjum */
+  load() {
 
-    //Sækir videos í json hlut
-    createVideos(data) {
-      const videos = data.videos;
-      const id = data.videos[0]['id'];
-      console.log('id FRÁ JSON', id);
-      const title = data.videos[1];
-      console.log('VIDEOS FRÁ JSON', videos);
-      return id;
-    }
+  }
 
-    //Sækir categories í json hlut
-    createCategories(data) {
-      const categories = data.categories;
-      //const prufa = data.videos[0].created;
-      //data['videos'][0]['created'];
-      console.log('CATEGORIES FRÁ JSON', categories);
-      //console.log('PRUFA', prufa);
-    }
-
-    getElements() {
-      const vid = createVideos();
-      console.log('id FRÁ FALLI', id);
-      //console.log('VIDEOS FRÁ FALLI', videos);
-
-      //console.log('title FRÁ FALLI', title);
-    }
-
-    /*sér um að littli kassinn sem er með lengd myndbandsins sé settur rétt inn, fær inn lengdina í sekúndum og skilar
-     *á forminu mín:sek*/
-     /*þetta fall er á mjög miklu tilraunarstigi*/
-    videoLenght(duration) {
-      var min;
-      var sec;
-      if (duration < 60){
-        if (duration < 10){
-          return "0:0" + duration;
-        }
-        else {
-          return "0:" + duration;
-        }
+  getJson() {
+    const r = new XMLHttpRequest();
+    r.open('GET', 'videos.json', true);
+    r.onload = function() { //laga þetta!
+      if (r.status >= 200 && r.status < 400) {
+        const obj = JSON.parse(r.response);
+        createVideos(obj);
+        createCategories(obj);
+      } else {
+        console.log('villa!', r);
       }
-      else {
-        min = parseInt(duration/60);
-        sec = duration -(min*60);
-        if (sec < 10){
-          sec = "0" + sec;
-        }
-        return min + ":" + sec;
-      }
-    }
+    };
+    r.onerror = function() {
+      console.log('villa í tengingu');
+    };
+    r.send();
+  }
+  // Sækir videos í json hlut
+  createVideos(data) {
+    const videos = data.videos;
+    const id = data.videos[0]['id'];
+    console.log('id FRÁ JSON', id);
+    const title = data.videos[1];
+    console.log('VIDEOS FRÁ JSON', videos);
+    return id;
+  }
 
-    /*sér um að það sé rétt lengd frá því myndbandið var birt.
+  // Sækir categories í json hlut
+  createCategories(data) {
+    const categories = data.categories;
+    // const prufa = data.videos[0].created;
+    // data['videos'][0]['created'];
+    console.log('CATEGORIES FRÁ JSON', categories);
+    // console.log('PRUFA', prufa);
+  }
+
+  getElements() {
+    const vid = createVideos();
+    console.log('id FRÁ FALLI', id);
+    // console.log('VIDEOS FRÁ FALLI', videos);
+
+    // console.log('title FRÁ FALLI', title);
+  }
+
+  /* sér um að littli kassinn sem er með lengd myndbandsins sé
+   * settur rétt inn, fær inn lengdina í sekúndum og skilar
+   * á forminu mín:sek */
+  /* þetta fall er á mjög miklu tilraunarstigi */
+  videoLenght(duration) {
+    if (duration < 60) {
+      if (duration < 10) {
+        return '0:0' + duration;
+      } else {
+        return "0:" + duration;
+      }
+    } else {
+      const min = parseInt(duration/60);
+      const sec = duration -(min*60);
+      if (sec < 10){
+        sec = "0" + sec;
+      }
+      return min + ":" + sec;
+    }
+  }
+
+  /* sér um að það sé rétt lengd frá því myndbandið var birt.
      *fær inn lengdina í millisekúndum og skilar streng sem segir til um hversu
-     *langt er síðan myndbandið var birt*/
-    sincePosted(created){
-      /*þarf að setja betur upp en þetta er svona í grófum dráttum
-       *gæti verið að við gætum notað const*/
-      var current = new Date().getTime();
+     *langt er síðan myndbandið var birt */
+  sincePosted(created) {
+    /* þarf að setja betur upp en þetta er svona í grófum dráttum
+     * gæti verið að við gætum notað const */
+    var current = new Date().getTime();
       var created = current - created;
       var sec = created/1000;
       var min = sec/60;
@@ -175,11 +176,6 @@ debugger
       return row;
     }
 
-    /*útfærir control gæjann, það sem kemur undir þegar
-    maður er að horfa á myndand*/
-    controls() {
-
-    }
 
 }
 
@@ -191,6 +187,7 @@ class Player{
     this.keyName = 'player';
     this.player = document.querySelector('.player');
     this.controls = document.querySelector('.controls');
+    this.back = document.querySelector('.back');
     /*gætum svo þurft að bæta við add addEventListener á takkana hérna*/
   }
 
@@ -222,15 +219,21 @@ class Player{
     return;
   }
 
+  /*útfærir control gæjann, það sem kemur undir þegar
+  maður er að horfa á myndand*/
+  controls() {
+
+  }
+
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const VideoSite = new VideoRentSite();
   const player = new Player();
-  if (/*query elementið er í skránni*/){
+  const findingClass = document.querySelector('.cardlist');
+  if (findingClass) {
     VideoSite.load();
-  }
-  else {
+  } else {
     player.load();
   }
 });
