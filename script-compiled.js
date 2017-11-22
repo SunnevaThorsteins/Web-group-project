@@ -64,12 +64,7 @@ var program = function () {
 
   /*sér um að byggju upp síðuna, búa til öll elementin sem við þurfum
    og appenda þau rétt fyrir rent*/
-  function createRent() {
-    /*ætti líklega að kalla í sectionin eða eitthvað?*/
-    video();
-    video();
-    video();
-  }
+  function createRent() {}
 
   /*sér um að kalla á öll föllin fyrir myndbandið, videoLegth, sincePosted, load ofl.
    *setur einnig card klasa á viðeigandi gæja */
@@ -109,9 +104,7 @@ var program = function () {
    *langt er síðan myndbandið var birt*/
   function sincePosted(created) {
     /*þarf að setja betur upp en þetta er svona í grófum dráttum
-     *gæti verið að við gætum notað const
-     *fæ alltaf út undefined þegar og það tengist eitthvað var gæjunum en veit ekki hvernig á að laga það*/
-    //const diff = created - new Date();
+     *gæti verið að við gætum notað const*/
     var current = new Date().getTime();
     var created = current - created;
     var sec = created / 1000;
