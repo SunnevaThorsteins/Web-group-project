@@ -1,11 +1,9 @@
-document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kannski að vera hérna, er allavega í verkefni 9 og 8 :
-  const main = document.querySelector('main');
-  console.log(main);
-  program.init(main);
-});
 
-  const program = function () {
+class VideoRentSite{
 
+  constructor() {
+    this.keyName = '';
+  }
   //listi yfir breytur? Það virðist vera gert oft
 
     function getJson() {
@@ -243,7 +241,15 @@ debugger
         getElements();
 
     }
-    return {
-      init: init
-    }
 }();
+
+document.addEventListener('DOMContentLoaded', () => {
+  const VideoSite = new VideoRentSite();
+  const player = new Player();
+  if (/*query elementið er í skránni*/){
+    VideoSite.load();
+  }
+  else {
+    player.load();
+  }
+});
