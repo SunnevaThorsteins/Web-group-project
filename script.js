@@ -6,7 +6,7 @@ class VideoRentSite{
   }
   //listi yfir breytur? Það virðist vera gert oft
 
-    function getJson() {
+    getJson() {
       const r = new XMLHttpRequest();
       r.open('GET', 'videos.json', true);
       r.onload = function() {
@@ -25,7 +25,7 @@ class VideoRentSite{
     }
 
     //Sækir videos í json hlut
-    function createVideos(data) {
+    createVideos(data) {
       const videos = data.videos;
       const id = data.videos[0]['id'];
       console.log('id FRÁ JSON', id);
@@ -35,7 +35,7 @@ class VideoRentSite{
     }
 
     //Sækir categories í json hlut
-    function createCategories(data) {
+    createCategories(data) {
       const categories = data.categories;
       //const prufa = data.videos[0].created;
       //data['videos'][0]['created'];
@@ -43,7 +43,7 @@ class VideoRentSite{
       //console.log('PRUFA', prufa);
     }
 
-    function getElements() {
+    getElements() {
       const vid = createVideos();
       console.log('id FRÁ FALLI', id);
       //console.log('VIDEOS FRÁ FALLI', videos);
@@ -56,34 +56,34 @@ class VideoRentSite{
     og/eða allt það sem þarf til þess að búa til síðuna áður en eitthvað
     er leigt af henni */
 
-    function videoRent() {
+    videoRent() {
 
     }
 
 
     /*sér um að byggju upp síðuna, búa til öll elementin sem við þurfum
      og appenda þau rétt fyrir rent*/
-    function createRent() {
+    createRent() {
 
     }
 
     /*sér um að kalla á öll föllin fyrir myndbandið, videoLegth, sincePosted, load ofl.
      *setur einnig card klasa á viðeigandi gæja */
-     function video(/*myndbanda jason fylkið eða hvað?*/){
+     video(/*myndbanda jason fylkið eða hvað?*/){
 
        load(); //geri ráð fyrir að það eigi að vera eitthvað gildi sem fer inn í þetta fall
        videoLength();
      }
 
     /*nær í gögnin sem við fáum fyrir myndböndin og setur svona loading gæja ef það er bið á því að þetta loadist*/
-    function load() {
+    load() {
 
     }
 
     /*sér um að littli kassinn sem er með lengd myndbandsins sé settur rétt inn, fær inn lengdina í sekúndum og skilar
      *á forminu mín:sek*/
      /*þetta fall er á mjög miklu tilraunarstigi*/
-    function videoLenght(duration) {
+    videoLenght(duration) {
       var min;
       var sec;
       if (duration < 60){
@@ -107,7 +107,7 @@ class VideoRentSite{
     /*sér um að það sé rétt lengd frá því myndbandið var birt.
      *fær inn lengdina í millisekúndum og skilar streng sem segir til um hversu
      *langt er síðan myndbandið var birt*/
-    function sincePosted(created){
+    sincePosted(created){
       /*þarf að setja betur upp en þetta er svona í grófum dráttum
        *gæti verið að við gætum notað const*/
       var current = new Date().getTime();
@@ -171,35 +171,9 @@ debugger
       }
     }
 
-    /*útfærir það sem gerist þegar ýtt er á myndbönd á rent síðunni*/
-    function watch(){
-
-    }
-
-    /*fær inn id af myndbandi og annaðhvort byrjar að spila það
-     *eða setur það á pásu. Ætti líklega líka að breyta play takkanum
-     *í pause takka og öfugt*/
-    function playPause(videoId){
-      var video = videoId;
-      if(video.paused){
-        /*held ég sé að finna takkann sem er að hafa þetta á pásu og breyta honum í play takka*/
-        var pauseButton = button.querySelector('.button--pause');
-        pauseButton.classList.remove('.button--pause');
-        pauseButton.classList.add('.button--play');
-        video.play();
-      }
-      else {
-        video.pause();
-        var playButton = button.querySelector('.button--play');
-        playButton.classList.remove('.button--play');
-        playButton.classList.add('.button--pause');
-      }
-      return;
-    }
-
     /*útfærir controles gæjan, það sem kemur undir þegar*/
 
-    function createElement(poster, /* video? ,*/ title) {
+    createElement(poster, /* video? ,*/ title) {
       const row = document.createElement('div');
       row.classList.add('cardlist__row');
       const col = document.createElement('div');
@@ -232,16 +206,52 @@ debugger
 
     /*útfærir control gæjann, það sem kemur undir þegar
     maður er að horfa á myndand*/
-    function controls() {
+    controls() {
 
     }
 
-    function init(main) {
-        getJson();
-        getElements();
+}
 
+class Player{
+
+/*hér á að skilgreina tilviksbreytur, allar breytur sem við viljum upphafsstilla
+ *þarf að vera this. á undan þeim*/
+  constructor() {
+    this.keyName = 'player';
+    this.player = document.querySelector('.player');
+    this.controls = document.querySelector('.controls');
+    /*gætum svo þurft að bæta við add addEventListener á takkana hérna*/
+  }
+
+  load() {
+    const request = new XMLHttpRequest();
+    const qs = new URLSerchParams(window.location.serch);
+    const id = parseInt(qs.get('id'), 10);
+    //request.open. ()
+  }
+
+  /*fær inn id af myndbandi og annaðhvort byrjar að spila það
+   *eða setur það á pásu. Ætti líklega líka að breyta play takkanum
+   *í pause takka og öfugt*/
+  playPause(videoId){
+    var video = videoId;
+    if(video.paused){
+      /*held ég sé að finna takkann sem er að hafa þetta á pásu og breyta honum í play takka*/
+      var pauseButton = button.querySelector('.button--pause');
+      pauseButton.classList.remove('.button--pause');
+      pauseButton.classList.add('.button--play');
+      video.play();
     }
-}();
+    else {
+      video.pause();
+      var playButton = button.querySelector('.button--play');
+      playButton.classList.remove('.button--play');
+      playButton.classList.add('.button--pause');
+    }
+    return;
+  }
+
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   const VideoSite = new VideoRentSite();
