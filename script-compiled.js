@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -11,51 +9,52 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var program = function () {
 
+  //listi yfir breytur? Það virðist vera gert oft
+
   function getJson() {
     var r = new XMLHttpRequest();
-
     r.open('GET', 'videos.json', true);
-
     r.onload = function () {
-      console.log(r.status);
-
       if (r.status >= 200 && r.status < 400) {
-<<<<<<< HEAD
-        obj = JSON.parse(r.response);
+        var obj = JSON.parse(r.response);
         createVideos(obj);
         createCategories(obj);
-=======
-        console.log(r.response);
->>>>>>> 0e405e12fc26de71f9ce5725b40103a24d9e1913
       } else {
         console.log('villa!', r);
       }
     };
-
     r.onerror = function () {
       console.log('villa í tengingu');
     };
-
     r.send();
   }
 
-<<<<<<< HEAD
   //Sækir videos í json hlut
   function createVideos(data) {
     var videos = data.videos;
+    var id = data.videos[0]['id'];
+    console.log('id FRÁ JSON', id);
+    var title = data.videos[1];
     console.log('VIDEOS FRÁ JSON', videos);
+    return id;
   }
 
   //Sækir categories í json hlut
   function createCategories(data) {
     var categories = data.categories;
+    //const prufa = data.videos[0].created;
+    //data['videos'][0]['created'];
     console.log('CATEGORIES FRÁ JSON', categories);
+    //console.log('PRUFA', prufa);
   }
 
-=======
->>>>>>> 0e405e12fc26de71f9ce5725b40103a24d9e1913
-  //listi yfir breytur? Það virðist vera gert oft
+  function getElements() {
+    var vid = createVideos();
+    console.log('id FRÁ FALLI', id);
+    //console.log('VIDEOS FRÁ FALLI', videos);
 
+    //console.log('title FRÁ FALLI', title);
+  }
 
   /*síðan undir venjulegum kringumstæðum. Sér um að kalla á föll
   og/eða allt það sem þarf til þess að búa til síðuna áður en eitthvað
@@ -77,11 +76,7 @@ var program = function () {
   function video() /*myndbanda jason fylkið eða hvað?*/{
 
     load(); //geri ráð fyrir að það eigi að vera eitthvað gildi sem fer inn í þetta fall
-<<<<<<< HEAD
-    videoLenght();
-=======
     videoLength();
->>>>>>> 0e405e12fc26de71f9ce5725b40103a24d9e1913
   }
 
   /*nær í gögnin sem við fáum fyrir myndböndin og setur svona loading gæja ef það er bið á því að þetta loadist*/
@@ -90,19 +85,23 @@ var program = function () {
   /*sér um að littli kassinn sem er með lengd myndbandsins sé settur rétt inn, fær inn lengdina í sekúndum og skilar
    *á forminu mín:sek*/
   /*þetta fall er á mjög miklu tilraunarstigi*/
-<<<<<<< HEAD
   function videoLenght(duration) {
-=======
-  function videoLength(duration) {
->>>>>>> 0e405e12fc26de71f9ce5725b40103a24d9e1913
+    var min;
+    var sec;
     if (duration < 60) {
       if (duration < 10) {
         return "0:0" + duration;
       } else {
         return "0:" + duration;
       }
-    } else {}
-    return min + ":" + sec;
+    } else {
+      min = parseInt(duration / 60);
+      sec = duration - min * 60;
+      if (sec < 10) {
+        sec = "0" + sec;
+      }
+      return min + ":" + sec;
+    }
   }
 
   /*sér um að það sé rétt lengd frá því myndbandið var birt.
@@ -112,6 +111,9 @@ var program = function () {
     /*þarf að setja betur upp en þetta er svona í grófum dráttum
      *gæti verið að við gætum notað const
      *fæ alltaf út undefined þegar og það tengist eitthvað var gæjunum en veit ekki hvernig á að laga það*/
+    //const diff = created - new Date();
+    var current = new Date().getTime();
+    var created = current - created;
     var sec = created / 1000;
     var min = sec / 60;
     var klst = min / 60;
@@ -119,7 +121,7 @@ var program = function () {
     var week;
     var month;
     var year;
-
+    debugger;
     /*ef meira en 365 dagar síðan "created"*/
     if (day >= 365) {
       year = parseInt(day / 365);
@@ -158,24 +160,38 @@ var program = function () {
           } else {
             klst = parseInt(klst);
             if (klst === 1) {
-              return 'Fyrir ' + klst + 'klukkustund síðan';
+              return 'Fyrir ' + klst + ' klukkustund síðan';
             } else {
-              return 'Fyrir ' + klst + 'klukkustundum síðan';
+              return 'Fyrir ' + klst + ' klukkustundum síðan';
             }
           }
   }
 
-  /*útfærir það sem gerist þegar ýtt er á myndbönd*/
+  /*útfærir það sem gerist þegar ýtt er á myndbönd á rent síðunni*/
   function watch() {}
 
-<<<<<<< HEAD
-  /*útfærir controles gæjan, það sem kemur undir þegar
-  maður er að horfa á myndand*/
-  function controles() {}
+  /*fær inn id af myndbandi og annaðhvort byrjar að spila það
+   *eða setur það á pásu. Ætti líklega líka að breyta play takkanum
+   *í pause takka og öfugt*/
+  function playPause(videoId) {
+    var video = videoId;
+    if (video.paused) {
+      /*held ég sé að finna takkann sem er að hafa þetta á pásu og breyta honum í play takka*/
+      var pauseButton = button.querySelector('.button--pause');
+      pauseButton.classList.remove('.button--pause');
+      pauseButton.classList.add('.button--play');
+      video.play();
+    } else {
+      video.pause();
+      var playButton = button.querySelector('.button--play');
+      playButton.classList.remove('.button--play');
+      playButton.classList.add('.button--pause');
+    }
+    return;
+  }
 
-  function init(main) {
-    getJson();
-=======
+  /*útfærir controles gæjan, það sem kemur undir þegar*/
+
   function createElement(poster, /* video? ,*/title) {
     var row = document.createElement('div');
     row.classList.add('cardlist__row');
@@ -189,6 +205,7 @@ var program = function () {
     var cardImage = document.createElement('img');
     cardImage.classList.add('card__img');
     cardImage.src = 'poster'; // ?????
+    console.log(cardImage.src);
     cardImage.setAttribute('src', poster); // ???????
     //cardImage.appendChild(document.createElement(poster));
     var cardContent = document.createElement('div');
@@ -211,13 +228,12 @@ var program = function () {
   function controls() {}
 
   function init(main) {
-    console.log(getJson());
->>>>>>> 0e405e12fc26de71f9ce5725b40103a24d9e1913
+    getJson();
+    getElements();
   }
   return {
     init: init
   };
 }();
->>>>>>> abe474599fb3007551c3c1667b29666f6c653c63
 
 //# sourceMappingURL=script-compiled.js.map

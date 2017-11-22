@@ -6,45 +6,52 @@ document.addEventListener('DOMContentLoaded', function () { //þeeeetta á kanns
 
   const program = function () {
 
+  //listi yfir breytur? Það virðist vera gert oft
+
     function getJson() {
       const r = new XMLHttpRequest();
-
       r.open('GET', 'videos.json', true);
-
       r.onload = function() {
-        console.log(r.status);
-
         if (r.status >= 200 && r.status < 400) {
-          obj = JSON.parse(r.response);
+          const obj = JSON.parse(r.response);
           createVideos(obj);
           createCategories(obj);
-
         } else {
           console.log('villa!', r);
         }
       };
-
       r.onerror = function() {
         console.log('villa í tengingu');
       };
-
       r.send();
     }
 
     //Sækir videos í json hlut
     function createVideos(data) {
-      var videos = data.videos;
+      const videos = data.videos;
+      const id = data.videos[0]['id'];
+      console.log('id FRÁ JSON', id);
+      const title = data.videos[1];
       console.log('VIDEOS FRÁ JSON', videos);
+      return id;
     }
 
     //Sækir categories í json hlut
     function createCategories(data) {
-      var categories = data.categories;
+      const categories = data.categories;
+      //const prufa = data.videos[0].created;
+      //data['videos'][0]['created'];
       console.log('CATEGORIES FRÁ JSON', categories);
+      //console.log('PRUFA', prufa);
     }
 
-    //listi yfir breytur? Það virðist vera gert oft
+    function getElements() {
+      const vid = createVideos();
+      console.log('id FRÁ FALLI', id);
+      //console.log('VIDEOS FRÁ FALLI', videos);
 
+      //console.log('title FRÁ FALLI', title);
+    }
 
 
     /*síðan undir venjulegum kringumstæðum. Sér um að kalla á föll
@@ -207,6 +214,7 @@ debugger
       const cardImage = document.createElement('img');
       cardImage.classList.add('card__img');
       cardImage.src = 'poster'; // ?????
+      console.log(cardImage.src);
       cardImage.setAttribute('src', poster); // ???????
       //cardImage.appendChild(document.createElement(poster));
       const cardContent = document.createElement('div');
@@ -232,6 +240,8 @@ debugger
 
     function init(main) {
         getJson();
+        getElements();
+
     }
     return {
       init: init
