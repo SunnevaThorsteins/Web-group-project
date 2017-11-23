@@ -173,26 +173,6 @@ class VideoRentSite {
     return row;
   }
 
-  fetchJson() {
-    const json = 'videos.json';
-    const r = new XMLHttpRequest();
-
-    r.open('GET', json, true);
-    r.onload = () => {
-      if (r.status >= 200 && r.status < 400) {
-        const data = JSON.parse(r.response);
-        console.log(data);
-        this.createVideolist(data);
-    } else {
-      console.log('villa!', r);
-      }
-    };
-    r.onerror = () => {
-      console.log('villa í tengingu');
-    };
-    r.send();
-  }
-
   // fær inn upplýsingar um myndband og "byggir" það upp, fallið sem ég var að gera en má alveg breyta eða nota annað fall
   createVideoElement(poster, video, title, posted, duration) {
     const col = document.createElement('div');
@@ -213,6 +193,26 @@ class VideoRentSite {
     col.appendChild(cardTitle);
     col.appendChild(since);
     col.appendChild(length);
+  }
+
+  fetchJson() {
+    const json = 'videos.json';
+    const r = new XMLHttpRequest();
+
+    r.open('GET', json, true);
+    r.onload = () => {
+      if (r.status >= 200 && r.status < 400) {
+        const data = JSON.parse(r.response);
+        console.log(data);
+        this.createVideolist(data);
+    } else {
+      console.log('villa!', r);
+      }
+    };
+    r.onerror = () => {
+      console.log('villa í tengingu');
+    };
+    r.send();
   }
 
 }
