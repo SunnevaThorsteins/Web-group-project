@@ -107,7 +107,7 @@ class VideoRentSite {
 
   /* útfærir controles gæjan, það sem kemur undir þegar */
 
-  createElement(poster, video, title, posted) {
+  /*createElement(poster, video, title, posted) {
     const row = document.createElement('div'); // ætti kannski að vera bara eitt á hvert section?
     const col = document.createElement('div');
     const vid = document.createElement('video');
@@ -138,46 +138,41 @@ class VideoRentSite {
     row.appendChild(card);
 
     return row;
-  }
+  }*/
 
   createVideolist(data) {
     const categories = data.categories;
     const videos = data.videos;
 
     for (let i=0; i<categories.length; i++) {
+      console.log('****************TELJARIII****************');
       const cats = categories[i];
       this.createCategorylist(cats, videos);
     }
   }
 
   createCategorylist(cats, videos) {
-    const div = document.createElement('div');
-    console.log('DIV', div);
-    div.classList.add('cardlist__row');
-
     const ClassContainer = document.querySelector('.videos');
-    console.log('class', ClassContainer);
-    ClassContainer.appendChild(div);
+    const row = document.createElement('div');
+    row.classList.add('cardlist__row');
+    ClassContainer.appendChild(row);
 
-
-    for (let i=0; i<=cats.videos.length; i++) {
+    for (let i=0; i<=cats.videos.length-1; i++) {
+      console.log('*************', [i+1], '*************');
       const id = cats.videos[i];
       console.log('ID', id);
-      console.log('CATS.VIDEOS', cats.videos);
-      const video = videos.find(videos => videos.id === id);
-      console.log('PRUFA TITIL', videos[i]['created'])
-      const videlement = this.createVideoElement(div, videos[i]['poster'], videos[i]['video'], videos[i]['title'], videos[i]['duration'], videos[i]['duration']);
+      const videlement = this.createVideoElement(row, videos[i]['poster'], videos[i]['video'], videos[i]['title'], videos[i]['created'], videos[i]['duration']);
+
     }
-    ClassContainer.appendChild(div);
   }
 
   // fær inn upplýsingar um myndband og "byggir" það upp, fallið sem ég var að gera en má alveg breyta eða nota annað fall
-  createVideoElement(div, poster, video, title, posted, duration) {
-    console.log(poster);
-    console.log(video);
-    console.log(title);
-    console.log(posted);
-    console.log(duration);
+  createVideoElement(row, poster, video, title, posted, duration) {
+    console.log('poster', poster);
+    console.log('video', video);
+    console.log('title', title);
+    console.log('posted', posted);
+    console.log('duration', duration);
     const col = document.createElement('div');
     const vid = document.createElement('video'); // spurning hvort það þurfi að kalla á myndbandið hérna?
     const aElement = document.createElement('a');
@@ -200,10 +195,7 @@ class VideoRentSite {
     col.appendChild(length);
 
     const VideoContainer = document.querySelector('.cardlist__row');
-    console.log('video', VideoContainer);
     VideoContainer.appendChild(col);
-
-    return;
   }
 
   fetchJson() {
