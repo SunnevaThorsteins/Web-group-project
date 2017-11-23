@@ -1,70 +1,39 @@
 class VideoRentSite {
-  /* hérna setjum við inn allar breytur sem þarf að upphasstilla, fer í gang um leið
-   * og við notum new */
+
   constructor() {
     //this.keyName = 'videos';
     this.container = document.querySelector('.videos');
-
-
   }
 
   /* þetta er fallið sem vil lendum fyrst í þegar við byrjum */
   load() {
-
   }
 
-  getJson() {
-    const r = new XMLHttpRequest();
-    r.open('GET', 'videos.json', true);
-    r.onload = function() {
-      if (r.status >= 200 && r.status < 400) {
-        const obj = JSON.parse(r.response);
-        createVideos(obj);
-      } else {
-        console.log('villa!', r);
-      }
-    };
-    r.onerror = function() {
-      console.log('villa í tengingu');
-    };
-    r.send();
-  }
-  // Sækir videos í json hlut
-  createVideos(data) {
+  createVideolist(data) {
+    console.log(data);
     const categories = data.categories;
+    console.log(categories);
     const videos = data.videos;
+    console.log(videos);
 
     for (let i=0; i<categories.length; i++) {
-      const cats = cats[i];
-      createCategory(cat, videos);
+      const cats = categories[i];
+      console.log('CATS', cats);
+      this.createCategorylist(cats, videos);
     }
-    /*
-    const id = data.videos[0]['id'];
-    console.log('id FRÁ JSON', id);
-    const title = data.videos[1];
-    console.log('VIDEOS FRÁ JSON', videos);
-    return id;
-    */
   }
 
-/*
-  // Sækir categories í json hlut
-  createCategories(data) {
-    const categories = data.categories;
-    // const prufa = data.videos[0].created;
-    // data['videos'][0]['created'];
-    console.log('CATEGORIES FRÁ JSON', categories);
-    // console.log('PRUFA', prufa);
+  createCategorylist(cats, videos) {
+    const div = document.createElement('div');
+    console.log(div);
+    //...
+    appendChild(createTextNode(cats.title));
+    for (let i=0; i<=cats.videos.length; i++) {
+      const id = cats.videos[i];
+      const video = videos.find(videos => videos.id === id);
+    }
+    const el = createVideolist(video);
   }
-
-  getElements() {
-    const vid = createVideos();
-    console.log('id FRÁ FALLI', id);
-    // console.log('VIDEOS FRÁ FALLI', videos);
-
-    // console.log('title FRÁ FALLI', title);
-  }
-  */
 
   /* sér um að littli kassinn sem er með lengd myndbandsins sé
    * settur rétt inn, fær inn lengdina í sekúndum og skilar
@@ -90,7 +59,7 @@ class VideoRentSite {
   /* sér um að það sé rétt lengd frá því myndbandið var birt.
      *fær inn lengdina í millisekúndum og skilar streng sem segir til um hversu
      *langt er síðan myndbandið var birt */
-  sincePosted(created){
+  sincePosted(created) {
     /* þarf að setja betur upp en þetta er svona í grófum dráttum
      * gæti verið að við gætum notað const */
       let current = new Date().getTime();
@@ -102,11 +71,11 @@ class VideoRentSite {
       let week;
       let month;
       let year;
-debugger
+
       /*ef meira en 365 dagar síðan "created"*/
       if (day >= 365) {
         year = parseInt(day/365);
-        if (year === 1){
+        if (year === 1) {
           return 'Fyrir ' + year + ' ári síðan';
         }
         else {
@@ -114,9 +83,9 @@ debugger
         }
       }
       /*ef meiri en 30 dagar síðan "created"*/
-      else if (day >= 30){
+      else if (day >= 30) {
         month = parseInt(day/30);
-        if (month === 1){
+        if (month === 1) {
           return 'Fyrir ' + month + ' mánuði síðan';
         }
         else {
@@ -124,9 +93,9 @@ debugger
         }
       }
       /*ef meira en 7 dagae er síðan "created"*/
-      else if (day >= 7){
+      else if (day >= 7) {
         week = parseInt(day/7);
-        if(week === 1){
+        if(week === 1) {
           return 'Fyrir ' + week + ' viku síðan';
         }
         else {
@@ -136,7 +105,7 @@ debugger
       /*ef meira en 24klst síðan "created"*/
       else if (klst >= 24){
         day = parseInt(day);
-        if (day === 1){
+        if (day === 1) {
           return 'Fyrir ' + day + ' degi síðan';
         }
         else {
@@ -157,7 +126,7 @@ debugger
           return 'Fyrir ' + klst + ' klukkustundum síðan';
         } */
       }
-    }
+
 
   /* útfærir controles gæjan, það sem kemur undir þegar */
 
@@ -195,9 +164,8 @@ debugger
   }
 
   // fær inn upplýsingar um myndband og "byggir" það upp, fallið sem ég var að gera en má alveg breyta eða nota annað fall
-  createVideoElement(poster, video, title, posted, duration) {
+  createVideoElement(div, poster, title, posted, duration) {
     const col = document.createElement('div');
-    const vid = document.createElement('video'); // spurning hvort það þurfi að kalla á myndbandið hérna?
     const aElement = document.createElement('a');
     const cardImg = document.createElement('img');
     const cardTitle = document.createElement('h2');
@@ -209,15 +177,37 @@ debugger
     cardImg.setAttribute('src', poster);
     since.createTextNode(sincePosted(posted));
     length.createTextNode(videoLength(duration));
-    a.appendChild(vid);
+    a.appendChild(cardImg);
     col.appendChild(a);
     col.appendChild(cardTitle);
     col.appendChild(since);
     col.appendChild(length);
+    return;
   }
+
+  fetchJson() {
+    const json = 'videos.json';
+    const r = new XMLHttpRequest();
+
+    r.open('GET', json, true);
+    r.onload = () => {
+      if (r.status >= 200 && r.status < 400) {
+        const data = JSON.parse(r.response);
+        console.log(data);
+        this.createVideolist(data);
+    } else {
+      console.log('villa!', r);
+      }
+    };
+    r.onerror = () => {
+      console.log('villa í tengingu');
+    };
+    r.send();
+  }
+
 }
 
-class Player{
+class Player {
 
 /*hér á að skilgreina tilviksbreytur, allar breytur sem við viljum upphafsstilla
  *þarf að vera this. á undan þeim*/
@@ -230,9 +220,9 @@ class Player{
   }
 
   load() {
-    const request = new XMLHttpRequest();
-    const qs = new URLSerchParams(window.location.serch);
-    const id = parseInt(qs.get('id'), 10);
+    //const request = new XMLHttpRequest();
+    //const qs = new URLSerchParams(window.location.serch);
+    //const id = parseInt(qs.get('id'), 10);
     // request.open. ()
   }
 
@@ -313,11 +303,14 @@ class Player{
   }
 }
 
+
 document.addEventListener('DOMContentLoaded', () => {
-  getJson();
   const VideoSite = new VideoRentSite();
   const player = new Player();
-  const findingClass = document.querySelector('.videos');
+
+  VideoSite.fetchJson();
+
+  const findingClass = document.querySelector('.cardlist');
   if (findingClass) {
     VideoSite.load();
   } else {
