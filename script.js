@@ -84,19 +84,17 @@ class VideoRentSite {
   sincePosted(created){
     /* þarf að setja betur upp en þetta er svona í grófum dráttum
      * gæti verið að við gætum notað const */
-      var current = new Date().getTime();
-      var created = current - created;
-      var sec = created/1000;
-      var min = sec/60;
-      var klst = min/60;
-      var day = klst/24;
-      var week;
-      var month;
-      var year;
+      let current = new Date().getTime();
+      let created = current - created;
+      let sec = created/1000;
+      let min = sec/60;
+      let klst = min/60;
+      let day = klst/24;
+      let week;
+      let month;
+      let year;
 debugger
       /*ef meira en 365 dagar síðan "created"*/
-      // const hours
-
       if (day >= 365) {
         year = parseInt(day/365);
         if (year === 1){
@@ -154,10 +152,12 @@ debugger
 
   /* útfærir controles gæjan, það sem kemur undir þegar */
 
-  createElement(poster, /* video? ,*/ title) {
-    const row = document.createElement('div');
-    row.classList.add('cardlist__row');
+  createElement(poster, video, title, posted) {
+    const row = document.createElement('div'); // ætti kannski að vera bara eitt á hvert section?
     const col = document.createElement('div');
+    const vid = document.createElement('video');
+    const AElement = document.createElement('a');
+    row.classList.add('cardlist__row');
     col.classList.add('cardlist__col');
     col.appendChild(document.createElement(blabla));
     row.appendChild(col);
@@ -227,13 +227,12 @@ class Player{
     }
     return;
   }
-
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const VideoSite = new VideoRentSite();
   const player = new Player();
-  const findingClass = document.querySelector('.cardlist');
+  const findingClass = document.querySelector('.videos');
   if (findingClass) {
     VideoSite.load();
   } else {
