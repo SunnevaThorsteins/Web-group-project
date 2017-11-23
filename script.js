@@ -1,4 +1,3 @@
-
 class VideoRentSite {
   /* hérna setjum við inn allar breytur sem þarf að upphasstilla, fer í gang um leið
    * og við notum new */
@@ -14,7 +13,7 @@ class VideoRentSite {
   getJson() {
     const r = new XMLHttpRequest();
     r.open('GET', 'videos.json', true);
-    r.onload = function() { //laga þetta!
+    r.onload = function(){  // laga þetta!
       if (r.status >= 200 && r.status < 400) {
         const obj = JSON.parse(r.response);
         createVideos(obj);
@@ -143,38 +142,38 @@ debugger
       }
     }
 
-    /*útfærir controles gæjan, það sem kemur undir þegar*/
+  /* útfærir controles gæjan, það sem kemur undir þegar */
 
-    createElement(poster, /* video? ,*/ title) {
-      const row = document.createElement('div');
-      row.classList.add('cardlist__row');
-      const col = document.createElement('div');
-      col.classList.add('cardlist__col');
-      col.appendChild(document.createElement(blabla));
-      row.appendChild(col);
+  createElement(poster, /* video? ,*/ title) {
+    const row = document.createElement('div');
+    row.classList.add('cardlist__row');
+    const col = document.createElement('div');
+    col.classList.add('cardlist__col');
+    col.appendChild(document.createElement(blabla));
+    row.appendChild(col);
 
-      const card = document.createElement('div');
-      card.classList.add('card');
-      const cardImage = document.createElement('img');
-      cardImage.classList.add('card__img');
-      cardImage.src = 'poster'; // ?????
-      console.log(cardImage.src);
-      cardImage.setAttribute('src', poster); // ???????
-      //cardImage.appendChild(document.createElement(poster));
-      const cardContent = document.createElement('div');
-      cardContent.classList.add('card__content');
-      cardContent.appendChild(document.createElement(blalba));
-      const cardHeading = document.createElement('div');
-      cardHeading.classList.add('card__heading');
-      cardHeading.appendChild(document.createTextNode(title));
-      card.appendChild(cardImage); //???
-      card.appendChild(cardContent);
-      card.appendChild(cardHeading);
+    const card = document.createElement('div');
+    card.classList.add('card');
+    const cardImage = document.createElement('img');
+    cardImage.classList.add('card__img');
+    cardImage.src = 'poster'; // ?????
+    console.log(cardImage.src);
+    cardImage.setAttribute('src', poster); // ???????
+    // cardImage.appendChild(document.createElement(poster));
+    const cardContent = document.createElement('div');
+    cardContent.classList.add('card__content');
+    cardContent.appendChild(document.createElement(blalba));
+    const cardHeading = document.createElement('div');
+    cardHeading.classList.add('card__heading');
+    cardHeading.appendChild(document.createTextNode(title));
+    card.appendChild(cardImage); // ???
+    card.appendChild(cardContent);
+    card.appendChild(cardHeading);
 
-      row.appendChild(card);
+    row.appendChild(card);
 
-      return row;
-    }
+    return row;
+  }
 
 
 }
@@ -195,12 +194,12 @@ class Player{
     const request = new XMLHttpRequest();
     const qs = new URLSerchParams(window.location.serch);
     const id = parseInt(qs.get('id'), 10);
-    //request.open. ()
+    // request.open. ()
   }
 
-  /*fær inn id af myndbandi og annaðhvort byrjar að spila það
-   *eða setur það á pásu. Ætti líklega líka að breyta play takkanum
-   *í pause takka og öfugt*/
+/* fær inn id af myndbandi og annaðhvort byrjar að spila það
+ * eða setur það á pásu. Ætti líklega líka að breyta play takkanum
+ * í pause takka og öfugt */
   playPause(videoId){
     var video = videoId;
     if(video.paused){
@@ -217,12 +216,6 @@ class Player{
       playButton.classList.add('.button--pause');
     }
     return;
-  }
-
-  /*útfærir control gæjann, það sem kemur undir þegar
-  maður er að horfa á myndand*/
-  controls() {
-
   }
 
 }
