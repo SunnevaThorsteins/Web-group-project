@@ -41,20 +41,25 @@ var program = function () {
 
   //Sækir categories í json hlut
   function createCategories(data) {
-    var categories = data.categories;
+    var myH1 = document.createElement('h1');
+    myH1.textContent = data.categories['title'];
+    document.append.Child;
+
+    document.write(data.categories['title']);
+
+    /*const categories = data.categories;
     //const prufa = data.videos[0].created;
     //data['videos'][0]['created'];
     console.log('CATEGORIES FRÁ JSON', categories);
-    //console.log('PRUFA', prufa);
+    //console.log('PRUFA', prufa);*/
   }
 
-  function getElements() {
-    var vid = createVideos();
-    console.log('id FRÁ FALLI', id);
-    //console.log('VIDEOS FRÁ FALLI', videos);
+  function getElements() {}
+  /*const vid = createVideos();
+  console.log('id FRÁ FALLI', id);
+  //console.log('VIDEOS FRÁ FALLI', videos);
+  //console.log('title FRÁ FALLI', title);*/
 
-    //console.log('title FRÁ FALLI', title);
-  }
 
   /*síðan undir venjulegum kringumstæðum. Sér um að kalla á föll
   og/eða allt það sem þarf til þess að búa til síðuna áður en eitthvað
