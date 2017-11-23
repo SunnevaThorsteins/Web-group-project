@@ -16,11 +16,10 @@ class VideoRentSite {
   getJson() {
     const r = new XMLHttpRequest();
     r.open('GET', 'videos.json', true);
-    r.onload = function(){  // laga þetta!
+    r.onload = function() {
       if (r.status >= 200 && r.status < 400) {
         const obj = JSON.parse(r.response);
         createVideos(obj);
-        createCategories(obj);
       } else {
         console.log('villa!', r);
       }
@@ -32,14 +31,23 @@ class VideoRentSite {
   }
   // Sækir videos í json hlut
   createVideos(data) {
+    const categories = data.categories;
     const videos = data.videos;
+
+    for (let i=0; i<categories.length; i++) {
+      const cats = cats[i];
+      createCategory(cat, videos);
+    }
+    /*
     const id = data.videos[0]['id'];
     console.log('id FRÁ JSON', id);
     const title = data.videos[1];
     console.log('VIDEOS FRÁ JSON', videos);
     return id;
+    */
   }
 
+/*
   // Sækir categories í json hlut
   createCategories(data) {
     const categories = data.categories;
@@ -56,6 +64,7 @@ class VideoRentSite {
 
     // console.log('title FRÁ FALLI', title);
   }
+  */
 
   /* sér um að littli kassinn sem er með lengd myndbandsins sé
    * settur rétt inn, fær inn lengdina í sekúndum og skilar
@@ -230,6 +239,7 @@ class Player{
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  getJson();
   const VideoSite = new VideoRentSite();
   const player = new Player();
   const findingClass = document.querySelector('.videos');
