@@ -165,7 +165,7 @@ debugger
     const row = document.createElement('div'); // ætti kannski að vera bara eitt á hvert section?
     const col = document.createElement('div');
     const vid = document.createElement('video');
-    const AElement = document.createElement('a');
+    const aElement = document.createElement('a');
     row.classList.add('cardlist__row');
     col.classList.add('cardlist__col');
     col.appendChild(document.createElement(blabla));

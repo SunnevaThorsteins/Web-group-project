@@ -1,10 +1,22 @@
-.videos {
-  &__row {
-    display: flex;
-    flex-wrap: wrap;
-  }
+.cardlist__row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -10px;
+  margin-left: -10px;
+}
 
-  &__col {
-    display: flex;
+.cardlist__col {
+  display: flex;
+  width: 100%;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin: 0 0 20px;
+}
+
+@media (min-width: 600px) {
+  .cardlist__col {
+    width: 50%;
+    margin-right: 0;
+    margin-left: 0;
   }
 }
