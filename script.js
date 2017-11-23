@@ -9,38 +9,13 @@ class VideoRentSite {
   load() {
   }
 
-  createVideolist(data) {
-    console.log(data);
-    const categories = data.categories;
-    console.log(categories);
-    const videos = data.videos;
-    console.log(videos);
 
-    for (let i=0; i<categories.length; i++) {
-      const cats = categories[i];
-      console.log('CATS', cats);
-      this.createCategorylist(cats, videos);
-    }
-  }
-
-  createCategorylist(cats, videos) {
-    const div = document.createElement('div');
-    div.classList.add('row');
-    //appendChild.createTextNode(cats.title);
-    for (let i=0; i<=cats.videos.length; i++) {
-      const id = cats.videos[i];
-      const video = videos.find(videos => videos.id === id);
-      const videlement = this.createVideoElement(div, videos['poster'], videos['title'], videos['created'], videos['duration']);
-
-    }
-    //const el = createVideolist(video);
-  }
 
   /* sér um að littli kassinn sem er með lengd myndbandsins sé
    * settur rétt inn, fær inn lengdina í sekúndum og skilar
    * á forminu mín:sek */
   /* þetta fall er á mjög miklu tilraunarstigi */
-  videoLenght(duration) {
+  videoLength(duration) {
     if (duration < 60) {
       if (duration < 10) {
         return '0:0' + duration;
@@ -49,7 +24,7 @@ class VideoRentSite {
       }
     } else {
       const min = parseInt(duration/60);
-      const sec = duration -(min*60);
+      let sec = duration -(min*60);
       if (sec < 10){
         sec = "0" + sec;
       }
@@ -165,26 +140,68 @@ class VideoRentSite {
     return row;
   }
 
+  createVideolist(data) {
+    const categories = data.categories;
+    const videos = data.videos;
+
+    for (let i=0; i<categories.length; i++) {
+      const cats = categories[i];
+      this.createCategorylist(cats, videos);
+    }
+  }
+
+  createCategorylist(cats, videos) {
+    const div = document.createElement('div');
+    console.log('DIV', div);
+    div.classList.add('cardlist__row');
+
+    const ClassContainer = document.querySelector('.videos');
+    console.log('class', ClassContainer);
+    ClassContainer.appendChild(div);
+
+
+    for (let i=0; i<=cats.videos.length; i++) {
+      const id = cats.videos[i];
+      console.log('ID', id);
+      console.log('CATS.VIDEOS', cats.videos);
+      const video = videos.find(videos => videos.id === id);
+      console.log('PRUFA TITIL', videos[i]['created'])
+      const videlement = this.createVideoElement(div, videos[i]['poster'], videos[i]['video'], videos[i]['title'], videos[i]['duration'], videos[i]['duration']);
+    }
+    ClassContainer.appendChild(div);
+  }
+
   // fær inn upplýsingar um myndband og "byggir" það upp, fallið sem ég var að gera en má alveg breyta eða nota annað fall
-  createVideoElement(poster, video, title, posted, duration) {
+  createVideoElement(div, poster, video, title, posted, duration) {
+    console.log(poster);
+    console.log(video);
+    console.log(title);
+    console.log(posted);
+    console.log(duration);
     const col = document.createElement('div');
     const vid = document.createElement('video'); // spurning hvort það þurfi að kalla á myndbandið hérna?
     const aElement = document.createElement('a');
     const cardImg = document.createElement('img');
     const cardTitle = document.createElement('h2');
     const since = document.createElement('p');
-    const lenght = document.createElement('p');
+    const length = document.createElement('p');
     col.classList.add('cardlist__col');
     aElement.setAttribute('href', 'site.html');
     cardImg.classList.add('card__img');
     cardImg.setAttribute('src', poster);
+    cardTitle.appendChild(document.createTextNode(title));
     since.appendChild(document.createTextNode(this.sincePosted(posted)));
-    lenght.appendChild(document.createTextNode(this.videoLenght(duration)));
+    length.appendChild(document.createTextNode(this.videoLength(duration)));
     aElement.appendChild(vid);
     col.appendChild(aElement);
+    col.appendChild(cardImg);
     col.appendChild(cardTitle);
     col.appendChild(since);
-    col.appendChild(lenght);
+    col.appendChild(length);
+
+    const VideoContainer = document.querySelector('.cardlist__row');
+    console.log('video', VideoContainer);
+    VideoContainer.appendChild(col);
 
     return;
   }
