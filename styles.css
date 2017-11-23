@@ -1,20 +1,8 @@
-@charset "UTF-8";
-/*hér verður  aðal sass skráin*/
+.videos__row {
+  display: flex;
+  flex-wrap: wrap; }
 
-.card {
-  width: 100%;
-  overflow: hidden; }
-  .card__heading {
-    width: 100%;
-    overflow: hidden;
-    font-family: helvetica, arial, sans-serif;
-    font-size: 1rem;
-    white-space: nowrap; }
-  .card__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center; }
-  .card__text {
-    font-size: 1rem; }
-  .card__img {
-    width: 100%; }
+.videos__col {
+  display: flex; }
+
+/*# sourceMappingURL=data:application/json;base64,ewoJInZlcnNpb24iOiAzLAoJImZpbGUiOiAic3R5bGVzLmNzcyIsCgkic291cmNlcyI6IFsKCQkic2Nzcy9jYXJkbGlzdC5zY3NzIgoJXSwKCSJuYW1lcyI6IFtdLAoJIm1hcHBpbmdzIjogIkFBQ0UsQUFBQSxZQUFNLENBQUM7RUFDTCxPQUFPLEVBQUUsSUFBSTtFQUNiLFNBQVMsRUFBRSxJQUFJLEdBQ2hCOztBQUVELEFBQUEsWUFBTSxDQUFDO0VBQ0wsT0FBTyxFQUFFLElBQUksR0FDZCIKfQ== */

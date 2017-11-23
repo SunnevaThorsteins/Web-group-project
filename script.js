@@ -2,7 +2,10 @@ class VideoRentSite {
   /* hérna setjum við inn allar breytur sem þarf að upphasstilla, fer í gang um leið
    * og við notum new */
   constructor() {
-    this.keyName = '';
+    //this.keyName = 'videos';
+    this.container = document.querySelector('.videos');
+
+
   }
 
   /* þetta er fallið sem vil lendum fyrst í þegar við byrjum */
@@ -92,6 +95,8 @@ class VideoRentSite {
       var year;
 debugger
       /*ef meira en 365 dagar síðan "created"*/
+      // const hours
+
       if (day >= 365) {
         year = parseInt(day/365);
         if (year === 1){
@@ -131,6 +136,11 @@ debugger
           return 'Fyrir ' + day + ' dögum síðan';
         }
       }
+
+      const klst = Math.floor((sec - day) / (60 * 60));
+      const klstString = klst === 1 ? 'klukkustund' : 'klukkustundum';
+      return 'Fyrir $(klst) $(klstString) síðan';
+
       else {
         klst = parseInt(klst);
         if (klst === 1){
@@ -146,9 +156,9 @@ debugger
 
     createElement(poster, /* video? ,*/ title) {
       const row = document.createElement('div');
-      row.classList.add('cardlist__row');
+      row.classList.add('videos__row');
       const col = document.createElement('div');
-      col.classList.add('cardlist__col');
+      col.classList.add('videos__col');
       col.appendChild(document.createElement(blabla));
       row.appendChild(col);
 
