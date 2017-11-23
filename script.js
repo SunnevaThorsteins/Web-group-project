@@ -25,14 +25,15 @@ class VideoRentSite {
 
   createCategorylist(cats, videos) {
     const div = document.createElement('div');
-    console.log(div);
-    //...
-    appendChild(createTextNode(cats.title));
+    div.classList.add('row');
+    //appendChild.createTextNode(cats.title);
     for (let i=0; i<=cats.videos.length; i++) {
       const id = cats.videos[i];
       const video = videos.find(videos => videos.id === id);
+      const videlement = this.createVideoElement(div, videos['poster'], videos['title'], videos['created'], videos['duration']);
+
     }
-    const el = createVideolist(video);
+    //const el = createVideolist(video);
   }
 
   /* sér um að littli kassinn sem er með lengd myndbandsins sé
@@ -59,21 +60,12 @@ class VideoRentSite {
   /* sér um að það sé rétt lengd frá því myndbandið var birt.
      *fær inn lengdina í millisekúndum og skilar streng sem segir til um hversu
      *langt er síðan myndbandið var birt */
-  sincePosted(created) {
+  sincePosted(made) {
     /* þarf að setja betur upp en þetta er svona í grófum dráttum
      * gæti verið að við gætum notað const */
-      var current = new Date().getTime();
-      var created = current - created;
-      var sec = created/1000;
-      var min = sec/60;
-      var klst = min/60;
-      var day = klst/24;
-      var week;
-      var month;
-      var year;
 
       let current = new Date().getTime();
-      let created = current - created;
+      let created = current - made;
       let sec = created/1000;
       let min = sec/60;
       let klst = min/60;
@@ -183,16 +175,18 @@ class VideoRentSite {
     const since = document.createElement('p');
     const lenght = document.createElement('p');
     col.classList.add('cardlist__col');
-    aElement.setAttribute('href', site.html);
+    aElement.setAttribute('href', 'site.html');
     cardImg.classList.add('card__img');
     cardImg.setAttribute('src', poster);
-    since.createTextNode(sincePosted(posted));
-    length.createTextNode(videoLength(duration));
-    a.appendChild(vid);
-    col.appendChild(a);
+    since.appendChild(document.createTextNode(this.sincePosted(posted)));
+    lenght.appendChild(document.createTextNode(this.videoLenght(duration)));
+    aElement.appendChild(vid);
+    col.appendChild(aElement);
     col.appendChild(cardTitle);
     col.appendChild(since);
-    col.appendChild(length);
+    col.appendChild(lenght);
+
+    return;
   }
 
   fetchJson() {
@@ -245,7 +239,7 @@ class Player {
     const fullscreenButton = document.createElement('button');
     const soundButton = document.createElement('button');
     controleContainer.classList.add('controles');
-    playingButton.setAttribute('click', playPause();
+    playingButton.setAttribute('click', playPause());
     playingButton.classList.add('button--play');
     forwardButton.setAttribute('click', skip(3));
     backButton.setAttribute('click', skip(-3));
