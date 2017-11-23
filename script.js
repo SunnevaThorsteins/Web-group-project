@@ -194,7 +194,7 @@ debugger
     return row;
   }
 
-  // fær inn upplýsingar um myndband og "byggir" það upp
+  // fær inn upplýsingar um myndband og "byggir" það upp, fallið sem ég var að gera en má alveg breyta eða nota annað fall
   createVideoElement(poster, video, title, posted, duration) {
     const col = document.createElement('div');
     const vid = document.createElement('video'); // spurning hvort það þurfi að kalla á myndbandið hérna?
