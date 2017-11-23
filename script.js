@@ -72,9 +72,17 @@ class VideoRentSite {
       var month;
       var year;
 
-      /*ef meira en 365 dagar síðan "created"*/
-      // const hours
+      let current = new Date().getTime();
+      let created = current - created;
+      let sec = created/1000;
+      let min = sec/60;
+      let klst = min/60;
+      let day = klst/24;
+      let week;
+      let month;
+      let year;
 
+      /*ef meira en 365 dagar síðan "created"*/
       if (day >= 365) {
         year = parseInt(day/365);
         if (year === 1) {
@@ -132,10 +140,12 @@ class VideoRentSite {
 
   /* útfærir controles gæjan, það sem kemur undir þegar */
 
-  createElement(poster, /* video? ,*/ title) {
-    const row = document.createElement('div');
-    row.classList.add('cardlist__row');
+  createElement(poster, video, title, posted) {
+    const row = document.createElement('div'); // ætti kannski að vera bara eitt á hvert section?
     const col = document.createElement('div');
+    const vid = document.createElement('video');
+    const aElement = document.createElement('a');
+    row.classList.add('cardlist__row');
     col.classList.add('cardlist__col');
     col.appendChild(document.createElement(blabla));
     row.appendChild(col);
@@ -183,6 +193,28 @@ class VideoRentSite {
     r.send();
   }
 
+  // fær inn upplýsingar um myndband og "byggir" það upp, fallið sem ég var að gera en má alveg breyta eða nota annað fall
+  createVideoElement(poster, video, title, posted, duration) {
+    const col = document.createElement('div');
+    const vid = document.createElement('video'); // spurning hvort það þurfi að kalla á myndbandið hérna?
+    const aElement = document.createElement('a');
+    const cardImg = document.createElement('img');
+    const cardTitle = document.createElement('h2');
+    const since = document.createElement('p');
+    const lenght = document.createElement('p');
+    col.classList.add('cardlist__col');
+    aElement.setAttribute('href', site.html);
+    cardImg.classList.add('card__img');
+    cardImg.setAttribute('src', poster);
+    since.createTextNode(sincePosted(posted));
+    length.createTextNode(videoLength(duration));
+    a.appendChild(vid);
+    col.appendChild(a);
+    col.appendChild(cardTitle);
+    col.appendChild(since);
+    col.appendChild(length);
+  }
+
 }
 
 class Player {
@@ -204,25 +236,80 @@ class Player {
     // request.open. ()
   }
 
+  // býr til grunnin að controles
+  createControles(){
+    const controleContainer = document.createElement('div');
+    const playingButton = document.createElement('button');
+    const forwardButton = document.createElement('button');
+    const backButton = document.createElement('button');
+    const fullscreenButton = document.createElement('button');
+    const soundButton = document.createElement('button');
+    controleContainer.classList.add('controles');
+    playingButton.setAttribute('click', playPause();
+    playingButton.classList.add('button--play');
+    forwardButton.setAttribute('click', skip(3));
+    backButton.setAttribute('click', skip(-3));
+    fullscreenButton.setAttribute('click', fullscreen());
+    fullscreenButton.classList.add('normalSize'); //þegar myndbandið er venjulegt
+    soundButton.setAttribute('click', sound());
+    controleContainer.appendChild(playingButton);
+    controleContainer.appendChild(forwardButton);
+    controleContainer.appendChild(backButton);
+    controleContainer.appendChild(fullscreenButton);
+    controleContainer.appendChild(soundButton);
+    return;
+  }
+
+  // spólar framm og til baka
+  skip(value){
+    const video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
+    video.currentTime += value;
+    return; // veit ekki hvort það þarf að vera return
+  }
+
+  // annaðhvort muta-ar eða setur hljóðið aftur á myndbandið
+  sound(){
+    const video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
+    if (video.muted){
+      video.muted = false;
+    } else {
+      video.muted = true;
+    }
+  }
+
+  // gerir skjáinn annaðhvort fullscreen eða tekur það af
+  fullscreen(){
+    const video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
+    if (document.querySelector('normalSize')){
+      let norm = button.querySelector('normalSize');
+      norm.classList.remove('normalSize');
+      norm.classList.add('fullscreenSize');
+    } else {
+      let full = button.querySelector('fullscreenSize');
+      full.classList.remove('fullscreenSize');
+      full.classList.add('normalSize');
+    }
+  }
+
 /* fær inn id af myndbandi og annaðhvort byrjar að spila það
  * eða setur það á pásu. Ætti líklega líka að breyta play takkanum
  * í pause takka og öfugt */
-  playPause(videoId){
-    var video = videoId;
+  playPause(){
+    const video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndband er verið að tala um
     if(video.paused){
-      /*held ég sé að finna takkann sem er að hafa þetta á pásu og breyta honum í play takka*/
-      var pauseButton = button.querySelector('.button--pause');
-      pauseButton.classList.remove('.button--pause');
-      pauseButton.classList.add('.button--play');
       video.play();
+      /*held ég sé að finna takkann sem er að hafa þetta á pásu og breyta honum í play takka*/
+      let play = button.querySelector('.button--pause');
+      play.classList.remove('.button--pause');
+      play.classList.add('.button--play');
     }
     else {
       video.pause();
-      var playButton = button.querySelector('.button--play');
-      playButton.classList.remove('.button--play');
-      playButton.classList.add('.button--pause');
+      let pause = button.querySelector('.button--play');
+      pause.classList.remove('.button--play');
+      pause.classList.add('.button--pause');
     }
-    return;
+    return; // veit ekki hvort það þarf að vera return :/
   }
 }
 

@@ -4,7 +4,6 @@ html { /* stylelint-disable-line */
 
 *, *:before, *:after { /* stylelint-disable-line */
   box-sizing: inherit;
-
   padding: 0;
   margin: 0;
 }
@@ -28,6 +27,7 @@ h1 { /* stylelint-disable-line */
 
 @import "scss/button";
 @import "scss/backButton";
+@import "scss/heading";
 @import "scss/card";
 @import "scss/cardlist";
 @import "scss/controls";
