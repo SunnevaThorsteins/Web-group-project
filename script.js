@@ -137,7 +137,7 @@ debugger
         }
       }
 
-      const klst = Math.floor((sec - day) / (60 * 60));
+    /*  const klst = Math.floor((sec - day) / (60 * 60));
       const klstString = klst === 1 ? 'klukkustund' : 'klukkustundum';
       return 'Fyrir $(klst) $(klstString) síðan';
 
@@ -148,7 +148,7 @@ debugger
         }
         else {
           return 'Fyrir ' + klst + ' klukkustundum síðan';
-        }
+        } */
       }
     }
 
