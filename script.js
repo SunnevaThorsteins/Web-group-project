@@ -204,8 +204,8 @@ debugger
     const since = document.createElement('p');
     const lenght = document.createElement('p');
     col.classList.add('cardlist__col');
-    aElement.setAttribute('href', site.html);
     cardImg.classList.add('card__img');
+    aElement.setAttribute('href', site.html);
     cardImg.setAttribute('src', poster);
     since.createTextNode(sincePosted(posted));
     length.createTextNode(videoLength(duration));
@@ -215,9 +215,6 @@ debugger
     col.appendChild(since);
     col.appendChild(length);
   }
-
-
-
 }
 
 class Player{
