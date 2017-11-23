@@ -79,10 +79,10 @@ class VideoRentSite {
   /* sér um að það sé rétt lengd frá því myndbandið var birt.
      *fær inn lengdina í millisekúndum og skilar streng sem segir til um hversu
      *langt er síðan myndbandið var birt */
-  sincePosted(created) {
+  sincePosted(created){
     /* þarf að setja betur upp en þetta er svona í grófum dráttum
      * gæti verið að við gætum notað const */
-    var current = new Date().getTime();
+      var current = new Date().getTime();
       var created = current - created;
       var sec = created/1000;
       var min = sec/60;
