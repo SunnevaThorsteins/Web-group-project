@@ -143,7 +143,7 @@ class VideoRentSite {
     const categories = data.categories;
     const videos = data.videos;
 
-    for (let i=0; i<categories.length; i++) {
+    for (let i = 0; i < categories.length; i++) {
       console.log('****************TELJARIII****************');
       const cats = categories[i];
       this.createCategorylist(cats, videos);
@@ -156,13 +156,13 @@ class VideoRentSite {
     row.classList.add('cardlist__row');
     ClassContainer.appendChild(row);
 
-    for (let i=0; i<=cats.videos.length-1; i++) {
+    for (let i = 0; i <= cats.videos.length - 1; i++) {
       console.log('*************', [i+1], '*************');
       const id = cats.videos[i];
       console.log('ID', id);
       const videlement = this.createVideoElement(row, videos[i]['poster'], videos[i]['video'], videos[i]['title'], videos[i]['created'], videos[i]['duration']);
-
     }
+    return;
   }
 
   // fær inn upplýsingar um myndband og "byggir" það upp, fallið sem ég var að gera en má alveg breyta eða nota annað fall
@@ -175,6 +175,7 @@ class VideoRentSite {
     const col = document.createElement('div');
     const aElement = document.createElement('a');
     const cardImg = document.createElement('img');
+    const vid = document.createElement('video');
     const cardTitle = document.createElement('h2');
     const since = document.createElement('p');
     const length = document.createElement('p');
@@ -185,7 +186,7 @@ class VideoRentSite {
     cardTitle.appendChild(document.createTextNode(title));
     since.appendChild(document.createTextNode(this.sincePosted(posted)));
     length.appendChild(document.createTextNode(this.videoLength(duration)));
-    aElement.appendChild(poster);
+    aElement.appendChild(vid);
     col.appendChild(aElement);
     col.appendChild(cardImg);
     col.appendChild(cardTitle);

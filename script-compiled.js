@@ -172,6 +172,7 @@ var VideoRentSite = function () {
         console.log('ID', id);
         var videlement = this.createVideoElement(row, videos[i]['poster'], videos[i]['video'], videos[i]['title'], videos[i]['created'], videos[i]['duration']);
       }
+      return;
     }
 
     // fær inn upplýsingar um myndband og "byggir" það upp, fallið sem ég var að gera en má alveg breyta eða nota annað fall
@@ -187,6 +188,7 @@ var VideoRentSite = function () {
       var col = document.createElement('div');
       var aElement = document.createElement('a');
       var cardImg = document.createElement('img');
+      var vid = document.createElement('video');
       var cardTitle = document.createElement('h2');
       var since = document.createElement('p');
       var length = document.createElement('p');
@@ -197,7 +199,7 @@ var VideoRentSite = function () {
       cardTitle.appendChild(document.createTextNode(title));
       since.appendChild(document.createTextNode(this.sincePosted(posted)));
       length.appendChild(document.createTextNode(this.videoLength(duration)));
-      aElement.appendChild(poster);
+      aElement.appendChild(vid);
       col.appendChild(aElement);
       col.appendChild(cardImg);
       col.appendChild(cardTitle);
