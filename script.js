@@ -1,7 +1,6 @@
 class VideoRentSite {
-
   constructor() {
-    //this.keyName = 'videos';
+    // this.keyName = 'videos';
     this.container = document.querySelector('.videos');
   }
 
@@ -9,37 +8,12 @@ class VideoRentSite {
   load() {
   }
 
-  createVideolist(data) {
-    console.log(data);
-    const categories = data.categories;
-    console.log(categories);
-    const videos = data.videos;
-    console.log(videos);
-
-    for (let i=0; i<categories.length; i++) {
-      const cats = categories[i];
-      console.log('CATS', cats);
-      this.createCategorylist(cats, videos);
-    }
-  }
-
-  createCategorylist(cats, videos) {
-    const div = document.createElement('div');
-    console.log(div);
-    //...
-    appendChild(createTextNode(cats.title));
-    for (let i=0; i<=cats.videos.length; i++) {
-      const id = cats.videos[i];
-      const video = videos.find(videos => videos.id === id);
-    }
-    const el = createVideolist(video);
-  }
 
   /* sér um að littli kassinn sem er með lengd myndbandsins sé
    * settur rétt inn, fær inn lengdina í sekúndum og skilar
    * á forminu mín:sek */
   /* þetta fall er á mjög miklu tilraunarstigi */
-  videoLenght(duration) {
+  videoLength(duration) {
     if (duration < 60) {
       if (duration < 10) {
         return '0:0' + duration;
@@ -48,7 +22,7 @@ class VideoRentSite {
       }
     } else {
       const min = parseInt(duration/60);
-      const sec = duration -(min*60);
+      let sec = duration -(min*60);
       if (sec < 10){
         sec = "0" + sec;
       }
@@ -59,11 +33,12 @@ class VideoRentSite {
   /* sér um að það sé rétt lengd frá því myndbandið var birt.
      *fær inn lengdina í millisekúndum og skilar streng sem segir til um hversu
      *langt er síðan myndbandið var birt */
-  sincePosted(created) {
+  sincePosted(made) {
     /* þarf að setja betur upp en þetta er svona í grófum dráttum
      * gæti verið að við gætum notað const */
+
       let current = new Date().getTime();
-      let created = current - created;
+      let created = current - made;
       let sec = created/1000;
       let min = sec/60;
       let klst = min/60;
@@ -111,6 +86,7 @@ class VideoRentSite {
         else {
           return 'Fyrir ' + day + ' dögum síðan';
         }
+        return;
       }
 
     /*  const klst = Math.floor((sec - day) / (60 * 60));
@@ -130,7 +106,7 @@ class VideoRentSite {
 
   /* útfærir controles gæjan, það sem kemur undir þegar */
 
-  createElement(poster, video, title, posted) {
+  /*createElement(poster, video, title, posted) {
     const row = document.createElement('div'); // ætti kannski að vera bara eitt á hvert section?
     const col = document.createElement('div');
     const vid = document.createElement('video');
@@ -161,28 +137,63 @@ class VideoRentSite {
     row.appendChild(card);
 
     return row;
+  }*/
+
+  createVideolist(data) {
+    const categories = data.categories;
+    const videos = data.videos;
+
+    for (let i=0; i<categories.length; i++) {
+      console.log('****************TELJARIII****************');
+      const cats = categories[i];
+      this.createCategorylist(cats, videos);
+    }
+  }
+
+  createCategorylist(cats, videos) {
+    const ClassContainer = document.querySelector('.videos');
+    const row = document.createElement('div');
+    row.classList.add('cardlist__row');
+    ClassContainer.appendChild(row);
+
+    for (let i=0; i<=cats.videos.length-1; i++) {
+      console.log('*************', [i+1], '*************');
+      const id = cats.videos[i];
+      console.log('ID', id);
+      const videlement = this.createVideoElement(row, videos[i]['poster'], videos[i]['video'], videos[i]['title'], videos[i]['created'], videos[i]['duration']);
+
+    }
   }
 
   // fær inn upplýsingar um myndband og "byggir" það upp, fallið sem ég var að gera en má alveg breyta eða nota annað fall
-  createVideoElement(div, poster, title, posted, duration) {
+  createVideoElement(row, poster, video, title, posted, duration) {
+    console.log('poster', poster);
+    console.log('video', video);
+    console.log('title', title);
+    console.log('posted', posted);
+    console.log('duration', duration);
     const col = document.createElement('div');
     const aElement = document.createElement('a');
     const cardImg = document.createElement('img');
     const cardTitle = document.createElement('h2');
     const since = document.createElement('p');
-    const lenght = document.createElement('p');
+    const length = document.createElement('p');
     col.classList.add('cardlist__col');
+    aElement.setAttribute('href', 'site.html');
     cardImg.classList.add('card__img');
-    aElement.setAttribute('href', site.html);
     cardImg.setAttribute('src', poster);
-    since.createTextNode(sincePosted(posted));
-    length.createTextNode(videoLength(duration));
-    a.appendChild(cardImg);
-    col.appendChild(a);
+    cardTitle.appendChild(document.createTextNode(title));
+    since.appendChild(document.createTextNode(this.sincePosted(posted)));
+    length.appendChild(document.createTextNode(this.videoLength(duration)));
+    aElement.appendChild(vid);
+    col.appendChild(aElement);
+    col.appendChild(cardImg);
     col.appendChild(cardTitle);
     col.appendChild(since);
     col.appendChild(length);
-    return;
+
+    const VideoContainer = document.querySelector('.cardlist__row');
+    VideoContainer.appendChild(col);
   }
 
   fetchJson() {
@@ -235,7 +246,7 @@ class Player {
     const fullscreenButton = document.createElement('button');
     const soundButton = document.createElement('button');
     controleContainer.classList.add('controles');
-    playingButton.setAttribute('click', playPause();
+    playingButton.setAttribute('click', playPause());
     playingButton.classList.add('button--play');
     forwardButton.setAttribute('click', skip(3));
     backButton.setAttribute('click', skip(-3));
