@@ -103,7 +103,7 @@ var VideoRentSite = function () {
       /*  const klst = Math.floor((sec - day) / (60 * 60));
         const klstString = klst === 1 ? 'klukkustund' : 'klukkustundum';
         return 'Fyrir $(klst) $(klstString) síðan';
-          else {
+         else {
           klst = parseInt(klst);
           if (klst === 1){
             return 'Fyrir ' + klst + ' klukkustund síðan';
@@ -115,40 +115,6 @@ var VideoRentSite = function () {
 
     /* útfærir controles gæjan, það sem kemur undir þegar */
 
-  }, {
-    key: 'createElement',
-    value: function createElement(poster, video, title, posted) {
-      var row = document.createElement('div'); // ætti kannski að vera bara eitt á hvert section?
-      var col = document.createElement('div');
-      var vid = document.createElement('video');
-      var aElement = document.createElement('a');
-      row.classList.add('cardlist__row');
-      col.classList.add('cardlist__col');
-      col.appendChild(document.createElement(blabla));
-      row.appendChild(col);
-
-      var card = document.createElement('div');
-      card.classList.add('card');
-      var cardImage = document.createElement('img');
-      cardImage.classList.add('card__img');
-      cardImage.src = 'poster'; // ?????
-      console.log(cardImage.src);
-      cardImage.setAttribute('src', poster); // ???????
-      // cardImage.appendChild(document.createElement(poster));
-      var cardContent = document.createElement('div');
-      cardContent.classList.add('card__content');
-      cardContent.appendChild(document.createElement(blalba));
-      var cardHeading = document.createElement('div');
-      cardHeading.classList.add('card__heading');
-      cardHeading.appendChild(document.createTextNode(title));
-      card.appendChild(cardImage); // ???
-      card.appendChild(cardContent);
-      card.appendChild(cardHeading);
-
-      row.appendChild(card);
-
-      return row;
-    }
   }, {
     key: 'createVideolist',
     value: function createVideolist(data) {
@@ -163,74 +129,154 @@ var VideoRentSite = function () {
   }, {
     key: 'createCategorylist',
     value: function createCategorylist(cats, videos) {
-      var _this = this;
+      //  const div = document.createElement('div');
+      //  console.log('DIV', div);
+      //div.classList.add('cardlist__row');
 
-      var div = document.createElement('div');
-      console.log('DIV', div);
-      div.classList.add('cardlist__row');
+      //  const ClassContainer = document.querySelector('.cardlist');
+      //    console.log('class', ClassContainer);
+      //  ClassContainer.appendChild(div);
 
-      var ClassContainer = document.querySelector('.videos');
-      console.log('class', ClassContainer);
-      ClassContainer.appendChild(div);
 
-      var _loop = function _loop(i) {
+      for (var i = 0; i <= cats.videos.length - 1; i++) {
         var id = cats.videos[i];
         console.log('ID', id);
         console.log('CATS.VIDEOS', cats.videos);
-        var video = videos.find(function (videos) {
-          return videos.id === id;
-        });
+        //const video = videos.find(videos => videos.id === id);
         console.log('PRUFA TITIL', videos[i]['created']);
-        var videlement = _this.createVideoElement(div, videos[i]['poster'], videos[i]['video'], videos[i]['title'], videos[i]['duration'], videos[i]['duration']);
-      };
-
-      for (var i = 0; i <= cats.videos.length; i++) {
-        _loop(i);
+        var videlement = this.createVideoElement(videos[i]['poster'], videos[i]['video'], videos[i]['title'], videos[i]['duration'], videos[i]['duration']);
       }
-      ClassContainer.appendChild(div);
+      //  ClassContainer.appendChild(div);
     }
+
+    /*  createElement(poster, video, title, posted) {
+        const cardlist = document.createElement('div');
+        cardlist.classList.add('cardlist');
+        const row = document.createElement('div'); // ætti kannski að vera bara eitt á hvert section?
+        row.classList.add('cardlist__row');
+        const col = document.createElement('div');
+        col.classList.add('cardlist__col');
+    
+        //const vid = document.createElement('video');
+        //const aElement = document.createElement('a');
+    
+        const card = document.createElement('div');
+        card.classList.add('card');
+        const cardImage = document.createElement('img');
+        cardImage.classList.add('card__image');
+        cardImage.src = 'poster'; // ?????
+        console.log(cardImage.src);
+        cardImage.setAttribute('src', poster); // ???????
+        // cardImage.appendChild(document.createElement(poster));
+        const cardContent = document.createElement('div');
+        cardContent.classList.add('card__content');
+        const cardHeading = document.createElement('h3');
+        cardHeading.classList.add('card__heading');
+        cardHeading.appendChild(document.createTextNode(title));
+        const cardText = document.createElement('p');
+        cardText.classList.add('card__text');
+        cardContent.appendChild(cardHeading);
+        cardContent.appendChild(cardText);
+        aElement.appendChild(cardImage); // ???
+        card.appendChild(cardContent);
+    
+        col.appendChild(card);
+        row.appendChild(col);
+        cardlist.appendChild(row);
+    
+        return cardlist;
+      }*/
 
     // fær inn upplýsingar um myndband og "byggir" það upp, fallið sem ég var að gera en má alveg breyta eða nota annað fall
 
   }, {
     key: 'createVideoElement',
-    value: function createVideoElement(div, poster, video, title, posted, duration) {
+    value: function createVideoElement(poster, video, title, posted, duration) {
       console.log(poster);
       console.log(video);
       console.log(title);
       console.log(posted);
       console.log(duration);
+
+      var row = document.createElement('div');
       var col = document.createElement('div');
-      var vid = document.createElement('video'); // spurning hvort það þurfi að kalla á myndbandið hérna?
-      var aElement = document.createElement('a');
-      var cardImg = document.createElement('img');
-      var cardTitle = document.createElement('h2');
-      var since = document.createElement('p');
-      var length = document.createElement('p');
+
+      var cardlist = document.querySelector('.cardlist');
+
+      row.classList.add('cardlist__row');
+
+      row.appendChild(col);
+      cardlist.appendChild(row);
+
+      /*** úr createElement ****/
+
+      /*const cardlist = document.querySelector('.cardlist');
+       //const cardlist = document.createElement('div');
+      //cardlist.classList.add('cardlist');
+      const row = document.createElement('div'); // ætti kannski að vera bara eitt á hvert section?
+      row.classList.add('cardlist__row');
+      cardlist.appendChild(row);
+      const col = document.createElement('div');
       col.classList.add('cardlist__col');
+      row.appendChild(col);
+       const card = document.createElement('div');
+      card.classList.add('card');
+      const cardImage = document.createElement('img');
+      cardImage.classList.add('card__image');
+      cardImage.src = 'poster'; // ?????
+      console.log(cardImage.src);
+      cardImage.setAttribute('src', poster); // ???????
+      const aElement = document.createElement('a');
       aElement.setAttribute('href', 'site.html');
-      cardImg.classList.add('card__img');
-      cardImg.setAttribute('src', poster);
-      cardTitle.appendChild(document.createTextNode(title));
-      since.appendChild(document.createTextNode(this.sincePosted(posted)));
-      length.appendChild(document.createTextNode(this.videoLength(duration)));
-      aElement.appendChild(vid);
-      col.appendChild(aElement);
-      col.appendChild(cardImg);
-      col.appendChild(cardTitle);
-      col.appendChild(since);
-      col.appendChild(length);
+      // cardImage.appendChild(document.createElement(poster));
+      const cardContent = document.createElement('div');
+      cardContent.classList.add('card__content');
+      const cardHeading = document.createElement('h3');
+      cardHeading.classList.add('card__heading');
+      cardHeading.appendChild(document.createTextNode(title));
+      const cardText = document.createElement('p');
+      cardText.classList.add('card__text');
+      cardText.appendChild(document.createTextNode(this.sincePosted(posted)));
+      cardContent.appendChild(cardHeading);
+      cardContent.appendChild(cardText);
+      aElement.appendChild(cardImage); // ???
+      card.appendChild(aElement);
+      card.appendChild(cardContent);
+       col.appendChild(card);*/
 
-      var VideoContainer = document.querySelector('.cardlist__row');
-      console.log('video', VideoContainer);
-      VideoContainer.appendChild(col);
+      /*** það endar hér ***/
 
-      return;
+      /*  const col = document.createElement('div');
+        const vid = document.createElement('video'); // spurning hvort það þurfi að kalla á myndbandið hérna?
+        const aElement = document.createElement('a');
+        const cardImg = document.createElement('img');
+        const cardTitle = document.createElement('h2');
+        const since = document.createElement('p');
+        const length = document.createElement('p');
+        col.classList.add('cardlist__col');
+        aElement.setAttribute('href', 'site.html');
+        cardImg.classList.add('card__img');
+        cardImg.setAttribute('src', poster);
+        cardTitle.appendChild(document.createTextNode(title));
+        since.appendChild(document.createTextNode(this.sincePosted(posted)));
+        length.appendChild(document.createTextNode(this.videoLength(duration)));
+        aElement.appendChild(vid);
+        col.appendChild(aElement);
+        col.appendChild(cardImg);
+        col.appendChild(cardTitle);
+        col.appendChild(since);
+        col.appendChild(length);*/
+
+      /*  const VideoContainer = document.querySelector('.cardlist__row');
+        console.log('video', VideoContainer);
+        VideoContainer.appendChild(row);*/
+
+      return cardlist;
     }
   }, {
     key: 'fetchJson',
     value: function fetchJson() {
-      var _this2 = this;
+      var _this = this;
 
       var json = 'videos.json';
       var r = new XMLHttpRequest();
@@ -240,7 +286,7 @@ var VideoRentSite = function () {
         if (r.status >= 200 && r.status < 400) {
           var data = JSON.parse(r.response);
           console.log(data);
-          _this2.createVideolist(data);
+          _this.createVideolist(data);
         } else {
           console.log('villa!', r);
         }
