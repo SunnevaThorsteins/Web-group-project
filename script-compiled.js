@@ -197,7 +197,7 @@ var VideoRentSite = function () {
       cardTitle.appendChild(document.createTextNode(title));
       since.appendChild(document.createTextNode(this.sincePosted(posted)));
       length.appendChild(document.createTextNode(this.videoLength(duration)));
-      aElement.appendChild(vid);
+      aElement.appendChild(poster);
       col.appendChild(aElement);
       col.appendChild(cardImg);
       col.appendChild(cardTitle);
@@ -236,9 +236,8 @@ var VideoRentSite = function () {
 }();
 
 var Player = function () {
-
-  /*hér á að skilgreina tilviksbreytur, allar breytur sem við viljum upphafsstilla
-   *þarf að vera this. á undan þeim*/
+  /* hér á að skilgreina tilviksbreytur, allar breytur sem við viljum upphafsstilla
+   *þarf að vera this. á undan þeim */
   function Player() {
     _classCallCheck(this, Player);
 
@@ -246,15 +245,15 @@ var Player = function () {
     this.player = document.querySelector('.player');
     this.controls = document.querySelector('.controls');
     this.back = document.querySelector('.back');
-    /*gætum svo þurft að bæta við add addEventListener á takkana hérna*/
+    /* gætum svo þurft að bæta við add addEventListener á takkana hérna */
   }
 
   _createClass(Player, [{
     key: 'load',
     value: function load() {}
-    //const request = new XMLHttpRequest();
-    //const qs = new URLSerchParams(window.location.serch);
-    //const id = parseInt(qs.get('id'), 10);
+    // const request = new XMLHttpRequest();
+    // const qs = new URLSerchParams(window.location.serch);
+    // const id = parseInt(qs.get('id'), 10);
     // request.open. ()
 
 
@@ -270,13 +269,13 @@ var Player = function () {
       var fullscreenButton = document.createElement('button');
       var soundButton = document.createElement('button');
       controleContainer.classList.add('controles');
-      playingButton.setAttribute('click', playPause());
+      playingButton.setAttribute('click', this.playPause());
       playingButton.classList.add('button--play');
-      forwardButton.setAttribute('click', skip(3));
-      backButton.setAttribute('click', skip(-3));
-      fullscreenButton.setAttribute('click', fullscreen());
-      fullscreenButton.classList.add('normalSize'); //þegar myndbandið er venjulegt
-      soundButton.setAttribute('click', sound());
+      forwardButton.setAttribute('click', this.skip(3));
+      backButton.setAttribute('click', this.skip(-3));
+      fullscreenButton.setAttribute('click', this.fullscreen());
+      fullscreenButton.classList.add('normalSize'); // þegar myndbandið er venjulegt
+      soundButton.setAttribute('click', this.sound());
       controleContainer.appendChild(playingButton);
       controleContainer.appendChild(forwardButton);
       controleContainer.appendChild(backButton);
@@ -292,7 +291,6 @@ var Player = function () {
     value: function skip(value) {
       var video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
       video.currentTime += value;
-      return; // veit ekki hvort það þarf að vera return
     }
 
     // annaðhvort muta-ar eða setur hljóðið aftur á myndbandið
@@ -315,11 +313,11 @@ var Player = function () {
     value: function fullscreen() {
       var video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
       if (document.querySelector('normalSize')) {
-        var norm = button.querySelector('normalSize');
+        var norm = video.querySelector('normalSize');
         norm.classList.remove('normalSize');
         norm.classList.add('fullscreenSize');
       } else {
-        var full = button.querySelector('fullscreenSize');
+        var full = video.querySelector('fullscreenSize');
         full.classList.remove('fullscreenSize');
         full.classList.add('normalSize');
       }
@@ -335,13 +333,13 @@ var Player = function () {
       var video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndband er verið að tala um
       if (video.paused) {
         video.play();
-        /*held ég sé að finna takkann sem er að hafa þetta á pásu og breyta honum í play takka*/
-        var play = button.querySelector('.button--pause');
+        /* held ég sé að finna takkann sem er að hafa þetta á pásu og breyta honum í play takka */
+        var play = video.querySelector('.button--pause');
         play.classList.remove('.button--pause');
         play.classList.add('.button--play');
       } else {
         video.pause();
-        var pause = button.querySelector('.button--play');
+        var pause = video.querySelector('.button--play');
         pause.classList.remove('.button--play');
         pause.classList.add('.button--pause');
       }
