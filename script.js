@@ -142,7 +142,9 @@ class VideoRentSite {
   createVideolist(data) {
     const categories = data.categories;
     const videos = data.videos;
+
     const ClassContainer = document.querySelector('.cardlist');
+
     for (let i=0; i<categories.length; i++) {
       console.log('****************TELJARIII****************');
       const cats = categories[i];
@@ -161,13 +163,19 @@ class VideoRentSite {
       console.log('*************', [i+1], '*************');
       const id = cats.videos[i];
       console.log('ID', id);
-      const videlement = this.createVideoElement(row, videos[i]['poster'], videos[i]['video'], videos[i]['title'], videos[i]['created'], videos[i]['duration']);
+      const videlement = this.createVideoElement(row, videos[id-1]['poster'], videos[id-1]['video'], videos[id-1]['title'], videos[id-1]['created'], videos[id-1]['duration']);
     }
     return;
   }
 
   // fær inn upplýsingar um myndband og "byggir" það upp, fallið sem ég var að gera en má alveg breyta eða nota annað fall
   createVideoElement(row, poster, video, title, posted, duration) {
+
+
+
+
+
+
     console.log('poster', poster);
     console.log('video', video);
     console.log('title', title);

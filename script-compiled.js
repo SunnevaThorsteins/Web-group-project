@@ -104,7 +104,7 @@ var VideoRentSite = function () {
       /*  const klst = Math.floor((sec - day) / (60 * 60));
         const klstString = klst === 1 ? 'klukkustund' : 'klukkustundum';
         return 'Fyrir $(klst) $(klstString) síðan';
-         else {
+          else {
           klst = parseInt(klst);
           if (klst === 1){
             return 'Fyrir ' + klst + ' klukkustund síðan';
@@ -125,7 +125,7 @@ var VideoRentSite = function () {
       col.classList.add('cardlist__col');
       col.appendChild(document.createElement(blabla));
       row.appendChild(col);
-       const card = document.createElement('div');
+        const card = document.createElement('div');
       card.classList.add('card');
       const cardImage = document.createElement('img');
       cardImage.classList.add('card__img');
@@ -142,8 +142,8 @@ var VideoRentSite = function () {
       card.appendChild(cardImage); // ???
       card.appendChild(cardContent);
       card.appendChild(cardHeading);
-       row.appendChild(card);
-       return row;
+        row.appendChild(card);
+        return row;
     }*/
 
   }, {
@@ -151,7 +151,9 @@ var VideoRentSite = function () {
     value: function createVideolist(data) {
       var categories = data.categories;
       var videos = data.videos;
+
       var ClassContainer = document.querySelector('.cardlist');
+
       for (var i = 0; i < categories.length; i++) {
         console.log('****************TELJARIII****************');
         var cats = categories[i];
@@ -171,7 +173,7 @@ var VideoRentSite = function () {
         console.log('*************', [i + 1], '*************');
         var id = cats.videos[i];
         console.log('ID', id);
-        var videlement = this.createVideoElement(row, videos[i]['poster'], videos[i]['video'], videos[i]['title'], videos[i]['created'], videos[i]['duration']);
+        var videlement = this.createVideoElement(row, videos[id - 1]['poster'], videos[id - 1]['video'], videos[id - 1]['title'], videos[id - 1]['created'], videos[id - 1]['duration']);
       }
       return;
     }
@@ -181,6 +183,7 @@ var VideoRentSite = function () {
   }, {
     key: 'createVideoElement',
     value: function createVideoElement(row, poster, video, title, posted, duration) {
+
       console.log('poster', poster);
       console.log('video', video);
       console.log('title', title);
