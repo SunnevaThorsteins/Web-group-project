@@ -8,7 +8,7 @@ var VideoRentSite = function () {
   function VideoRentSite() {
     _classCallCheck(this, VideoRentSite);
 
-    //this.keyName = 'videos';
+    // this.keyName = 'videos';
     this.container = document.querySelector('.videos');
   }
 
@@ -98,12 +98,13 @@ var VideoRentSite = function () {
               } else {
                 return 'Fyrir ' + day + ' dögum síðan';
               }
+              return;
             }
 
       /*  const klst = Math.floor((sec - day) / (60 * 60));
         const klstString = klst === 1 ? 'klukkustund' : 'klukkustundum';
         return 'Fyrir $(klst) $(klstString) síðan';
-          else {
+         else {
           klst = parseInt(klst);
           if (klst === 1){
             return 'Fyrir ' + klst + ' klukkustund síðan';
@@ -124,7 +125,7 @@ var VideoRentSite = function () {
       col.classList.add('cardlist__col');
       col.appendChild(document.createElement(blabla));
       row.appendChild(col);
-        const card = document.createElement('div');
+       const card = document.createElement('div');
       card.classList.add('card');
       const cardImage = document.createElement('img');
       cardImage.classList.add('card__img');
@@ -141,8 +142,8 @@ var VideoRentSite = function () {
       card.appendChild(cardImage); // ???
       card.appendChild(cardContent);
       card.appendChild(cardHeading);
-        row.appendChild(card);
-        return row;
+       row.appendChild(card);
+       return row;
     }*/
 
   }, {
@@ -192,10 +193,14 @@ var VideoRentSite = function () {
       console.log('posted', posted);
       console.log('duration', duration);
       var col = document.createElement('div');
-      var vid = document.createElement('video'); // spurning hvort það þurfi að kalla á myndbandið hérna?
       var aElement = document.createElement('a');
       var cardImg = document.createElement('img');
+<<<<<<< HEAD
       var cardTitle = document.createElement('h3');
+=======
+      // const vid = document.createElement('video');
+      var cardTitle = document.createElement('h2');
+>>>>>>> 7b1e2662a2dbf277cc6186560ef3dd7bbf077dd0
       var since = document.createElement('p');
       var length = document.createElement('p');
       col.classList.add('cardlist__col');
@@ -205,9 +210,15 @@ var VideoRentSite = function () {
       cardTitle.appendChild(document.createTextNode(title));
       since.appendChild(document.createTextNode(this.sincePosted(posted)));
       length.appendChild(document.createTextNode(this.videoLength(duration)));
+<<<<<<< HEAD
       aElement.appendChild(vid);
       aElement.appendChild(cardImg);
       col.appendChild(aElement);
+=======
+      // aElement.appendChild(vid);
+      col.appendChild(aElement);
+      aElement.appendChild(cardImg);
+>>>>>>> 7b1e2662a2dbf277cc6186560ef3dd7bbf077dd0
       col.appendChild(cardTitle);
       col.appendChild(since);
       col.appendChild(length);
@@ -245,9 +256,8 @@ var VideoRentSite = function () {
 }();
 
 var Player = function () {
-
-  /*hér á að skilgreina tilviksbreytur, allar breytur sem við viljum upphafsstilla
-   *þarf að vera this. á undan þeim*/
+  /* hér á að skilgreina tilviksbreytur, allar breytur sem við viljum upphafsstilla
+   *þarf að vera this. á undan þeim */
   function Player() {
     _classCallCheck(this, Player);
 
@@ -255,15 +265,15 @@ var Player = function () {
     this.player = document.querySelector('.player');
     this.controls = document.querySelector('.controls');
     this.back = document.querySelector('.back');
-    /*gætum svo þurft að bæta við add addEventListener á takkana hérna*/
+    /* gætum svo þurft að bæta við add addEventListener á takkana hérna */
   }
 
   _createClass(Player, [{
     key: 'load',
     value: function load() {}
-    //const request = new XMLHttpRequest();
-    //const qs = new URLSerchParams(window.location.serch);
-    //const id = parseInt(qs.get('id'), 10);
+    // const request = new XMLHttpRequest();
+    // const qs = new URLSerchParams(window.location.serch);
+    // const id = parseInt(qs.get('id'), 10);
     // request.open. ()
 
 
@@ -279,13 +289,13 @@ var Player = function () {
       var fullscreenButton = document.createElement('button');
       var soundButton = document.createElement('button');
       controleContainer.classList.add('controles');
-      playingButton.setAttribute('click', playPause());
+      playingButton.setAttribute('click', this.playPause());
       playingButton.classList.add('button--play');
-      forwardButton.setAttribute('click', skip(3));
-      backButton.setAttribute('click', skip(-3));
-      fullscreenButton.setAttribute('click', fullscreen());
-      fullscreenButton.classList.add('normalSize'); //þegar myndbandið er venjulegt
-      soundButton.setAttribute('click', sound());
+      forwardButton.setAttribute('click', this.skip(3));
+      backButton.setAttribute('click', this.skip(-3));
+      fullscreenButton.setAttribute('click', this.fullscreen());
+      fullscreenButton.classList.add('normalSize'); // þegar myndbandið er venjulegt
+      soundButton.setAttribute('click', this.sound());
       controleContainer.appendChild(playingButton);
       controleContainer.appendChild(forwardButton);
       controleContainer.appendChild(backButton);
@@ -301,7 +311,6 @@ var Player = function () {
     value: function skip(value) {
       var video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
       video.currentTime += value;
-      return; // veit ekki hvort það þarf að vera return
     }
 
     // annaðhvort muta-ar eða setur hljóðið aftur á myndbandið
@@ -324,11 +333,11 @@ var Player = function () {
     value: function fullscreen() {
       var video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
       if (document.querySelector('normalSize')) {
-        var norm = button.querySelector('normalSize');
+        var norm = video.querySelector('normalSize');
         norm.classList.remove('normalSize');
         norm.classList.add('fullscreenSize');
       } else {
-        var full = button.querySelector('fullscreenSize');
+        var full = video.querySelector('fullscreenSize');
         full.classList.remove('fullscreenSize');
         full.classList.add('normalSize');
       }
@@ -344,13 +353,13 @@ var Player = function () {
       var video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndband er verið að tala um
       if (video.paused) {
         video.play();
-        /*held ég sé að finna takkann sem er að hafa þetta á pásu og breyta honum í play takka*/
-        var play = button.querySelector('.button--pause');
+        /* held ég sé að finna takkann sem er að hafa þetta á pásu og breyta honum í play takka */
+        var play = video.querySelector('.button--pause');
         play.classList.remove('.button--pause');
         play.classList.add('.button--play');
       } else {
         video.pause();
-        var pause = button.querySelector('.button--play');
+        var pause = video.querySelector('.button--play');
         pause.classList.remove('.button--play');
         pause.classList.add('.button--pause');
       }
