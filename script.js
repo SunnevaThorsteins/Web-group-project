@@ -142,21 +142,23 @@ class VideoRentSite {
   createVideolist(data) {
     const categories = data.categories;
     const videos = data.videos;
+    const ClassContainer = document.querySelector('.videos');
 
-    for (let i = 0; i < categories.length; i++) {
+    for (let i=0; i<categories.length; i++) {
       console.log('****************TELJARIII****************');
       const cats = categories[i];
-      this.createCategorylist(cats, videos);
+      const row = document.createElement('div');
+      const heading = document.createElement('h2');
+      heading.appendChild(document.createTextNode(categories[i]['title']));
+      ClassContainer.appendChild(heading);
+      row.classList.add('cardlist__row');
+      ClassContainer.appendChild(row);
+      this.createCategorylist(ClassContainer, row, cats, videos);
     }
   }
 
-  createCategorylist(cats, videos) {
-    const ClassContainer = document.querySelector('.cardlist');
-    const row = document.createElement('div');
-    row.classList.add('cardlist__row');
-    ClassContainer.appendChild(row);
-
-    for (let i = 0; i <= cats.videos.length - 1; i++) {
+  createCategorylist(ClassContainer, row, cats, videos) {
+    for (let i=0; i<=cats.videos.length-1; i++) {
       console.log('*************', [i+1], '*************');
       const id = cats.videos[i];
       console.log('ID', id);
@@ -178,8 +180,7 @@ class VideoRentSite {
     const cardImage = document.createElement('div');
     const aElement = document.createElement('a');
     const cardImg = document.createElement('img');
-    // const vid = document.createElement('video');
-    const cardHeading = document.createElement('h3');
+    const cardTitle = document.createElement('h3');
     const since = document.createElement('p');
     const length = document.createElement('p');
     col.classList.add('cardlist__col');
@@ -192,7 +193,6 @@ class VideoRentSite {
     cardHeading.appendChild(document.createTextNode(title));
     since.appendChild(document.createTextNode(this.sincePosted(posted)));
     length.appendChild(document.createTextNode(this.videoLength(duration)));
-    // aElement.appendChild(vid);
     col.appendChild(card);
     aElement.appendChild(cardImg);
     card.appendChild(aElement);
@@ -203,6 +203,8 @@ class VideoRentSite {
 
     const VideoContainer = document.querySelector('.cardlist__row');
     VideoContainer.appendChild(col);
+    return;
+
   }
 
   fetchJson() {
@@ -318,7 +320,6 @@ class Player {
     return; // veit ekki hvort það þarf að vera return :/
   }
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
   const VideoSite = new VideoRentSite();
