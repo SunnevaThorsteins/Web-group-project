@@ -104,7 +104,7 @@ var VideoRentSite = function () {
       /*  const klst = Math.floor((sec - day) / (60 * 60));
         const klstString = klst === 1 ? 'klukkustund' : 'klukkustundum';
         return 'Fyrir $(klst) $(klstString) síðan';
-          else {
+         else {
           klst = parseInt(klst);
           if (klst === 1){
             return 'Fyrir ' + klst + ' klukkustund síðan';
@@ -125,7 +125,7 @@ var VideoRentSite = function () {
       col.classList.add('cardlist__col');
       col.appendChild(document.createElement(blabla));
       row.appendChild(col);
-        const card = document.createElement('div');
+       const card = document.createElement('div');
       card.classList.add('card');
       const cardImage = document.createElement('img');
       cardImage.classList.add('card__img');
@@ -142,8 +142,8 @@ var VideoRentSite = function () {
       card.appendChild(cardImage); // ???
       card.appendChild(cardContent);
       card.appendChild(cardHeading);
-        row.appendChild(card);
-        return row;
+       row.appendChild(card);
+       return row;
     }*/
 
   }, {
@@ -151,8 +151,7 @@ var VideoRentSite = function () {
     value: function createVideolist(data) {
       var categories = data.categories;
       var videos = data.videos;
-      var ClassContainer = document.querySelector('.videos');
-
+      var ClassContainer = document.querySelector('.cardlist');
       for (var i = 0; i < categories.length; i++) {
         console.log('****************TELJARIII****************');
         var cats = categories[i];
@@ -190,16 +189,15 @@ var VideoRentSite = function () {
       var col = document.createElement('div');
       var card = document.createElement('div');
       var cardContent = document.createElement('div');
-      var cardImage = document.createElement('div');
       var aElement = document.createElement('a');
       var cardImg = document.createElement('img');
-      var cardTitle = document.createElement('h3');
+      var cardHeading = document.createElement('h3');
       var since = document.createElement('p');
       var length = document.createElement('p');
       col.classList.add('cardlist__col');
       card.classList.add('card');
       aElement.setAttribute('href', 'site.html');
-      cardImage.classList.add('card__img');
+      cardImg.classList.add('card__img');
       cardImg.setAttribute('src', poster);
       cardContent.classList.add('cardContent');
       since.classList.add('cardText');
@@ -212,7 +210,7 @@ var VideoRentSite = function () {
       cardContent.appendChild(cardHeading);
       cardContent.appendChild(since);
       card.appendChild(cardContent);
-      cardImage.appendChild(length);
+      card.appendChild(length);
 
       var VideoContainer = document.querySelector('.cardlist__row');
       VideoContainer.appendChild(col);

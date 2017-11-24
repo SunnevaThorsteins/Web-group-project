@@ -142,8 +142,7 @@ class VideoRentSite {
   createVideolist(data) {
     const categories = data.categories;
     const videos = data.videos;
-    const ClassContainer = document.querySelector('.videos');
-
+    const ClassContainer = document.querySelector('.cardlist');
     for (let i=0; i<categories.length; i++) {
       console.log('****************TELJARIII****************');
       const cats = categories[i];
@@ -177,16 +176,15 @@ class VideoRentSite {
     const col = document.createElement('div');
     const card = document.createElement('div');
     const cardContent = document.createElement('div');
-    const cardImage = document.createElement('div');
     const aElement = document.createElement('a');
     const cardImg = document.createElement('img');
-    const cardTitle = document.createElement('h3');
+    const cardHeading = document.createElement('h3');
     const since = document.createElement('p');
     const length = document.createElement('p');
     col.classList.add('cardlist__col');
     card.classList.add('card');
     aElement.setAttribute('href', 'site.html');
-    cardImage.classList.add('card__img');
+    cardImg.classList.add('card__img');
     cardImg.setAttribute('src', poster);
     cardContent.classList.add('cardContent');
     since.classList.add('cardText');
@@ -199,7 +197,7 @@ class VideoRentSite {
     cardContent.appendChild(cardHeading);
     cardContent.appendChild(since);
     card.appendChild(cardContent);
-    cardImage.appendChild(length);
+    card.appendChild(length);
 
     const VideoContainer = document.querySelector('.cardlist__row');
     VideoContainer.appendChild(col);
