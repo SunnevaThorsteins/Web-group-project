@@ -151,26 +151,34 @@ var VideoRentSite = function () {
       var categories = data.categories;
       var videos = data.videos;
 
+      var ClassContainer = document.querySelector('.videos');
+
       for (var i = 0; i < categories.length; i++) {
         console.log('****************TELJARIII****************');
         var cats = categories[i];
-        this.createCategorylist(cats, videos);
+
+        var row = document.createElement('div');
+        var heading = document.createElement('h2');
+        heading.appendChild(document.createTextNode(categories[i]['title']));
+        ClassContainer.appendChild(heading);
+
+        row.classList.add('cardlist__row');
+
+        ClassContainer.appendChild(row);
+
+        this.createCategorylist(ClassContainer, row, cats, videos);
       }
     }
   }, {
     key: 'createCategorylist',
-    value: function createCategorylist(cats, videos) {
-      var ClassContainer = document.querySelector('.videos');
-      var row = document.createElement('div');
-      row.classList.add('cardlist__row');
-      ClassContainer.appendChild(row);
-
+    value: function createCategorylist(ClassContainer, row, cats, videos) {
       for (var i = 0; i <= cats.videos.length - 1; i++) {
         console.log('*************', [i + 1], '*************');
         var id = cats.videos[i];
         console.log('ID', id);
         var videlement = this.createVideoElement(row, videos[i]['poster'], videos[i]['video'], videos[i]['title'], videos[i]['created'], videos[i]['duration']);
       }
+      return;
     }
 
     // fær inn upplýsingar um myndband og "byggir" það upp, fallið sem ég var að gera en má alveg breyta eða nota annað fall
@@ -187,7 +195,7 @@ var VideoRentSite = function () {
       var vid = document.createElement('video'); // spurning hvort það þurfi að kalla á myndbandið hérna?
       var aElement = document.createElement('a');
       var cardImg = document.createElement('img');
-      var cardTitle = document.createElement('h2');
+      var cardTitle = document.createElement('h3');
       var since = document.createElement('p');
       var length = document.createElement('p');
       col.classList.add('cardlist__col');
@@ -198,14 +206,15 @@ var VideoRentSite = function () {
       since.appendChild(document.createTextNode(this.sincePosted(posted)));
       length.appendChild(document.createTextNode(this.videoLength(duration)));
       aElement.appendChild(vid);
+      aElement.appendChild(cardImg);
       col.appendChild(aElement);
-      col.appendChild(cardImg);
       col.appendChild(cardTitle);
       col.appendChild(since);
       col.appendChild(length);
 
       var VideoContainer = document.querySelector('.cardlist__row');
       VideoContainer.appendChild(col);
+      return;
     }
   }, {
     key: 'fetchJson',

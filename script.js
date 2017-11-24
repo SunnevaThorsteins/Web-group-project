@@ -144,26 +144,33 @@ class VideoRentSite {
     const categories = data.categories;
     const videos = data.videos;
 
+    const ClassContainer = document.querySelector('.videos');
+
     for (let i=0; i<categories.length; i++) {
       console.log('****************TELJARIII****************');
       const cats = categories[i];
-      this.createCategorylist(cats, videos);
+
+      const row = document.createElement('div');
+      const heading = document.createElement('h2');
+      heading.appendChild(document.createTextNode(categories[i]['title']));
+      ClassContainer.appendChild(heading);
+
+      row.classList.add('cardlist__row');
+
+      ClassContainer.appendChild(row);
+
+      this.createCategorylist(ClassContainer, row, cats, videos);
     }
   }
 
-  createCategorylist(cats, videos) {
-    const ClassContainer = document.querySelector('.videos');
-    const row = document.createElement('div');
-    row.classList.add('cardlist__row');
-    ClassContainer.appendChild(row);
-
+  createCategorylist(ClassContainer, row, cats, videos) {
     for (let i=0; i<=cats.videos.length-1; i++) {
       console.log('*************', [i+1], '*************');
       const id = cats.videos[i];
       console.log('ID', id);
       const videlement = this.createVideoElement(row, videos[i]['poster'], videos[i]['video'], videos[i]['title'], videos[i]['created'], videos[i]['duration']);
-
     }
+    return;
   }
 
   // fær inn upplýsingar um myndband og "byggir" það upp, fallið sem ég var að gera en má alveg breyta eða nota annað fall
@@ -177,7 +184,7 @@ class VideoRentSite {
     const vid = document.createElement('video'); // spurning hvort það þurfi að kalla á myndbandið hérna?
     const aElement = document.createElement('a');
     const cardImg = document.createElement('img');
-    const cardTitle = document.createElement('h2');
+    const cardTitle = document.createElement('h3');
     const since = document.createElement('p');
     const length = document.createElement('p');
     col.classList.add('cardlist__col');
@@ -188,14 +195,16 @@ class VideoRentSite {
     since.appendChild(document.createTextNode(this.sincePosted(posted)));
     length.appendChild(document.createTextNode(this.videoLength(duration)));
     aElement.appendChild(vid);
+    aElement.appendChild(cardImg);
     col.appendChild(aElement);
-    col.appendChild(cardImg);
     col.appendChild(cardTitle);
     col.appendChild(since);
     col.appendChild(length);
 
     const VideoContainer = document.querySelector('.cardlist__row');
     VideoContainer.appendChild(col);
+    return;
+
   }
 
   fetchJson() {
@@ -315,7 +324,6 @@ class Player {
     return; // veit ekki hvort það þarf að vera return :/
   }
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
   const VideoSite = new VideoRentSite();
