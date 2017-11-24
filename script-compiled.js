@@ -161,7 +161,7 @@ var VideoRentSite = function () {
   }, {
     key: 'createCategorylist',
     value: function createCategorylist(cats, videos) {
-      var ClassContainer = document.querySelector('.videos');
+      var ClassContainer = document.querySelector('.cardlist');
       var row = document.createElement('div');
       row.classList.add('cardlist__row');
       ClassContainer.appendChild(row);
@@ -186,25 +186,33 @@ var VideoRentSite = function () {
       console.log('posted', posted);
       console.log('duration', duration);
       var col = document.createElement('div');
+      var card = document.createElement('div');
+      var cardContent = document.createElement('div');
+      var cardImage = document.createElement('div');
       var aElement = document.createElement('a');
       var cardImg = document.createElement('img');
       // const vid = document.createElement('video');
-      var cardTitle = document.createElement('h2');
+      var cardHeading = document.createElement('h3');
       var since = document.createElement('p');
       var length = document.createElement('p');
       col.classList.add('cardlist__col');
+      card.classList.add('card');
       aElement.setAttribute('href', 'site.html');
-      cardImg.classList.add('card__img');
+      cardImage.classList.add('card__img');
       cardImg.setAttribute('src', poster);
-      cardTitle.appendChild(document.createTextNode(title));
+      cardContent.classList.add('cardContent');
+      since.classList.add('cardText');
+      cardHeading.appendChild(document.createTextNode(title));
       since.appendChild(document.createTextNode(this.sincePosted(posted)));
       length.appendChild(document.createTextNode(this.videoLength(duration)));
       // aElement.appendChild(vid);
-      col.appendChild(aElement);
+      col.appendChild(card);
       aElement.appendChild(cardImg);
-      col.appendChild(cardTitle);
-      col.appendChild(since);
-      col.appendChild(length);
+      card.appendChild(aElement);
+      cardContent.appendChild(cardHeading);
+      cardContent.appendChild(since);
+      card.appendChild(cardContent);
+      cardImage.appendChild(length);
 
       var VideoContainer = document.querySelector('.cardlist__row');
       VideoContainer.appendChild(col);
