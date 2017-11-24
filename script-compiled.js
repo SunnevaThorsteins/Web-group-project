@@ -8,7 +8,7 @@ var VideoRentSite = function () {
   function VideoRentSite() {
     _classCallCheck(this, VideoRentSite);
 
-    //this.keyName = 'videos';
+    // this.keyName = 'videos';
     this.container = document.querySelector('.videos');
   }
 
@@ -98,6 +98,7 @@ var VideoRentSite = function () {
               } else {
                 return 'Fyrir ' + day + ' dögum síðan';
               }
+              return;
             }
 
       /*  const klst = Math.floor((sec - day) / (60 * 60));
@@ -120,33 +121,30 @@ var VideoRentSite = function () {
     value: function createVideolist(data) {
       var categories = data.categories;
       var videos = data.videos;
+      var ClassContainer = document.querySelector('.videos');
 
       for (var i = 0; i < categories.length; i++) {
+        console.log('****************TELJARIII****************');
         var cats = categories[i];
-        this.createCategorylist(cats, videos);
+        var row = document.createElement('div');
+        var heading = document.createElement('h2');
+        heading.appendChild(document.createTextNode(categories[i]['title']));
+        ClassContainer.appendChild(heading);
+        row.classList.add('cardlist__row');
+        ClassContainer.appendChild(row);
+        this.createCategorylist(ClassContainer, row, cats, videos);
       }
     }
   }, {
     key: 'createCategorylist',
-    value: function createCategorylist(cats, videos) {
-      //  const div = document.createElement('div');
-      //  console.log('DIV', div);
-      //div.classList.add('cardlist__row');
-
-      //  const ClassContainer = document.querySelector('.cardlist');
-      //    console.log('class', ClassContainer);
-      //  ClassContainer.appendChild(div);
-
-
+    value: function createCategorylist(ClassContainer, row, cats, videos) {
       for (var i = 0; i <= cats.videos.length - 1; i++) {
+        console.log('*************', [i + 1], '*************');
         var id = cats.videos[i];
         console.log('ID', id);
-        console.log('CATS.VIDEOS', cats.videos);
-        //const video = videos.find(videos => videos.id === id);
-        console.log('PRUFA TITIL', videos[i]['created']);
-        var videlement = this.createVideoElement(videos[i]['poster'], videos[i]['video'], videos[i]['title'], videos[i]['duration'], videos[i]['duration']);
+        var videlement = this.createVideoElement(row, videos[i]['poster'], videos[i]['video'], videos[i]['title'], videos[i]['created'], videos[i]['duration']);
       }
-      //  ClassContainer.appendChild(div);
+      return;
     }
 
     /*  createElement(poster, video, title, posted) {
@@ -250,7 +248,7 @@ var VideoRentSite = function () {
         const vid = document.createElement('video'); // spurning hvort það þurfi að kalla á myndbandið hérna?
         const aElement = document.createElement('a');
         const cardImg = document.createElement('img');
-        const cardTitle = document.createElement('h2');
+        const cardTitle = document.createElement('h3');
         const since = document.createElement('p');
         const length = document.createElement('p');
         col.classList.add('cardlist__col');
@@ -260,18 +258,15 @@ var VideoRentSite = function () {
         cardTitle.appendChild(document.createTextNode(title));
         since.appendChild(document.createTextNode(this.sincePosted(posted)));
         length.appendChild(document.createTextNode(this.videoLength(duration)));
-        aElement.appendChild(vid);
         col.appendChild(aElement);
-        col.appendChild(cardImg);
+        aElement.appendChild(cardImg);
         col.appendChild(cardTitle);
         col.appendChild(since);
         col.appendChild(length);*/
 
-      /*  const VideoContainer = document.querySelector('.cardlist__row');
-        console.log('video', VideoContainer);
-        VideoContainer.appendChild(row);*/
-
-      return cardlist;
+      var VideoContainer = document.querySelector('.cardlist__row');
+      VideoContainer.appendChild(col);
+      return;
     }
   }, {
     key: 'fetchJson',
@@ -302,9 +297,8 @@ var VideoRentSite = function () {
 }();
 
 var Player = function () {
-
-  /*hér á að skilgreina tilviksbreytur, allar breytur sem við viljum upphafsstilla
-   *þarf að vera this. á undan þeim*/
+  /* hér á að skilgreina tilviksbreytur, allar breytur sem við viljum upphafsstilla
+   *þarf að vera this. á undan þeim */
   function Player() {
     _classCallCheck(this, Player);
 
@@ -312,15 +306,15 @@ var Player = function () {
     this.player = document.querySelector('.player');
     this.controls = document.querySelector('.controls');
     this.back = document.querySelector('.back');
-    /*gætum svo þurft að bæta við add addEventListener á takkana hérna*/
+    /* gætum svo þurft að bæta við add addEventListener á takkana hérna */
   }
 
   _createClass(Player, [{
     key: 'load',
     value: function load() {}
-    //const request = new XMLHttpRequest();
-    //const qs = new URLSerchParams(window.location.serch);
-    //const id = parseInt(qs.get('id'), 10);
+    // const request = new XMLHttpRequest();
+    // const qs = new URLSerchParams(window.location.serch);
+    // const id = parseInt(qs.get('id'), 10);
     // request.open. ()
 
 
@@ -336,13 +330,13 @@ var Player = function () {
       var fullscreenButton = document.createElement('button');
       var soundButton = document.createElement('button');
       controleContainer.classList.add('controles');
-      playingButton.setAttribute('click', playPause());
+      playingButton.setAttribute('click', this.playPause());
       playingButton.classList.add('button--play');
-      forwardButton.setAttribute('click', skip(3));
-      backButton.setAttribute('click', skip(-3));
-      fullscreenButton.setAttribute('click', fullscreen());
-      fullscreenButton.classList.add('normalSize'); //þegar myndbandið er venjulegt
-      soundButton.setAttribute('click', sound());
+      forwardButton.setAttribute('click', this.skip(3));
+      backButton.setAttribute('click', this.skip(-3));
+      fullscreenButton.setAttribute('click', this.fullscreen());
+      fullscreenButton.classList.add('normalSize'); // þegar myndbandið er venjulegt
+      soundButton.setAttribute('click', this.sound());
       controleContainer.appendChild(playingButton);
       controleContainer.appendChild(forwardButton);
       controleContainer.appendChild(backButton);
@@ -358,7 +352,6 @@ var Player = function () {
     value: function skip(value) {
       var video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
       video.currentTime += value;
-      return; // veit ekki hvort það þarf að vera return
     }
 
     // annaðhvort muta-ar eða setur hljóðið aftur á myndbandið
@@ -381,11 +374,11 @@ var Player = function () {
     value: function fullscreen() {
       var video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
       if (document.querySelector('normalSize')) {
-        var norm = button.querySelector('normalSize');
+        var norm = video.querySelector('normalSize');
         norm.classList.remove('normalSize');
         norm.classList.add('fullscreenSize');
       } else {
-        var full = button.querySelector('fullscreenSize');
+        var full = video.querySelector('fullscreenSize');
         full.classList.remove('fullscreenSize');
         full.classList.add('normalSize');
       }
@@ -401,13 +394,13 @@ var Player = function () {
       var video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndband er verið að tala um
       if (video.paused) {
         video.play();
-        /*held ég sé að finna takkann sem er að hafa þetta á pásu og breyta honum í play takka*/
-        var play = button.querySelector('.button--pause');
+        /* held ég sé að finna takkann sem er að hafa þetta á pásu og breyta honum í play takka */
+        var play = video.querySelector('.button--pause');
         play.classList.remove('.button--pause');
         play.classList.add('.button--play');
       } else {
         video.pause();
-        var pause = button.querySelector('.button--play');
+        var pause = video.querySelector('.button--play');
         pause.classList.remove('.button--play');
         pause.classList.add('.button--pause');
       }
