@@ -175,7 +175,7 @@ class VideoRentSite {
     const col = document.createElement('div');
     const aElement = document.createElement('a');
     const cardImg = document.createElement('img');
-    const vid = document.createElement('video');
+    // const vid = document.createElement('video');
     const cardTitle = document.createElement('h2');
     const since = document.createElement('p');
     const length = document.createElement('p');
@@ -186,9 +186,9 @@ class VideoRentSite {
     cardTitle.appendChild(document.createTextNode(title));
     since.appendChild(document.createTextNode(this.sincePosted(posted)));
     length.appendChild(document.createTextNode(this.videoLength(duration)));
-    aElement.appendChild(vid);
+    // aElement.appendChild(vid);
     col.appendChild(aElement);
-    col.appendChild(cardImg);
+    aElement.appendChild(cardImg);
     col.appendChild(cardTitle);
     col.appendChild(since);
     col.appendChild(length);
