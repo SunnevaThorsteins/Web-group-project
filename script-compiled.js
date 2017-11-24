@@ -104,7 +104,7 @@ var VideoRentSite = function () {
       /*  const klst = Math.floor((sec - day) / (60 * 60));
         const klstString = klst === 1 ? 'klukkustund' : 'klukkustundum';
         return 'Fyrir $(klst) $(klstString) síðan';
-         else {
+          else {
           klst = parseInt(klst);
           if (klst === 1){
             return 'Fyrir ' + klst + ' klukkustund síðan';
@@ -125,7 +125,7 @@ var VideoRentSite = function () {
       col.classList.add('cardlist__col');
       col.appendChild(document.createElement(blabla));
       row.appendChild(col);
-       const card = document.createElement('div');
+        const card = document.createElement('div');
       card.classList.add('card');
       const cardImage = document.createElement('img');
       cardImage.classList.add('card__img');
@@ -142,8 +142,8 @@ var VideoRentSite = function () {
       card.appendChild(cardImage); // ???
       card.appendChild(cardContent);
       card.appendChild(cardHeading);
-       row.appendChild(card);
-       return row;
+        row.appendChild(card);
+        return row;
     }*/
 
   }, {
@@ -151,37 +151,23 @@ var VideoRentSite = function () {
     value: function createVideolist(data) {
       var categories = data.categories;
       var videos = data.videos;
-
       var ClassContainer = document.querySelector('.videos');
 
       for (var i = 0; i < categories.length; i++) {
         console.log('****************TELJARIII****************');
         var cats = categories[i];
-
         var row = document.createElement('div');
         var heading = document.createElement('h2');
         heading.appendChild(document.createTextNode(categories[i]['title']));
         ClassContainer.appendChild(heading);
-
         row.classList.add('cardlist__row');
-
         ClassContainer.appendChild(row);
-
         this.createCategorylist(ClassContainer, row, cats, videos);
       }
     }
   }, {
     key: 'createCategorylist',
-<<<<<<< HEAD
-    value: function createCategorylist(cats, videos) {
-      var ClassContainer = document.querySelector('.cardlist');
-      var row = document.createElement('div');
-      row.classList.add('cardlist__row');
-      ClassContainer.appendChild(row);
-
-=======
     value: function createCategorylist(ClassContainer, row, cats, videos) {
->>>>>>> c8a733caa1d24a1d66d18033dfc6997b6aa77f80
       for (var i = 0; i <= cats.videos.length - 1; i++) {
         console.log('*************', [i + 1], '*************');
         var id = cats.videos[i];
@@ -207,16 +193,7 @@ var VideoRentSite = function () {
       var cardImage = document.createElement('div');
       var aElement = document.createElement('a');
       var cardImg = document.createElement('img');
-<<<<<<< HEAD
       var cardTitle = document.createElement('h3');
-=======
-      // const vid = document.createElement('video');
-<<<<<<< HEAD
-      var cardHeading = document.createElement('h3');
-=======
-      var cardTitle = document.createElement('h2');
->>>>>>> 7b1e2662a2dbf277cc6186560ef3dd7bbf077dd0
->>>>>>> c8a733caa1d24a1d66d18033dfc6997b6aa77f80
       var since = document.createElement('p');
       var length = document.createElement('p');
       col.classList.add('cardlist__col');
@@ -229,26 +206,13 @@ var VideoRentSite = function () {
       cardHeading.appendChild(document.createTextNode(title));
       since.appendChild(document.createTextNode(this.sincePosted(posted)));
       length.appendChild(document.createTextNode(this.videoLength(duration)));
-<<<<<<< HEAD
-      aElement.appendChild(vid);
-      aElement.appendChild(cardImg);
-      col.appendChild(aElement);
-=======
-      // aElement.appendChild(vid);
       col.appendChild(card);
       aElement.appendChild(cardImg);
-<<<<<<< HEAD
       card.appendChild(aElement);
       cardContent.appendChild(cardHeading);
       cardContent.appendChild(since);
       card.appendChild(cardContent);
       cardImage.appendChild(length);
-=======
->>>>>>> 7b1e2662a2dbf277cc6186560ef3dd7bbf077dd0
-      col.appendChild(cardTitle);
-      col.appendChild(since);
-      col.appendChild(length);
->>>>>>> c8a733caa1d24a1d66d18033dfc6997b6aa77f80
 
       var VideoContainer = document.querySelector('.cardlist__row');
       VideoContainer.appendChild(col);
