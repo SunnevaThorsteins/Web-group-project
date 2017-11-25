@@ -17,7 +17,6 @@ html { /* stylelint-disable-line */
 }
 
 main { /* stylelint-disable-line */
-  display: flex;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -28,10 +27,9 @@ header { /* stylelint-disable-line */
 }
 
 @import "scss/button";
-@import "scss/backButton";
 @import "scss/heading";
 @import "scss/card";
 @import "scss/cardlist";
-@import "scss/controls";
+@import "scss/video";
 @import "scss/pagelist";
 @import "scss/watching";
