@@ -236,30 +236,33 @@ class Player {
     // const qs = new URLSerchParams(window.location.serch);
     // const id = parseInt(qs.get('id'), 10);
     // request.open. ()
+    this.createControles();
+    this.getVideo(); // nær í myndbandið?
   }
 
   // býr til grunnin að controles
   createControles() {
-    const controleContainer = document.createElement('div');
+    const controleContainer = document.querySelector('.buttons__container');
     const playingButton = document.createElement('button');
     const forwardButton = document.createElement('button');
     const backButton = document.createElement('button');
     const fullscreenButton = document.createElement('button');
     const soundButton = document.createElement('button');
-    controleContainer.classList.add('controles');
-    playingButton.setAttribute('click', this.playPause());
     playingButton.classList.add('button--play');
+    forwardButton.classList.add('button--forward');
+    backButton.classList.add('button--back');
+    soundButton.classList.add('button--unmute');
+    fullscreenButton.classList.add('normalSize'); // þegar myndbandið er venjulegt
+    playingButton.setAttribute('click', this.playPause());
     forwardButton.setAttribute('click', this.skip(3));
     backButton.setAttribute('click', this.skip(-3));
     fullscreenButton.setAttribute('click', this.fullscreen());
-    fullscreenButton.classList.add('normalSize'); // þegar myndbandið er venjulegt
     soundButton.setAttribute('click', this.sound());
     controleContainer.appendChild(playingButton);
     controleContainer.appendChild(forwardButton);
     controleContainer.appendChild(backButton);
     controleContainer.appendChild(fullscreenButton);
     controleContainer.appendChild(soundButton);
-    return;
   }
 
   // spólar framm og til baka
