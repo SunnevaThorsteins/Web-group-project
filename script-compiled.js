@@ -144,11 +144,12 @@ var VideoRentSite = function () {
       var categories = data.categories;
       var videos = data.videos;
 
-      var ClassContainer = document.querySelector('.cardlist');
-
       for (var i = 0; i < categories.length; i++) {
+
         console.log('****************TELJARIII****************');
         var cats = categories[i];
+
+        var ClassContainer = document.querySelector('.cardlist');
         var row = document.createElement('div');
         var heading = document.createElement('h2');
         heading.appendChild(document.createTextNode(categories[i]['title']));

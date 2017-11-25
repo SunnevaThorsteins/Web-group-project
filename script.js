@@ -131,11 +131,12 @@ class VideoRentSite {
     const categories = data.categories;
     const videos = data.videos;
 
-    const ClassContainer = document.querySelector('.cardlist');
+    for (let i=0; i<categories.length; i++) {
 
-    for (let i = 0; i < categories.length; i++) {
       console.log('****************TELJARIII****************');
       const cats = categories[i];
+
+      const ClassContainer = document.querySelector('.cardlist');
       const row = document.createElement('div');
       const heading = document.createElement('h2');
       heading.appendChild(document.createTextNode(categories[i]['title']));
