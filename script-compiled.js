@@ -168,7 +168,6 @@ var VideoRentSite = function () {
       cardContent.appendChild(cardHeading);
       cardContent.appendChild(since);
       card.appendChild(cardContent);
-      card.appendChild(length);
     }
   }, {
     key: 'fetchJson',

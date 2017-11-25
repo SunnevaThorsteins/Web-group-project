@@ -150,7 +150,6 @@ class VideoRentSite {
     cardContent.appendChild(cardHeading);
     cardContent.appendChild(since);
     card.appendChild(cardContent);
-    card.appendChild(length);
   }
 
   fetchJson() {
