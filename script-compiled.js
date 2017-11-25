@@ -104,7 +104,7 @@ var VideoRentSite = function () {
       /*  const klst = Math.floor((sec - day) / (60 * 60));
         const klstString = klst === 1 ? 'klukkustund' : 'klukkustundum';
         return 'Fyrir $(klst) $(klstString) síðan';
-          else {
+         else {
           klst = parseInt(klst);
           if (klst === 1){
             return 'Fyrir ' + klst + ' klukkustund síðan';
@@ -125,7 +125,7 @@ var VideoRentSite = function () {
       col.classList.add('cardlist__col');
       col.appendChild(document.createElement(blabla));
       row.appendChild(col);
-        const card = document.createElement('div');
+       const card = document.createElement('div');
       card.classList.add('card');
       const cardImage = document.createElement('img');
       cardImage.classList.add('card__img');
@@ -142,8 +142,8 @@ var VideoRentSite = function () {
       card.appendChild(cardImage); // ???
       card.appendChild(cardContent);
       card.appendChild(cardHeading);
-        row.appendChild(card);
-        return row;
+       row.appendChild(card);
+       return row;
     }*/
 
   }, {
