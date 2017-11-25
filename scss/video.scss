@@ -1,0 +1,50 @@
+.video {
+  margin: 0 auto;
+
+  &__header {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+.video__img {
+  width: 100%;
+}
+
+.buttons__container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+  display: flex;
+  width: 48px;
+  height: 48px;
+  margin: 10px;
+  flex-direction: column;
+  background-size: 32px 32px;
+}
+
+.back--button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.back--button a,
+a:active,
+a:visited,
+a:hover,
+a:link {
+  color: #fff;
+  text-decoration: none;
+}

@@ -95,7 +95,7 @@ var VideoRentSite = function () {
       /*  const klst = Math.floor((sec - day) / (60 * 60));
         const klstString = klst === 1 ? 'klukkustund' : 'klukkustundum';
         return 'Fyrir $(klst) $(klstString) síðan';
-         else {
+          else {
           klst = parseInt(klst);
           if (klst === 1){
             return 'Fyrir ' + klst + ' klukkustund síðan';
@@ -152,15 +152,17 @@ var VideoRentSite = function () {
       col.classList.add('cardlist__col');
       card.classList.add('card');
       aElement.setAttribute('href', 'site.html');
-      aElement.classList.add(id);
+      aElement.classList.add('card__imgCont');
       cardImg.classList.add('card__img');
       cardImg.setAttribute('src', poster);
       cardContent.classList.add('cardContent');
       since.classList.add('cardText');
+      length.classList.add('time');
       cardHeading.appendChild(document.createTextNode(title));
       since.appendChild(document.createTextNode(this.sincePosted(posted)));
       length.appendChild(document.createTextNode(this.videoLength(duration)));
       col.appendChild(card);
+      aElement.appendChild(length);
       aElement.appendChild(cardImg);
       card.appendChild(aElement);
       cardContent.appendChild(cardHeading);
