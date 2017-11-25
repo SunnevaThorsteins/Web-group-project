@@ -28,6 +28,24 @@
   max-width: 100%;
 }
 
+.imgCont {
+  position: relative;
+  display: flex;
+}
+
+.time {
+  position: absolute;
+  z-index: 2;
+  padding: 5px;
+  color: #fff;
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.time a:active, a:visited, a:hover, a:link {
+  text-decoration: none;
+}
+
 @media (min-width: 600px) {
   .card--wide {
     display: flex;
