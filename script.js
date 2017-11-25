@@ -238,6 +238,7 @@ class Player {
   }
 
   load() {
+    /* það sem valentín gerði á töflunni ;) */
     // const request = new XMLHttpRequest();
     // const qs = new URLSerchParams(window.location.serch);
     // const id = parseInt(qs.get('id'), 10);
