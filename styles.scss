@@ -22,8 +22,9 @@ main { /* stylelint-disable-line */
   margin: 0 auto;
 }
 
-h1 { /* stylelint-disable-line */
-  //text-align: center;
+header { /* stylelint-disable-line */
+  max-width: 1200px;
+  margin: 20px auto;
 }
 
 @import "scss/button";
