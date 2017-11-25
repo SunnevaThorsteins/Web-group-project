@@ -52,7 +52,6 @@ var VideoRentSite = function () {
     value: function sincePosted(made) {
       /* þarf að setja betur upp en þetta er svona í grófum dráttum
        * gæti verið að við gætum notað const */
-
       var current = new Date().getTime();
       var created = current - made;
       var sec = created / 1000;
@@ -63,7 +62,7 @@ var VideoRentSite = function () {
       var month = void 0;
       var year = void 0;
 
-      /*ef meira en 365 dagar síðan "created"*/
+      /* ef meira en 365 dagar síðan "created" */
       if (day >= 365) {
         year = parseInt(day / 365);
         if (year === 1) {
@@ -71,35 +70,28 @@ var VideoRentSite = function () {
         } else {
           return 'Fyrir ' + year + ' árum síðan';
         }
-      }
-      /*ef meiri en 30 dagar síðan "created"*/
-      else if (day >= 30) {
-          month = parseInt(day / 30);
-          if (month === 1) {
-            return 'Fyrir ' + month + ' mánuði síðan';
-          } else {
-            return 'Fyrir ' + month + ' mánuðum síðan';
-          }
+      } else if (day >= 30) {
+        month = parseInt(day / 30);
+        if (month === 1) {
+          return 'Fyrir ' + month + ' mánuði síðan';
+        } else {
+          return 'Fyrir ' + month + ' mánuðum síðan';
         }
-        /*ef meira en 7 dagae er síðan "created"*/
-        else if (day >= 7) {
-            week = parseInt(day / 7);
-            if (week === 1) {
-              return 'Fyrir ' + week + ' viku síðan';
-            } else {
-              return 'Fyrir ' + week + ' vikum síðan';
-            }
-          }
-          /*ef meira en 24klst síðan "created"*/
-          else if (klst >= 24) {
-              day = parseInt(day);
-              if (day === 1) {
-                return 'Fyrir ' + day + ' degi síðan';
-              } else {
-                return 'Fyrir ' + day + ' dögum síðan';
-              }
-              return;
-            }
+      } else if (day >= 7) {
+        week = parseInt(day / 7);
+        if (week === 1) {
+          return 'Fyrir ' + week + ' viku síðan';
+        } else {
+          return 'Fyrir ' + week + ' vikum síðan';
+        }
+      } else if (klst >= 24) {
+        day = parseInt(day);
+        if (day === 1) {
+          return 'Fyrir ' + day + ' degi síðan';
+        } else {
+          return 'Fyrir ' + day + ' dögum síðan';
+        }
+      }
 
       /*  const klst = Math.floor((sec - day) / (60 * 60));
         const klstString = klst === 1 ? 'klukkustund' : 'klukkustundum';
@@ -116,7 +108,7 @@ var VideoRentSite = function () {
 
     /* útfærir controles gæjan, það sem kemur undir þegar */
 
-    /*createElement(poster, video, title, posted) {
+    /* createElement(poster, video, title, posted) {
       const row = document.createElement('div'); // ætti kannski að vera bara eitt á hvert section?
       const col = document.createElement('div');
       const vid = document.createElement('video');
@@ -144,7 +136,7 @@ var VideoRentSite = function () {
       card.appendChild(cardHeading);
        row.appendChild(card);
        return row;
-    }*/
+    } */
 
   }, {
     key: 'createVideolist',
@@ -173,7 +165,7 @@ var VideoRentSite = function () {
         console.log('*************', [i + 1], '*************');
         var id = cats.videos[i];
         console.log('ID', id);
-        var videlement = this.createVideoElement(row, videos[id - 1]['poster'], videos[id - 1]['video'], videos[id - 1]['title'], videos[id - 1]['created'], videos[id - 1]['duration']);
+        var videlement = this.createVideoElement(row, videos[id - 1]['poster'], videos[id - 1]['video'], videos[id - 1]['title'], videos[id - 1]['created'], videos[id - 1]['duration'], videos[id - 1]['id']);
       }
       return;
     }
@@ -182,13 +174,13 @@ var VideoRentSite = function () {
 
   }, {
     key: 'createVideoElement',
-    value: function createVideoElement(row, poster, video, title, posted, duration) {
-
+    value: function createVideoElement(row, poster, video, title, posted, duration, id) {
       console.log('poster', poster);
       console.log('video', video);
       console.log('title', title);
       console.log('posted', posted);
       console.log('duration', duration);
+      console.log('id', id);
       var col = document.createElement('div');
       var card = document.createElement('div');
       var cardContent = document.createElement('div');
@@ -200,6 +192,7 @@ var VideoRentSite = function () {
       col.classList.add('cardlist__col');
       card.classList.add('card');
       aElement.setAttribute('href', 'site.html');
+      aElement.classList.add(id);
       cardImg.classList.add('card__img');
       cardImg.setAttribute('src', poster);
       cardContent.classList.add('cardContent');
@@ -263,6 +256,7 @@ var Player = function () {
   _createClass(Player, [{
     key: 'load',
     value: function load() {}
+    /* það sem valentín gerði á töflunni ;) */
     // const request = new XMLHttpRequest();
     // const qs = new URLSerchParams(window.location.serch);
     // const id = parseInt(qs.get('id'), 10);
