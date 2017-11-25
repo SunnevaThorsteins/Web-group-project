@@ -36,58 +36,46 @@ class VideoRentSite {
   sincePosted(made) {
     /* þarf að setja betur upp en þetta er svona í grófum dráttum
      * gæti verið að við gætum notað const */
+    const current = new Date().getTime();
+    const created = current - made;
+    const sec = created / 1000;
+    const min = sec / 60;
+    const klst = min / 60;
+    let day = klst / 24;
+    let week;
+    let month;
+    let year;
 
-      let current = new Date().getTime();
-      let created = current - made;
-      let sec = created/1000;
-      let min = sec/60;
-      let klst = min/60;
-      let day = klst/24;
-      let week;
-      let month;
-      let year;
-
-      /*ef meira en 365 dagar síðan "created"*/
-      if (day >= 365) {
-        year = parseInt(day/365);
-        if (year === 1) {
-          return 'Fyrir ' + year + ' ári síðan';
-        }
-        else {
-          return 'Fyrir ' + year + ' árum síðan';
-        }
+    /* ef meira en 365 dagar síðan "created" */
+    if (day >= 365) {
+      year = parseInt(day/365);
+      if (year === 1) {
+        return 'Fyrir ' + year + ' ári síðan';
+      } else {
+        return 'Fyrir ' + year + ' árum síðan';
       }
-      /*ef meiri en 30 dagar síðan "created"*/
-      else if (day >= 30) {
-        month = parseInt(day/30);
-        if (month === 1) {
-          return 'Fyrir ' + month + ' mánuði síðan';
-        }
-        else {
-          return 'Fyrir ' + month + ' mánuðum síðan';
-        }
+    } else if (day >= 30) {
+      month = parseInt(day / 30);
+      if (month === 1) {
+        return 'Fyrir ' + month + ' mánuði síðan';
+      } else {
+        return 'Fyrir ' + month + ' mánuðum síðan';
       }
-      /*ef meira en 7 dagae er síðan "created"*/
-      else if (day >= 7) {
-        week = parseInt(day/7);
-        if(week === 1) {
-          return 'Fyrir ' + week + ' viku síðan';
-        }
-        else {
-          return 'Fyrir ' + week + ' vikum síðan';
-        }
+    } else if (day >= 7) {
+      week = parseInt(day/7);
+      if (week === 1) {
+        return 'Fyrir ' + week + ' viku síðan';
+      } else {
+        return 'Fyrir ' + week + ' vikum síðan';
       }
-      /*ef meira en 24klst síðan "created"*/
-      else if (klst >= 24){
-        day = parseInt(day);
-        if (day === 1) {
-          return 'Fyrir ' + day + ' degi síðan';
-        }
-        else {
-          return 'Fyrir ' + day + ' dögum síðan';
-        }
-        return;
+    } else if (klst >= 24) {
+      day = parseInt(day);
+      if (day === 1) {
+        return 'Fyrir ' + day + ' degi síðan';
+      } else {
+        return 'Fyrir ' + day + ' dögum síðan';
       }
+    }
 
     /*  const klst = Math.floor((sec - day) / (60 * 60));
       const klstString = klst === 1 ? 'klukkustund' : 'klukkustundum';
@@ -101,12 +89,12 @@ class VideoRentSite {
         else {
           return 'Fyrir ' + klst + ' klukkustundum síðan';
         } */
-      }
+  }
 
 
   /* útfærir controles gæjan, það sem kemur undir þegar */
 
-  /*createElement(poster, video, title, posted) {
+  /* createElement(poster, video, title, posted) {
     const row = document.createElement('div'); // ætti kannski að vera bara eitt á hvert section?
     const col = document.createElement('div');
     const vid = document.createElement('video');
@@ -137,13 +125,14 @@ class VideoRentSite {
     row.appendChild(card);
 
     return row;
-  }*/
+  } */
 
   createVideolist(data) {
     const categories = data.categories;
     const videos = data.videos;
 
     for (let i=0; i<categories.length; i++) {
+
       console.log('****************TELJARIII****************');
       const cats = categories[i];
 
@@ -159,28 +148,23 @@ class VideoRentSite {
   }
 
   createCategorylist(ClassContainer, row, cats, videos) {
-    for (let i=0; i<=cats.videos.length-1; i++) {
-      console.log('*************', [i+1], '*************');
+    for (let i = 0; i <= cats.videos.length - 1; i++) {
+      console.log('*************', [i + 1], '*************');
       const id = cats.videos[i];
       console.log('ID', id);
-      const videlement = this.createVideoElement(row, videos[id-1]['poster'], videos[id-1]['video'], videos[id-1]['title'], videos[id-1]['created'], videos[id-1]['duration']);
+      const videlement = this.createVideoElement(row, videos[id - 1]['poster'], videos[id - 1]['video'], videos[id - 1]['title'], videos[id - 1]['created'], videos[id - 1]['duration'], videos[id - 1]['id']);
     }
     return;
   }
 
   // fær inn upplýsingar um myndband og "byggir" það upp, fallið sem ég var að gera en má alveg breyta eða nota annað fall
-  createVideoElement(row, poster, video, title, posted, duration) {
-
-
-
-
-
-
+  createVideoElement(row, poster, video, title, posted, duration, id) {
     console.log('poster', poster);
     console.log('video', video);
     console.log('title', title);
     console.log('posted', posted);
     console.log('duration', duration);
+    console.log('id', id);
     const col = document.createElement('div');
     const card = document.createElement('div');
     const cardContent = document.createElement('div');
@@ -192,6 +176,7 @@ class VideoRentSite {
     col.classList.add('cardlist__col');
     card.classList.add('card');
     aElement.setAttribute('href', 'site.html');
+    aElement.classList.add(id);
     cardImg.classList.add('card__img');
     cardImg.setAttribute('src', poster);
     cardContent.classList.add('cardContent');
@@ -210,7 +195,6 @@ class VideoRentSite {
     const VideoContainer = document.querySelector('.cardlist__row');
     VideoContainer.appendChild(col);
     return;
-
   }
 
   fetchJson() {
@@ -223,8 +207,8 @@ class VideoRentSite {
         const data = JSON.parse(r.response);
         console.log(data);
         this.createVideolist(data);
-    } else {
-      console.log('villa!', r);
+      } else {
+        console.log('villa!', r);
       }
     };
     r.onerror = () => {
@@ -246,6 +230,7 @@ class Player {
   }
 
   load() {
+    /* það sem valentín gerði á töflunni ;) */
     // const request = new XMLHttpRequest();
     // const qs = new URLSerchParams(window.location.serch);
     // const id = parseInt(qs.get('id'), 10);
