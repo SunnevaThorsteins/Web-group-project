@@ -92,7 +92,6 @@ var VideoRentSite = function () {
           return 'Fyrir ' + day + ' dögum síðan';
         }
       }
-
       /*  const klst = Math.floor((sec - day) / (60 * 60));
         const klstString = klst === 1 ? 'klukkustund' : 'klukkustundum';
         return 'Fyrir $(klst) $(klstString) síðan';
@@ -105,39 +104,6 @@ var VideoRentSite = function () {
             return 'Fyrir ' + klst + ' klukkustundum síðan';
           } */
     }
-
-    /* útfærir controles gæjan, það sem kemur undir þegar */
-
-    /* createElement(poster, video, title, posted) {
-      const row = document.createElement('div'); // ætti kannski að vera bara eitt á hvert section?
-      const col = document.createElement('div');
-      const vid = document.createElement('video');
-      const aElement = document.createElement('a');
-      row.classList.add('cardlist__row');
-      col.classList.add('cardlist__col');
-      col.appendChild(document.createElement(blabla));
-      row.appendChild(col);
-       const card = document.createElement('div');
-      card.classList.add('card');
-      const cardImage = document.createElement('img');
-      cardImage.classList.add('card__img');
-      cardImage.src = 'poster'; // ?????
-      console.log(cardImage.src);
-      cardImage.setAttribute('src', poster); // ???????
-      // cardImage.appendChild(document.createElement(poster));
-      const cardContent = document.createElement('div');
-      cardContent.classList.add('card__content');
-      cardContent.appendChild(document.createElement(blalba));
-      const cardHeading = document.createElement('div');
-      cardHeading.classList.add('card__heading');
-      cardHeading.appendChild(document.createTextNode(title));
-      card.appendChild(cardImage); // ???
-      card.appendChild(cardContent);
-      card.appendChild(cardHeading);
-       row.appendChild(card);
-       return row;
-    } */
-
   }, {
     key: 'createVideolist',
     value: function createVideolist(data) {
@@ -145,44 +111,37 @@ var VideoRentSite = function () {
       var videos = data.videos;
 
       for (var i = 0; i < categories.length; i++) {
-
         console.log('****************TELJARIII****************');
         var cats = categories[i];
-
-        var ClassContainer = document.querySelector('.cardlist');
-        var row = document.createElement('div');
+        var VideoContainer = document.getElementById(i);
         var heading = document.createElement('h2');
+
         heading.appendChild(document.createTextNode(categories[i]['title']));
-        ClassContainer.appendChild(heading);
-        row.classList.add('cardlist__row');
-        ClassContainer.appendChild(row);
-        this.createCategorylist(ClassContainer, row, cats, videos);
+        VideoContainer.appendChild(heading);
+        this.createCategorylist(VideoContainer, cats, videos);
       }
     }
   }, {
     key: 'createCategorylist',
-    value: function createCategorylist(ClassContainer, row, cats, videos) {
+    value: function createCategorylist(VideoContainer, cats, videos) {
       for (var i = 0; i <= cats.videos.length - 1; i++) {
         console.log('*************', [i + 1], '*************');
         var id = cats.videos[i];
-        console.log('ID', id);
-        var videlement = this.createVideoElement(row, videos[id - 1]['poster'], videos[id - 1]['video'], videos[id - 1]['title'], videos[id - 1]['created'], videos[id - 1]['duration'], videos[id - 1]['id']);
+        var col = document.createElement('div'); //fast
+        col.classList.add('cardlist__col');
+        var videlement = this.createVideoElement(col, videos[id - 1]['poster'], videos[id - 1]['video'], videos[id - 1]['title'], videos[id - 1]['created'], videos[id - 1]['duration'], videos[id - 1]['id']);
+        VideoContainer.appendChild(col);
       }
-      return;
     }
-
-    // fær inn upplýsingar um myndband og "byggir" það upp, fallið sem ég var að gera en má alveg breyta eða nota annað fall
-
   }, {
     key: 'createVideoElement',
-    value: function createVideoElement(row, poster, video, title, posted, duration, id) {
+    value: function createVideoElement(col, poster, video, title, posted, duration, id) {
       console.log('poster', poster);
       console.log('video', video);
       console.log('title', title);
       console.log('posted', posted);
       console.log('duration', duration);
       console.log('id', id);
-      var col = document.createElement('div');
       var card = document.createElement('div');
       var cardContent = document.createElement('div');
       var aElement = document.createElement('a');
@@ -209,10 +168,7 @@ var VideoRentSite = function () {
       cardContent.appendChild(cardHeading);
       cardContent.appendChild(since);
       card.appendChild(cardContent);
-
-      var VideoContainer = document.querySelector('.cardlist__row');
-      VideoContainer.appendChild(col);
-      return;
+      card.appendChild(length);
     }
   }, {
     key: 'fetchJson',
