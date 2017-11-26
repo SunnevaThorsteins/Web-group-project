@@ -239,7 +239,7 @@ var Player = function () {
     key: 'load',
     value: function load() {
       this.tempVid();
-      this.createControles();
+      this.createControls();
       /* það sem valentín gerði á töflunni ;) */
       // const request = new XMLHttpRequest();
       // const qs = new URLSerchParams(window.location.serch);
@@ -248,12 +248,12 @@ var Player = function () {
       // this.getVideo(); // nær í myndbandið?
     }
 
-    // býr til grunnin að controles
+    // býr til grunnin að controls
 
   }, {
-    key: 'createControles',
-    value: function createControles() {
-      var controleContainer = document.querySelector('.video');
+    key: 'createControls',
+    value: function createControls() {
+      var controlContainer = document.querySelector('.video');
       var playingButton = document.createElement('button');
       var forwardButton = document.createElement('button');
       var backButton = document.createElement('button');
@@ -298,8 +298,8 @@ var Player = function () {
       button.appendChild(screenButton);
       button.appendChild(forwardButton);
       divCon.appendChild(button);
-      controleContainer.appendChild(divCon);
-      controleContainer.appendChild(aEl);
+      controlContainer.appendChild(divCon);
+      controlContainer.appendChild(aEl);
       playingButton.addEventListener('click', this.playPause.bind());
       forwardButton.addEventListener('click', this.skip.bind(3));
       backButton.addEventListener('click', this.skip.bind(-3));

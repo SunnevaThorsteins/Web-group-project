@@ -210,7 +210,7 @@ class Player {
 
   load() {
     this.tempVid();
-    this.createControles();
+    this.createControls();
     /* það sem valentín gerði á töflunni ;) */
     // const request = new XMLHttpRequest();
     // const qs = new URLSerchParams(window.location.serch);
@@ -219,9 +219,9 @@ class Player {
     // this.getVideo(); // nær í myndbandið?
   }
 
-  // býr til grunnin að controles
-  createControles() {
-    const controleContainer = document.querySelector('.video');
+  // býr til grunnin að controls
+  createControls() {
+    const controlContainer = document.querySelector('.video');
     const playingButton = document.createElement('button');
     const forwardButton = document.createElement('button');
     const backButton = document.createElement('button');
@@ -266,8 +266,8 @@ class Player {
     button.appendChild(screenButton);
     button.appendChild(forwardButton);
     divCon.appendChild(button);
-    controleContainer.appendChild(divCon);
-    controleContainer.appendChild(aEl);
+    controlContainer.appendChild(divCon);
+    controlContainer.appendChild(aEl);
     playingButton.addEventListener('click', this.playPause.bind());
     forwardButton.addEventListener('click', this.skip.bind(3));
     backButton.addEventListener('click', this.skip.bind(-3));

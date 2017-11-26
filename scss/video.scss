@@ -12,6 +12,15 @@
   width: 100%;
 }
 
+button { /* stylelint-disable-line */
+  background-color: transparent;
+  border: 0;
+}
+
+button:focus { /* stylelint-disable-line */
+  outline: 0;
+}
+
 .buttons__container {
   display: flex;
   justify-content: center;
@@ -31,6 +40,10 @@
   margin: 10px;
   flex-direction: column;
   background-size: 32px 32px;
+}
+
+.button:hover {
+  cursor: pointer;
 }
 
 .back--button {
