@@ -280,44 +280,88 @@ var Player = function () {
   }
 
   _createClass(Player, [{
+    key: 'tempVid',
+    value: function tempVid() {
+      var vidContainer = document.querySelector('.video');
+      var div = document.createElement('div');
+      var vid = document.createElement('video');
+      vid.classList.add('vid');
+      vid.setAttribute('src', '/videos/bunny.mp4');
+      vid.setAttribute('type', 'video/mp4');
+      div.appendChild(vid);
+      vidContainer.appendChild(div);
+    }
+  }, {
     key: 'load',
     value: function load() {
       //this.ChangeQueryString();
+      this.tempVid();
+      this.createControls();
       /* það sem valentín gerði á töflunni ;) */
       // const request = new XMLHttpRequest();
       // const qs = new URLSerchParams(window.location.serch);
       // const id = parseInt(qs.get('id'), 10);
       // request.open. ()
-      this.createControles();
-      this.getVideo(); // nær í myndbandið?
+      // this.getVideo(); // nær í myndbandið?
     }
 
-    // býr til grunnin að controles
+    // býr til grunnin að controls
 
   }, {
-    key: 'createControles',
-    value: function createControles() {
-      var controleContainer = document.querySelector('.buttons__container');
+    key: 'createControls',
+    value: function createControls() {
+      var controlContainer = document.querySelector('.video');
       var playingButton = document.createElement('button');
       var forwardButton = document.createElement('button');
       var backButton = document.createElement('button');
-      var fullscreenButton = document.createElement('button');
+      var screenButton = document.createElement('button');
       var soundButton = document.createElement('button');
-      playingButton.classList.add('button--play');
-      forwardButton.classList.add('button--forward');
-      backButton.classList.add('button--back');
-      soundButton.classList.add('button--unmute');
-      fullscreenButton.classList.add('normalSize'); // þegar myndbandið er venjulegt
-      playingButton.setAttribute('click', this.playPause());
-      forwardButton.setAttribute('click', this.skip(3));
-      backButton.setAttribute('click', this.skip(-3));
-      fullscreenButton.setAttribute('click', this.fullscreen());
-      soundButton.setAttribute('click', this.sound());
-      controleContainer.appendChild(playingButton);
-      controleContainer.appendChild(forwardButton);
-      controleContainer.appendChild(backButton);
-      controleContainer.appendChild(fullscreenButton);
-      controleContainer.appendChild(soundButton);
+      var backImg = document.createElement('img');
+      var playImg = document.createElement('img');
+      var soundImg = document.createElement('img');
+      var screenImg = document.createElement('img');
+      var forwardImg = document.createElement('img');
+      var divCon = document.createElement('div');
+      var button = document.createElement('div');
+      var aEl = document.createElement('a');
+      aEl.setAttribute('href', 'index.html');
+      aEl.classList.add('back--button');
+      aEl.appendChild(document.createTextNode('Til baka'));
+      divCon.classList.add('buttons__container');
+      button.classList.add('buttons');
+      playingButton.classList.add('pause');
+      forwardButton.classList.add('forward');
+      backButton.classList.add('back');
+      soundButton.classList.add('unmute');
+      screenButton.classList.add('normalSize'); // þegar myndbandið er venjulegt
+      soundButton.appendChild(soundImg);
+      playingButton.appendChild(playImg);
+      forwardButton.appendChild(forwardImg);
+      backButton.appendChild(backImg);
+      screenButton.appendChild(screenImg);
+      soundImg.setAttribute('src', '/img/mute.svg');
+      soundImg.classList.add('button');
+      playImg.setAttribute('src', '/img/play.svg');
+      playImg.classList.add('button');
+      forwardImg.setAttribute('src', '/img/next.svg');
+      forwardImg.classList.add('button');
+      backImg.setAttribute('src', '/img/back.svg');
+      backImg.classList.add('button');
+      screenImg.setAttribute('src', '/img/fullscreen.svg');
+      screenImg.classList.add('button');
+      button.appendChild(backButton);
+      button.appendChild(playingButton);
+      button.appendChild(soundButton);
+      button.appendChild(screenButton);
+      button.appendChild(forwardButton);
+      divCon.appendChild(button);
+      controlContainer.appendChild(divCon);
+      controlContainer.appendChild(aEl);
+      playingButton.addEventListener('click', this.playPause.bind());
+      forwardButton.addEventListener('click', this.skip.bind(3));
+      backButton.addEventListener('click', this.skip.bind(-3));
+      screenButton.addEventListener('click', this.fullscreen.bind());
+      soundButton.addEventListener('click', this.sound.bind());
     }
 
     // spólar framm og til baka
@@ -366,20 +410,22 @@ var Player = function () {
   }, {
     key: 'playPause',
     value: function playPause() {
-      var video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndband er verið að tala um
-      if (video.paused) {
-        video.play();
-        /* held ég sé að finna takkann sem er að hafa þetta á pásu og breyta honum í play takka */
-        var play = video.querySelector('.button--pause');
-        play.classList.remove('.button--pause');
-        play.classList.add('.button--play');
+      var vid = document.querySelector('.vid'); // klasinn sem þarf til þess að við vitum hvaða myndband er verið að tala um
+      if (vid.paused) {
+        vid.play();
+        var play = document.querySelector('.pause');
+        play.classList.remove('pause');
+        play.classList.add('play');
+        play.firstChild.removeAttribute('src');
+        play.firstChild.setAttribute('src', '/img/pause.svg');
       } else {
-        video.pause();
-        var pause = video.querySelector('.button--play');
-        pause.classList.remove('.button--play');
-        pause.classList.add('.button--pause');
+        vid.pause();
+        var pause = document.querySelector('.play');
+        pause.classList.remove('play');
+        pause.classList.add('pause');
+        pause.firstChild.removeAttribute('src');
+        pause.firstChild.setAttribute('src', '/img/play.svg');
       }
-      return; // veit ekki hvort það þarf að vera return :/
     }
   }]);
 
@@ -389,6 +435,7 @@ var Player = function () {
 document.addEventListener('DOMContentLoaded', function () {
   var VideoSite = new VideoRentSite();
   var player = new Player();
+
   var findingClass = document.querySelector('.cardlist');
   if (findingClass) {
     VideoSite.fetchJson();
