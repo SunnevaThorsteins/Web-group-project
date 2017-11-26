@@ -33,6 +33,10 @@
   background-size: 32px 32px;
 }
 
+.button:hover {
+  cursor: pointer;
+}
+
 .back--button {
   display: flex;
   justify-content: center;
