@@ -18,6 +18,8 @@ var VideoRentSite = function () {
   _createClass(VideoRentSite, [{
     key: 'load',
     value: function load() {}
+    //this.ChangeQueryString();
+
 
     /* sér um að littli kassinn sem er með lengd myndbandsins sé
      * settur rétt inn, fær inn lengdina í sekúndum og skilar
@@ -135,13 +137,13 @@ var VideoRentSite = function () {
     }
   }, {
     key: 'createVideoElement',
-    value: function createVideoElement(col, poster, video, title, posted, duration, id) {
+    value: function createVideoElement(col, poster, video, title, posted, duration, Id) {
       console.log('poster', poster);
       console.log('video', video);
       console.log('title', title);
       console.log('posted', posted);
       console.log('duration', duration);
-      console.log('id', id);
+      console.log('id', Id);
       var card = document.createElement('div');
       var cardContent = document.createElement('div');
       var aElement = document.createElement('a');
@@ -155,6 +157,7 @@ var VideoRentSite = function () {
       aElement.classList.add('card__imgCont');
       cardImg.classList.add('card__img');
       cardImg.setAttribute('src', poster);
+      cardImg.setAttribute('title', Id);
       cardContent.classList.add('cardContent');
       since.classList.add('cardText');
       length.classList.add('time');
@@ -170,11 +173,65 @@ var VideoRentSite = function () {
       card.appendChild(cardContent);
     }
   }, {
+    key: 'ChangeQueryString',
+    value: function ChangeQueryString() {
+      if (history.pushState) {
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?id=' + 'getId';
+        window.history.pushState({ path: newurl }, '', newurl);
+      }
+    }
+  }, {
     key: 'getId',
     value: function getId(data) {
-      var id = data.videos['id'];
-      console.log('************ID*****************', id);
-      document.images.addEventListener("click", this.WriteId(id), false);
+
+      //var images = document.getElementsByName('img');
+      //console.log('IMAGES ELEMENTS', images);
+
+      //var x = document.getElementsByTagName("img")[0].getAttribute("title");
+      //document.getElementById("d").innerHTML = x;
+
+      //var div1 = document.getElementsByName("img").getAttribute("title");
+
+      //const attrs = document.getElementsByClass("").attributes);
+      /*
+      var x = document.getElementsByTagName("img");
+      console.log('x', x);
+      console.log(x[0]['title']);
+      for (let i=0; i<=8; i++){
+        var y = x[i]['title'];
+        console.log('IDDDD', y);
+      }
+      */
+      /*var images = document.getElementsByTagName('img');
+      console.log(images);
+      var name = (this)images.title;
+      console.log(name);*/
+
+      var images = document.getElementsByTagName('img');
+      console.log('images', images);
+      document.addEventListener('click', function () {
+        console.log(this);
+        //const title = images[this].getAttribute('title');
+        //console.log(title);
+      });
+
+      //var images = document.getElementsByName('img')
+      //const image = document.getElementsByTagName("img");;
+      //images.addEventListener("click", function(){
+      //const ImgTitle = image[]
+      //var x = document.getElementsByTagName("img").getAttribute("title");
+      //console.log('IDDDD', x);
+      //});
+
+      console.log('************DATA*****************', data);
+      console.log('************DATA.VIDEOS*****************', data.videos);
+      var ide = data.videos[0]['id'];
+      console.log('************ID*****************', ide);
+    }
+  }, {
+    key: 'findId',
+    value: function findId() {
+      console.log('hæ');
     }
   }, {
     key: 'WriteId',
@@ -193,7 +250,6 @@ var VideoRentSite = function () {
       r.onload = function () {
         if (r.status >= 200 && r.status < 400) {
           var data = JSON.parse(r.response);
-          console.log(data);
           _this.createVideolist(data);
           _this.getId(data);
         } else {
@@ -226,6 +282,7 @@ var Player = function () {
   _createClass(Player, [{
     key: 'load',
     value: function load() {
+      //this.ChangeQueryString();
       /* það sem valentín gerði á töflunni ;) */
       // const request = new XMLHttpRequest();
       // const qs = new URLSerchParams(window.location.serch);
@@ -332,11 +389,9 @@ var Player = function () {
 document.addEventListener('DOMContentLoaded', function () {
   var VideoSite = new VideoRentSite();
   var player = new Player();
-
-  VideoSite.fetchJson();
-
   var findingClass = document.querySelector('.cardlist');
   if (findingClass) {
+    VideoSite.fetchJson();
     VideoSite.load();
   } else {
     player.load();

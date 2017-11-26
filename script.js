@@ -6,8 +6,8 @@ class VideoRentSite {
 
   /* þetta er fallið sem vil lendum fyrst í þegar við byrjum */
   load() {
+    //this.ChangeQueryString();
   }
-
 
   /* sér um að littli kassinn sem er með lengd myndbandsins sé
    * settur rétt inn, fær inn lengdina í sekúndum og skilar
@@ -91,76 +91,133 @@ class VideoRentSite {
   }
 
   createVideolist(data) {
-    const categories = data.categories;
-    const videos = data.videos;
+      const categories = data.categories;
+      const videos = data.videos;
 
-    for (let i=0; i<categories.length; i++) {
-      console.log('****************TELJARIII****************');
-      const cats = categories[i];
-      const VideoContainer = document.getElementById(i);
-      const heading = document.createElement('h2');
+      for (let i=0; i<categories.length; i++) {
+        console.log('****************TELJARIII****************');
+        const cats = categories[i];
+        const VideoContainer = document.getElementById(i);
+        const heading = document.createElement('h2');
 
-      heading.appendChild(document.createTextNode(categories[i]['title']));
-      VideoContainer.appendChild(heading);
-      this.createCategorylist(VideoContainer, cats, videos);
+        heading.appendChild(document.createTextNode(categories[i]['title']));
+        VideoContainer.appendChild(heading);
+        this.createCategorylist(VideoContainer, cats, videos);
+      }
     }
-  }
 
-  createCategorylist(VideoContainer, cats, videos) {
-    for (let i = 0; i <= cats.videos.length - 1; i++) {
-      console.log('*************', [i + 1], '*************');
-      const id = cats.videos[i];
-      const col = document.createElement('div'); //fast
+    createCategorylist(VideoContainer, cats, videos) {
+      for (let i = 0; i <= cats.videos.length - 1; i++) {
+        console.log('*************', [i + 1], '*************');
+        const id = cats.videos[i];
+        const col = document.createElement('div'); //fast
+        col.classList.add('cardlist__col');
+        const videlement = this.createVideoElement(col, videos[id - 1]['poster'], videos[id - 1]['video'], videos[id - 1]['title'], videos[id - 1]['created'], videos[id - 1]['duration'], videos[id - 1]['id']);
+        VideoContainer.appendChild(col);
+      }
+    }
+
+    createVideoElement(col, poster, video, title, posted, duration, Id) {
+      console.log('poster', poster);
+      console.log('video', video);
+      console.log('title', title);
+      console.log('posted', posted);
+      console.log('duration', duration);
+      console.log('id', Id);
+      const card = document.createElement('div');
+      const cardContent = document.createElement('div');
+      const aElement = document.createElement('a');
+      const cardImg = document.createElement('img');
+      const cardHeading = document.createElement('h3');
+      const since = document.createElement('p');
+      const length = document.createElement('p');
       col.classList.add('cardlist__col');
-      const videlement = this.createVideoElement(col, videos[id - 1]['poster'], videos[id - 1]['video'], videos[id - 1]['title'], videos[id - 1]['created'], videos[id - 1]['duration'], videos[id - 1]['id']);
-      VideoContainer.appendChild(col);
+      card.classList.add('card');
+      aElement.setAttribute('href', 'site.html');
+      aElement.classList.add('card__imgCont');
+      cardImg.classList.add('card__img');
+      cardImg.setAttribute('src', poster);
+      cardImg.setAttribute('title', Id);
+      cardContent.classList.add('cardContent');
+      since.classList.add('cardText');
+      length.classList.add('time');
+      cardHeading.appendChild(document.createTextNode(title));
+      since.appendChild(document.createTextNode(this.sincePosted(posted)));
+      length.appendChild(document.createTextNode(this.videoLength(duration)));
+      col.appendChild(card);
+      aElement.appendChild(length);
+      aElement.appendChild(cardImg);
+      card.appendChild(aElement);
+      cardContent.appendChild(cardHeading);
+      cardContent.appendChild(since);
+      card.appendChild(cardContent);
     }
-  }
 
-  createVideoElement(col, poster, video, title, posted, duration, id) {
-    console.log('poster', poster);
-    console.log('video', video);
-    console.log('title', title);
-    console.log('posted', posted);
-    console.log('duration', duration);
-    console.log('id', id);
-    const card = document.createElement('div');
-    const cardContent = document.createElement('div');
-    const aElement = document.createElement('a');
-    const cardImg = document.createElement('img');
-    const cardHeading = document.createElement('h3');
-    const since = document.createElement('p');
-    const length = document.createElement('p');
-    col.classList.add('cardlist__col');
-    card.classList.add('card');
-    aElement.setAttribute('href', 'site.html');
-    aElement.classList.add('card__imgCont');
-    cardImg.classList.add('card__img');
-    cardImg.setAttribute('src', poster);
-    cardContent.classList.add('cardContent');
-    since.classList.add('cardText');
-    length.classList.add('time');
-    cardHeading.appendChild(document.createTextNode(title));
-    since.appendChild(document.createTextNode(this.sincePosted(posted)));
-    length.appendChild(document.createTextNode(this.videoLength(duration)));
-    col.appendChild(card);
-    aElement.appendChild(length);
-    aElement.appendChild(cardImg);
-    card.appendChild(aElement);
-    cardContent.appendChild(cardHeading);
-    cardContent.appendChild(since);
-    card.appendChild(cardContent);
+  ChangeQueryString() {
+    if (history.pushState) {
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?id=' + 'getId';
+        window.history.pushState({path:newurl},'',newurl);
+    }
   }
 
   getId(data) {
-    const id = data.videos['id'];
-    console.log('************ID*****************', id);
-    document.images.addEventListener("click", this.WriteId(id), false);
+
+
+
+    //var images = document.getElementsByName('img');
+    //console.log('IMAGES ELEMENTS', images);
+
+    //var x = document.getElementsByTagName("img")[0].getAttribute("title");
+    //document.getElementById("d").innerHTML = x;
+
+    //var div1 = document.getElementsByName("img").getAttribute("title");
+
+    //const attrs = document.getElementsByClass("").attributes);
+    /*
+    var x = document.getElementsByTagName("img");
+    console.log('x', x);
+    console.log(x[0]['title']);
+    for (let i=0; i<=8; i++){
+      var y = x[i]['title'];
+      console.log('IDDDD', y);
+    }
+    */
+    /*var images = document.getElementsByTagName('img');
+    console.log(images);
+    var name = (this)images.title;
+    console.log(name);*/
+
+    var images = document.getElementsByTagName('img');
+    console.log('images', images);
+    document.addEventListener('click', function() {
+      console.log(this);
+        //const title = images[this].getAttribute('title');
+        //console.log(title);
+    })
+
+    //var images = document.getElementsByName('img')
+    //const image = document.getElementsByTagName("img");;
+    //images.addEventListener("click", function(){
+      //const ImgTitle = image[]
+      //var x = document.getElementsByTagName("img").getAttribute("title");
+      //console.log('IDDDD', x);
+    //});
+
+    console.log('************DATA*****************', data);
+    console.log('************DATA.VIDEOS*****************', data.videos);
+    const ide = data.videos[0]['id'];
+    console.log('************ID*****************', ide);
+
+  }
+
+  findId() {
+    console.log('hæ');
   }
 
   WriteId (id) {
     console.log('************ID*****************', id);
   }
+
 
   fetchJson() {
     const json = 'videos.json';
@@ -170,7 +227,6 @@ class VideoRentSite {
     r.onload = () => {
       if (r.status >= 200 && r.status < 400) {
         const data = JSON.parse(r.response);
-        console.log(data);
         this.createVideolist(data);
         this.getId(data);
       } else {
@@ -182,7 +238,6 @@ class VideoRentSite {
     };
     r.send();
   }
-
 
 }
 
@@ -198,6 +253,7 @@ class Player {
   }
 
   load() {
+    //this.ChangeQueryString();
     /* það sem valentín gerði á töflunni ;) */
     // const request = new XMLHttpRequest();
     // const qs = new URLSerchParams(window.location.serch);
@@ -286,11 +342,9 @@ class Player {
 document.addEventListener('DOMContentLoaded', () => {
   const VideoSite = new VideoRentSite();
   const player = new Player();
-
-  VideoSite.fetchJson();
-
   const findingClass = document.querySelector('.cardlist');
   if (findingClass) {
+    VideoSite.fetchJson();
     VideoSite.load();
   } else {
     player.load();
