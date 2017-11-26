@@ -95,7 +95,7 @@ var VideoRentSite = function () {
       /*  const klst = Math.floor((sec - day) / (60 * 60));
         const klstString = klst === 1 ? 'klukkustund' : 'klukkustundum';
         return 'Fyrir $(klst) $(klstString) síðan';
-          else {
+         else {
           klst = parseInt(klst);
           if (klst === 1){
             return 'Fyrir ' + klst + ' klukkustund síðan';
@@ -232,7 +232,7 @@ var Player = function () {
       // const qs = new URLSerchParams(window.location.serch);
       // const id = parseInt(qs.get('id'), 10);
       // request.open. ()
-      this.getVideo(); // nær í myndbandið?
+      // this.getVideo(); // nær í myndbandið?
     }
 
     // býr til grunnin að controles
@@ -240,27 +240,47 @@ var Player = function () {
   }, {
     key: 'createControles',
     value: function createControles() {
-      var controleContainer = document.querySelector('.buttons__container');
+      var controleContainer = document.querySelector('.buttons');
       var playingButton = document.createElement('button');
       var forwardButton = document.createElement('button');
       var backButton = document.createElement('button');
-      var fullscreenButton = document.createElement('button');
+      var screenButton = document.createElement('button');
       var soundButton = document.createElement('button');
+      var backImg = document.createElement('img');
+      var playImg = document.createElement('img');
+      var soundImg = document.createElement('img');
+      var screenImg = document.createElement('img');
+      var forwardImg = document.createElement('img');
       playingButton.classList.add('button--play');
       forwardButton.classList.add('button--forward');
       backButton.classList.add('button--back');
       soundButton.classList.add('button--unmute');
-      fullscreenButton.classList.add('normalSize'); // þegar myndbandið er venjulegt
-      playingButton.setAttribute('click', this.playPause());
-      forwardButton.setAttribute('click', this.skip(3));
-      backButton.setAttribute('click', this.skip(-3));
-      fullscreenButton.setAttribute('click', this.fullscreen());
-      soundButton.setAttribute('click', this.sound());
-      controleContainer.appendChild(playingButton);
-      controleContainer.appendChild(forwardButton);
+      screenButton.classList.add('normalSize'); // þegar myndbandið er venjulegt
+      soundButton.appendChild(soundImg);
+      playingButton.appendChild(playImg);
+      forwardButton.appendChild(forwardImg);
+      backButton.appendChild(backImg);
+      screenButton.appendChild(screenImg);
+      soundImg.setAttribute('src', '/img/mute.svg');
+      soundImg.classList.add('button');
+      playImg.setAttribute('src', '/img/play.svg');
+      playImg.classList.add('button');
+      forwardImg.setAttribute('src', '/img/next.svg');
+      forwardImg.classList.add('button');
+      backImg.setAttribute('src', '/img/back.svg');
+      backImg.classList.add('button');
+      screenImg.setAttribute('src', '/img/fullscreen.svg');
+      screenImg.classList.add('button');
       controleContainer.appendChild(backButton);
-      controleContainer.appendChild(fullscreenButton);
+      controleContainer.appendChild(playingButton);
       controleContainer.appendChild(soundButton);
+      controleContainer.appendChild(screenButton);
+      controleContainer.appendChild(forwardButton);
+      playingButton.addEventListener('click', this.playPause.bind());
+      forwardButton.addEventListener('click', this.skip.bind(3));
+      backButton.addEventListener('click', this.skip.bind(-3));
+      screenButton.addEventListener('click', this.fullscreen.bind());
+      soundButton.addEventListener('click', this.sound.bind());
     }
 
     // spólar framm og til baka
