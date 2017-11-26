@@ -224,8 +224,19 @@ var Player = function () {
   }
 
   _createClass(Player, [{
+    key: 'tempVid',
+    value: function tempVid() {
+      var vidContainer = document.querySelector('.video');
+      var div = document.createElement('div');
+      var vid = document.createElement('video');
+      vid.setAttribute('src', '/videos/bunny.mp4');
+      div.appendChild(vid);
+      vidContainer.appendChild(div);
+    }
+  }, {
     key: 'load',
     value: function load() {
+      this.tempVid();
       this.createControles();
       /* það sem valentín gerði á töflunni ;) */
       // const request = new XMLHttpRequest();
@@ -240,7 +251,7 @@ var Player = function () {
   }, {
     key: 'createControles',
     value: function createControles() {
-      var controleContainer = document.querySelector('.buttons');
+      var controleContainer = document.querySelector('.video');
       var playingButton = document.createElement('button');
       var forwardButton = document.createElement('button');
       var backButton = document.createElement('button');
@@ -251,6 +262,14 @@ var Player = function () {
       var soundImg = document.createElement('img');
       var screenImg = document.createElement('img');
       var forwardImg = document.createElement('img');
+      var divCon = document.createElement('div');
+      var button = document.createElement('div');
+      var aEl = document.createElement('a');
+      aEl.setAttribute('href', 'index.html');
+      aEl.classList.add('back--button');
+      aEl.appendChild(document.createTextNode('Til baka'));
+      divCon.classList.add('buttons__container');
+      button.classList.add('buttons');
       playingButton.classList.add('button--play');
       forwardButton.classList.add('button--forward');
       backButton.classList.add('button--back');
@@ -271,11 +290,14 @@ var Player = function () {
       backImg.classList.add('button');
       screenImg.setAttribute('src', '/img/fullscreen.svg');
       screenImg.classList.add('button');
-      controleContainer.appendChild(backButton);
-      controleContainer.appendChild(playingButton);
-      controleContainer.appendChild(soundButton);
-      controleContainer.appendChild(screenButton);
-      controleContainer.appendChild(forwardButton);
+      button.appendChild(backButton);
+      button.appendChild(playingButton);
+      button.appendChild(soundButton);
+      button.appendChild(screenButton);
+      button.appendChild(forwardButton);
+      divCon.appendChild(button);
+      controleContainer.appendChild(divCon);
+      controleContainer.appendChild(aEl);
       playingButton.addEventListener('click', this.playPause.bind());
       forwardButton.addEventListener('click', this.skip.bind(3));
       backButton.addEventListener('click', this.skip.bind(-3));
