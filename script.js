@@ -197,7 +197,17 @@ class Player {
     /* gætum svo þurft að bæta við add addEventListener á takkana hérna */
   }
 
+  tempVid() {
+    const vidContainer = document.querySelector('.video');
+    const div = document.createElement('div');
+    const vid = document.createElement('video');
+    vid.setAttribute('src', '/videos/bunny.mp4');
+    div.appendChild(vid);
+    vidContainer.appendChild(div);
+  }
+
   load() {
+    this.tempVid();
     this.createControls();
     /* það sem valentín gerði á töflunni ;) */
     // const request = new XMLHttpRequest();
@@ -220,6 +230,14 @@ class Player {
     const soundImg = document.createElement('img');
     const screenImg = document.createElement('img');
     const forwardImg = document.createElement('img');
+    const divCon = document.createElement('div');
+    const button = document.createElement('div');
+    const aEl = document.createElement('a');
+    aEl.setAttribute('href', 'index.html');
+    aEl.classList.add('back--button');
+    aEl.appendChild(document.createTextNode('Til baka'));
+    divCon.classList.add('buttons__container');
+    button.classList.add('buttons');
     playingButton.classList.add('button--play');
     forwardButton.classList.add('button--forward');
     backButton.classList.add('button--back');
@@ -240,11 +258,14 @@ class Player {
     backImg.classList.add('button');
     screenImg.setAttribute('src', '/img/fullscreen.svg');
     screenImg.classList.add('button');
-    controlContainer.appendChild(backButton);
-    controlContainer.appendChild(playingButton);
-    controlContainer.appendChild(soundButton);
-    controlContainer.appendChild(screenButton);
-    controlContainer.appendChild(forwardButton);
+    button.appendChild(backButton);
+    button.appendChild(playingButton);
+    button.appendChild(soundButton);
+    button.appendChild(screenButton);
+    button.appendChild(forwardButton);
+    divCon.appendChild(button);
+    controlContainer.appendChild(divCon);
+    controlContainer.appendChild(aEl);
     playingButton.addEventListener('click', this.playPause.bind());
     forwardButton.addEventListener('click', this.skip.bind(3));
     backButton.addEventListener('click', this.skip.bind(-3));

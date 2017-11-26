@@ -33,6 +33,10 @@
   background-size: 32px 32px;
 }
 
+.button button {
+  background-color: transparent;
+}
+
 .button:hover {
   cursor: pointer;
 }
