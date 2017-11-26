@@ -201,7 +201,9 @@ class Player {
     const vidContainer = document.querySelector('.video');
     const div = document.createElement('div');
     const vid = document.createElement('video');
+    vid.classList.add('vid');
     vid.setAttribute('src', '/videos/bunny.mp4');
+    vid.setAttribute('type', 'video/mp4');
     div.appendChild(vid);
     vidContainer.appendChild(div);
   }
@@ -238,10 +240,10 @@ class Player {
     aEl.appendChild(document.createTextNode('Til baka'));
     divCon.classList.add('buttons__container');
     button.classList.add('buttons');
-    playingButton.classList.add('button--play');
-    forwardButton.classList.add('button--forward');
-    backButton.classList.add('button--back');
-    soundButton.classList.add('button--unmute');
+    playingButton.classList.add('pause');
+    forwardButton.classList.add('forward');
+    backButton.classList.add('back');
+    soundButton.classList.add('unmute');
     screenButton.classList.add('normalSize'); // þegar myndbandið er venjulegt
     soundButton.appendChild(soundImg);
     playingButton.appendChild(playImg);
@@ -307,20 +309,19 @@ class Player {
    * eða setur það á pásu. Ætti líklega líka að breyta play takkanum
    * í pause takka og öfugt */
   playPause() {
-    const video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndband er verið að tala um
-    if (video.paused) {
-      video.play();
-      /* held ég sé að finna takkann sem er að hafa þetta á pásu og breyta honum í play takka */
-      const play = video.querySelector('.button--pause');
-      play.classList.remove('.button--pause');
-      play.classList.add('.button--play');
+    const vid = document.querySelector('.vid'); // klasinn sem þarf til þess að við vitum hvaða myndband er verið að tala um
+    if (vid.paused) {
+      vid.play();
+      const play = document.querySelector('.pause');
+      play.classList.remove('pause');
+      play.classList.add('play');
+      img.getAttribute('')
     } else {
-      video.pause();
-      const pause = video.querySelector('.button--play');
-      pause.classList.remove('.button--play');
-      pause.classList.add('.button--pause');
+      vid.pause();
+      const pause = document.querySelector('.play');
+      pause.classList.remove('play');
+      pause.classList.add('pause');
     }
-    return; // veit ekki hvort það þarf að vera return :/
   }
 }
 
