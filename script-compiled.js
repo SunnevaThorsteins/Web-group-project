@@ -92,7 +92,6 @@ var VideoRentSite = function () {
           return 'Fyrir ' + day + ' dögum síðan';
         }
       }
-
       /*  const klst = Math.floor((sec - day) / (60 * 60));
         const klstString = klst === 1 ? 'klukkustund' : 'klukkustundum';
         return 'Fyrir $(klst) $(klstString) síðan';
@@ -105,39 +104,6 @@ var VideoRentSite = function () {
             return 'Fyrir ' + klst + ' klukkustundum síðan';
           } */
     }
-
-    /* útfærir controles gæjan, það sem kemur undir þegar */
-
-    /* createElement(poster, video, title, posted) {
-      const row = document.createElement('div'); // ætti kannski að vera bara eitt á hvert section?
-      const col = document.createElement('div');
-      const vid = document.createElement('video');
-      const aElement = document.createElement('a');
-      row.classList.add('cardlist__row');
-      col.classList.add('cardlist__col');
-      col.appendChild(document.createElement(blabla));
-      row.appendChild(col);
-       const card = document.createElement('div');
-      card.classList.add('card');
-      const cardImage = document.createElement('img');
-      cardImage.classList.add('card__img');
-      cardImage.src = 'poster'; // ?????
-      console.log(cardImage.src);
-      cardImage.setAttribute('src', poster); // ???????
-      // cardImage.appendChild(document.createElement(poster));
-      const cardContent = document.createElement('div');
-      cardContent.classList.add('card__content');
-      cardContent.appendChild(document.createElement(blalba));
-      const cardHeading = document.createElement('div');
-      cardHeading.classList.add('card__heading');
-      cardHeading.appendChild(document.createTextNode(title));
-      card.appendChild(cardImage); // ???
-      card.appendChild(cardContent);
-      card.appendChild(cardHeading);
-       row.appendChild(card);
-       return row;
-    } */
-
   }, {
     key: 'createVideolist',
     value: function createVideolist(data) {
@@ -145,44 +111,37 @@ var VideoRentSite = function () {
       var videos = data.videos;
 
       for (var i = 0; i < categories.length; i++) {
-
         console.log('****************TELJARIII****************');
         var cats = categories[i];
-
-        var ClassContainer = document.querySelector('.cardlist');
-        var row = document.createElement('div');
+        var VideoContainer = document.getElementById(i);
         var heading = document.createElement('h2');
+
         heading.appendChild(document.createTextNode(categories[i]['title']));
-        ClassContainer.appendChild(heading);
-        row.classList.add('cardlist__row');
-        ClassContainer.appendChild(row);
-        this.createCategorylist(ClassContainer, row, cats, videos);
+        VideoContainer.appendChild(heading);
+        this.createCategorylist(VideoContainer, cats, videos);
       }
     }
   }, {
     key: 'createCategorylist',
-    value: function createCategorylist(ClassContainer, row, cats, videos) {
+    value: function createCategorylist(VideoContainer, cats, videos) {
       for (var i = 0; i <= cats.videos.length - 1; i++) {
         console.log('*************', [i + 1], '*************');
         var id = cats.videos[i];
-        console.log('ID', id);
-        var videlement = this.createVideoElement(row, videos[id - 1]['poster'], videos[id - 1]['video'], videos[id - 1]['title'], videos[id - 1]['created'], videos[id - 1]['duration'], videos[id - 1]['id']);
+        var col = document.createElement('div'); //fast
+        col.classList.add('cardlist__col');
+        var videlement = this.createVideoElement(col, videos[id - 1]['poster'], videos[id - 1]['video'], videos[id - 1]['title'], videos[id - 1]['created'], videos[id - 1]['duration'], videos[id - 1]['id']);
+        VideoContainer.appendChild(col);
       }
-      return;
     }
-
-    // fær inn upplýsingar um myndband og "byggir" það upp, fallið sem ég var að gera en má alveg breyta eða nota annað fall
-
   }, {
     key: 'createVideoElement',
-    value: function createVideoElement(row, poster, video, title, posted, duration, id) {
+    value: function createVideoElement(col, poster, video, title, posted, duration, id) {
       console.log('poster', poster);
       console.log('video', video);
       console.log('title', title);
       console.log('posted', posted);
       console.log('duration', duration);
       console.log('id', id);
-      var col = document.createElement('div');
       var card = document.createElement('div');
       var cardContent = document.createElement('div');
       var aElement = document.createElement('a');
@@ -209,10 +168,18 @@ var VideoRentSite = function () {
       cardContent.appendChild(cardHeading);
       cardContent.appendChild(since);
       card.appendChild(cardContent);
-
-      var VideoContainer = document.querySelector('.cardlist__row');
-      VideoContainer.appendChild(col);
-      return;
+    }
+  }, {
+    key: 'getId',
+    value: function getId(data) {
+      var id = data.videos['id'];
+      console.log('************ID*****************', id);
+      document.images.addEventListener("click", this.WriteId(id), false);
+    }
+  }, {
+    key: 'WriteId',
+    value: function WriteId(id) {
+      console.log('************ID*****************', id);
     }
   }, {
     key: 'fetchJson',
@@ -228,6 +195,7 @@ var VideoRentSite = function () {
           var data = JSON.parse(r.response);
           console.log(data);
           _this.createVideolist(data);
+          _this.getId(data);
         } else {
           console.log('villa!', r);
         }
@@ -257,39 +225,62 @@ var Player = function () {
 
   _createClass(Player, [{
     key: 'load',
-    value: function load() {}
-    /* það sem valentín gerði á töflunni ;) */
-    // const request = new XMLHttpRequest();
-    // const qs = new URLSerchParams(window.location.serch);
-    // const id = parseInt(qs.get('id'), 10);
-    // request.open. ()
+    value: function load() {
+      this.createControls();
+      /* það sem valentín gerði á töflunni ;) */
+      // const request = new XMLHttpRequest();
+      // const qs = new URLSerchParams(window.location.serch);
+      // const id = parseInt(qs.get('id'), 10);
+      // request.open. ()
+      // this.getVideo(); // nær í myndbandið?
+    }
 
-
-    // býr til grunnin að controles
+    // býr til grunnin að controls
 
   }, {
-    key: 'createControles',
-    value: function createControles() {
-      var controleContainer = document.createElement('div');
+    key: 'createControls',
+    value: function createControls() {
+      var controlContainer = document.querySelector('.buttons');
       var playingButton = document.createElement('button');
       var forwardButton = document.createElement('button');
       var backButton = document.createElement('button');
-      var fullscreenButton = document.createElement('button');
+      var screenButton = document.createElement('button');
       var soundButton = document.createElement('button');
-      controleContainer.classList.add('controles');
-      playingButton.setAttribute('click', this.playPause());
+      var backImg = document.createElement('img');
+      var playImg = document.createElement('img');
+      var soundImg = document.createElement('img');
+      var screenImg = document.createElement('img');
+      var forwardImg = document.createElement('img');
       playingButton.classList.add('button--play');
-      forwardButton.setAttribute('click', this.skip(3));
-      backButton.setAttribute('click', this.skip(-3));
-      fullscreenButton.setAttribute('click', this.fullscreen());
-      fullscreenButton.classList.add('normalSize'); // þegar myndbandið er venjulegt
-      soundButton.setAttribute('click', this.sound());
-      controleContainer.appendChild(playingButton);
-      controleContainer.appendChild(forwardButton);
-      controleContainer.appendChild(backButton);
-      controleContainer.appendChild(fullscreenButton);
-      controleContainer.appendChild(soundButton);
-      return;
+      forwardButton.classList.add('button--forward');
+      backButton.classList.add('button--back');
+      soundButton.classList.add('button--unmute');
+      screenButton.classList.add('normalSize'); // þegar myndbandið er venjulegt
+      soundButton.appendChild(soundImg);
+      playingButton.appendChild(playImg);
+      forwardButton.appendChild(forwardImg);
+      backButton.appendChild(backImg);
+      screenButton.appendChild(screenImg);
+      soundImg.setAttribute('src', '/img/mute.svg');
+      soundImg.classList.add('button');
+      playImg.setAttribute('src', '/img/play.svg');
+      playImg.classList.add('button');
+      forwardImg.setAttribute('src', '/img/next.svg');
+      forwardImg.classList.add('button');
+      backImg.setAttribute('src', '/img/back.svg');
+      backImg.classList.add('button');
+      screenImg.setAttribute('src', '/img/fullscreen.svg');
+      screenImg.classList.add('button');
+      controlContainer.appendChild(backButton);
+      controlContainer.appendChild(playingButton);
+      controlContainer.appendChild(soundButton);
+      controlContainer.appendChild(screenButton);
+      controlContainer.appendChild(forwardButton);
+      playingButton.addEventListener('click', this.playPause.bind());
+      forwardButton.addEventListener('click', this.skip.bind(3));
+      backButton.addEventListener('click', this.skip.bind(-3));
+      screenButton.addEventListener('click', this.fullscreen.bind());
+      soundButton.addEventListener('click', this.sound.bind());
     }
 
     // spólar framm og til baka
@@ -361,9 +352,7 @@ var Player = function () {
 document.addEventListener('DOMContentLoaded', function () {
   var VideoSite = new VideoRentSite();
   var player = new Player();
-
   VideoSite.fetchJson();
-
   var findingClass = document.querySelector('.cardlist');
   if (findingClass) {
     VideoSite.load();
