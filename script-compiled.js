@@ -168,7 +168,18 @@ var VideoRentSite = function () {
       cardContent.appendChild(cardHeading);
       cardContent.appendChild(since);
       card.appendChild(cardContent);
-      card.appendChild(length);
+    }
+  }, {
+    key: 'getId',
+    value: function getId(data) {
+      var id = data.videos['id'];
+      console.log('************ID*****************', id);
+      document.images.addEventListener("click", this.WriteId(id), false);
+    }
+  }, {
+    key: 'WriteId',
+    value: function WriteId(id) {
+      console.log('************ID*****************', id);
     }
   }, {
     key: 'fetchJson',
@@ -184,6 +195,7 @@ var VideoRentSite = function () {
           var data = JSON.parse(r.response);
           console.log(data);
           _this.createVideolist(data);
+          _this.getId(data);
         } else {
           console.log('villa!', r);
         }
