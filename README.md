@@ -30,6 +30,20 @@ SKIPULAG 0G VERKASKIPTING:
 
 
 **************************************************************************
+ÞAÐ SEM ER EFTIR:
+
+  - passa að rétt myndband opnist á síðu
+  - lína á milli sectionanna
+  - útfæra controles
+    - alla takka
+    - bæta css við
+    -appenda alla takkana :(
+  - gera overlay á myndbönd þegar það er pása
+  - laga overlay kassan með tímanum
+
+
+**************************************************************************
+
 
 GIT SKIPANIR Í COMMAND PROMT:
 
