@@ -315,12 +315,15 @@ class Player {
       const play = document.querySelector('.pause');
       play.classList.remove('pause');
       play.classList.add('play');
-      img.getAttribute('')
+      play.firstChild.removeAttribute('src');
+      play.firstChild.setAttribute('src', '/img/pause.svg');
     } else {
       vid.pause();
       const pause = document.querySelector('.play');
       pause.classList.remove('play');
       pause.classList.add('pause');
+      pause.firstChild.removeAttribute('src');
+      pause.firstChild.setAttribute('src', '/img/play.svg');
     }
   }
 }
