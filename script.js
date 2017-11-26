@@ -152,6 +152,16 @@ class VideoRentSite {
     card.appendChild(cardContent);
   }
 
+  getId(data) {
+    const id = data.videos['id'];
+    console.log('************ID*****************', id);
+    document.images.addEventListener("click", this.WriteId(id), false);
+  }
+
+  WriteId (id) {
+    console.log('************ID*****************', id);
+  }
+
   fetchJson() {
     const json = 'videos.json';
     const r = new XMLHttpRequest();
@@ -162,6 +172,7 @@ class VideoRentSite {
         const data = JSON.parse(r.response);
         console.log(data);
         this.createVideolist(data);
+        this.getId(data);
       } else {
         console.log('villa!', r);
       }
@@ -171,6 +182,8 @@ class VideoRentSite {
     };
     r.send();
   }
+
+
 }
 
 class Player {
