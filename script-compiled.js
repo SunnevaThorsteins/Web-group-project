@@ -213,12 +213,12 @@ var Player = function () {
   _createClass(Player, [{
     key: 'load',
     value: function load() {
+      this.createControles();
       /* það sem valentín gerði á töflunni ;) */
       // const request = new XMLHttpRequest();
       // const qs = new URLSerchParams(window.location.serch);
       // const id = parseInt(qs.get('id'), 10);
       // request.open. ()
-      this.createControles();
       this.getVideo(); // nær í myndbandið?
     }
 
@@ -319,9 +319,7 @@ var Player = function () {
 document.addEventListener('DOMContentLoaded', function () {
   var VideoSite = new VideoRentSite();
   var player = new Player();
-
   VideoSite.fetchJson();
-
   var findingClass = document.querySelector('.cardlist');
   if (findingClass) {
     VideoSite.load();

@@ -185,12 +185,12 @@ class Player {
   }
 
   load() {
+    this.createControles();
     /* það sem valentín gerði á töflunni ;) */
     // const request = new XMLHttpRequest();
     // const qs = new URLSerchParams(window.location.serch);
     // const id = parseInt(qs.get('id'), 10);
     // request.open. ()
-    this.createControles();
     this.getVideo(); // nær í myndbandið?
   }
 
@@ -273,9 +273,7 @@ class Player {
 document.addEventListener('DOMContentLoaded', () => {
   const VideoSite = new VideoRentSite();
   const player = new Player();
-
   VideoSite.fetchJson();
-
   const findingClass = document.querySelector('.cardlist');
   if (findingClass) {
     VideoSite.load();
