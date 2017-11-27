@@ -146,9 +146,9 @@ class VideoRentSite {
     col.appendChild(card);
     aElement.appendChild(length);
     aElement.appendChild(cardImg);
+    aElement.appendChild(cardHeading);
+    aElement.appendChild(since);
     card.appendChild(aElement);
-    cardContent.appendChild(cardHeading);
-    cardContent.appendChild(since);
     card.appendChild(cardContent);
   }
 
