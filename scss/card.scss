@@ -7,10 +7,10 @@
 
 .card__heading {
   width: 100%;
-  color: #fff;
-  font-size: 1.5em;
-  white-space: nowrap;
   overflow: hidden;
+  font-size: 1.5em;
+  color: #fff;
+  white-space: nowrap;
 }
 
 .card__content {
@@ -36,8 +36,8 @@
 
 .time {
   position: absolute;
-  bottom: 15px;
   right: 5px;
+  bottom: 15px;
   z-index: 2;
   padding: 2px 8px;
   color: #fff;
@@ -45,7 +45,10 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.time a:active, a:visited, a:hover, a:link {
+.time a:active, /* stylelint-disable-line */
+a:visited, /* stylelint-disable-line */
+a:hover, /* stylelint-disable-line */
+a:link { /* stylelint-disable-line */
   text-decoration: none;
 }
 

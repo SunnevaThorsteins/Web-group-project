@@ -1,8 +1,9 @@
 .cardlist__row {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -10px;
-  margin-left: -10px;
+  padding-bottom: 40px;
+  margin: 20px -10px 50px;
+  border-bottom: 1px solid #eee;
 }
 
 .cardlist__col {

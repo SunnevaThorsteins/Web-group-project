@@ -25,15 +25,8 @@ header { /* stylelint-disable-line */
   margin: 10px 0;
 }
 
-h1 { /* stylelint-disable-line */
-  margin: 10px;
-  font-size: 2em;
-}
-
-@import "scss/button";
 @import "scss/heading";
-@import "scss/card";
 @import "scss/cardlist";
+@import "scss/card";
 @import "scss/video";
-@import "scss/pagelist";
-@import "scss/watching";
+@import "scss/overlay";

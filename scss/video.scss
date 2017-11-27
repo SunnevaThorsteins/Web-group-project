@@ -53,11 +53,11 @@ button:focus { /* stylelint-disable-line */
   margin: 20px 0;
 }
 
-.back--button a,
-a:active,
-a:visited,
-a:hover,
-a:link {
+.back--button a, /* stylelint-disable-line */
+a:active, /* stylelint-disable-line */
+a:visited, /* stylelint-disable-line */
+a:hover, /* stylelint-disable-line */
+a:link { /* stylelint-disable-line */
   color: #fff;
   text-decoration: none;
 }
