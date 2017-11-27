@@ -100,7 +100,7 @@ class VideoRentSite {
       //const section = document.getElementsByTagName('section');
       const VideoContainer = document.getElementById(i);
       //const section = document.createElement('section');
-      const heading = document.createElement('h2');
+      const heading = document.createElement('h1');
       var parentDiv = VideoContainer.parentNode;
 
       parentDiv.insertBefore(heading, VideoContainer);
@@ -149,7 +149,7 @@ class VideoRentSite {
     cardImg.setAttribute('src', poster);
     since.classList.add('cardText');
     length.classList.add('time');
-    cardHeading.classList.add('headingCard');
+    cardHeading.classList.add('card__heading');
     headingCont.appendChild(cardHeading);
     cardHeading.appendChild(document.createTextNode(title));
     since.appendChild(document.createTextNode(this.sincePosted(posted)));
@@ -243,6 +243,9 @@ class Player {
       vid.setAttribute('src', '/videos/bunny.mp4');
       vid.setAttribute('type', 'video/mp4');
       header.appendChild(document.createTextNode('Prufu myndband með löngum texta sem fer í tvær línur'));
+    } else {
+      const error = document.createTextNode('Myndband finnst ekki');
+      header.appendChild(error);
     }
 
     overButton.classList.add('lay');
