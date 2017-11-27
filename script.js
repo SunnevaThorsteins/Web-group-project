@@ -199,25 +199,24 @@ class Player {
 
   tempVid() {
     const vidContainer = document.querySelector('.video');
-    const div = document.createElement('div');
     const vid = document.createElement('video');
     const overButton = document.createElement('button');
     const playImg = document.createElement('img');
     const overlay = document.createElement('div');
-    div.classList.add('vidContainer');
     vid.classList.add('vid');
     vid.setAttribute('src', '/videos/bunny.mp4');
     vid.setAttribute('type', 'video/mp4');
     overButton.classList.add('display');
     playImg.setAttribute('src', '/img/play.svg');
     overlay.classList.add('overlay');
-    playImg.classList.add('button');
+    playImg.classList.add('overlayButton');
     overButton.appendChild(playImg);
     overlay.appendChild(overButton);
     overButton.addEventListener('click', this.playPause.bind());
-    div.appendChild(vid);
-    div.appendChild(overlay);
-    vidContainer.appendChild(div);
+
+
+    overlay.appendChild(vid);
+    vidContainer.appendChild(overlay);
   }
 
   load() {
