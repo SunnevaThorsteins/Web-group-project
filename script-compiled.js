@@ -229,10 +229,17 @@ var Player = function () {
       var vidContainer = document.querySelector('.video');
       var div = document.createElement('div');
       var vid = document.createElement('video');
+      var overButton = document.createElement('button');
+      var playImg = document.createElement('img');
       vid.classList.add('vid');
       vid.setAttribute('src', '/videos/bunny.mp4');
       vid.setAttribute('type', 'video/mp4');
+      overButton.classList.add('display');
+      playImg.setAttribute('src', '/img/play.svg');
+      overButton.appendChild(playImg);
+      overButton.addEventListener('click', this.overlayButton.bind());
       div.appendChild(vid);
+      div.appendChild(overButton);
       vidContainer.appendChild(div);
     }
   }, {
@@ -306,14 +313,34 @@ var Player = function () {
       screenButton.addEventListener('click', this.fullscreen.bind());
       soundButton.addEventListener('click', this.sound.bind());
     }
+  }, {
+    key: 'overlayButton',
+    value: function overlayButton() {
+      var vid = document.querySelector('.vid');
+      if (document.querySelector('.display')) {
+        vid.play();
+        var dis = document.querySelector('.display');
+        dis.classList.remove('display');
+        dis.classList.add('none');
+      } else {
+        vid.pause();
+        var none = document.querySelector('.none');
+        none.classList.remove('none');
+        none.classList.add('display');
+      }
+      return;
+    }
 
     // spólar framm og til baka
 
   }, {
     key: 'skip',
     value: function skip(value) {
-      var video = document.querySelector('.vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
-      video.currentTime += value;
+      var vid = document.querySelector('.vid'); // klasinn sem þarf til þess að við vitum hvaða mynd
+      var time = vid.currentTime;
+      if (time < 3) {
+        vid.currentTime += value;
+      }
     }
 
     // annaðhvort muta-ar eða setur hljóðið aftur á myndbandið
@@ -322,10 +349,20 @@ var Player = function () {
     key: 'sound',
     value: function sound() {
       var video = document.querySelector('.vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
-      if (video.muted) {
+      if (document.querySelector('.mute')) {
         video.muted = false;
+        var mute = document.querySelector('.mute');
+        mute.classList.remove('mute');
+        mute.classList.add('unmute');
+        mute.firstChild.removeAttribute('src');
+        mute.firstChild.setAttribute('src', '/img/mute.svg');
       } else {
         video.muted = true;
+        var unmute = document.querySelector('.unmute');
+        unmute.classList.remove('unmute');
+        unmute.classList.add('mute');
+        unmute.firstChild.removeAttribute('src');
+        unmute.firstChild.setAttribute('src', '/img/unmute.svg');
       }
     }
 
@@ -334,16 +371,9 @@ var Player = function () {
   }, {
     key: 'fullscreen',
     value: function fullscreen() {
-      var video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
-      if (document.querySelector('normalSize')) {
-        var norm = video.querySelector('normalSize');
-        norm.classList.remove('normalSize');
-        norm.classList.add('fullscreenSize');
-      } else {
-        var full = video.querySelector('fullscreenSize');
-        full.classList.remove('fullscreenSize');
-        full.classList.add('normalSize');
-      }
+      var vid = document.querySelector('.vid');
+      var rfs = vid.requestFullscreen || vid.webkitRequestFullScreen || vid.mozRequestFullScreen || vid.msRequestFullscreen;
+      rfs.call(vid);
     }
 
     /* fær inn id af myndbandi og annaðhvort byrjar að spila það
