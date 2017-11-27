@@ -231,17 +231,20 @@ var Player = function () {
       var vid = document.createElement('video');
       var overButton = document.createElement('button');
       var playImg = document.createElement('img');
+      var overlay = document.createElement('div');
       div.classList.add('vidContainer');
       vid.classList.add('vid');
       vid.setAttribute('src', '/videos/bunny.mp4');
       vid.setAttribute('type', 'video/mp4');
       overButton.classList.add('display');
       playImg.setAttribute('src', '/img/play.svg');
+      overlay.classList.add('overlay');
       playImg.classList.add('button');
       overButton.appendChild(playImg);
+      overlay.appendChild(overButton);
       overButton.addEventListener('click', this.playPause.bind());
-      vid.appendChild(overButton);
       div.appendChild(vid);
+      div.appendChild(overlay);
       vidContainer.appendChild(div);
     }
   }, {
