@@ -102,20 +102,24 @@ class VideoRentSite {
       const divCont = document.createElement('div');
 
       heading.appendChild(document.createTextNode(categories[i]['title']));
+      heading.classList.add('headingH');
       VideoContainer.appendChild(heading);
       this.createCategorylist(VideoContainer, cats, videos);
     }
   }
 
   createCategorylist(VideoContainer, cats, videos) {
+    const cont = document.createElement('div');
     for (let i = 0; i <= cats.videos.length - 1; i++) {
       console.log('*************', [i + 1], '*************');
       const id = cats.videos[i];
       const col = document.createElement('div'); //fast
+      cont.classList.add('vidPost');
       col.classList.add('cardlist__col');
-      const videlement = this.createVideoElement(col, videos[id - 1]['poster'], videos[id - 1]['video'], videos[id - 1]['title'], videos[id - 1]['created'], videos[id - 1]['duration'], videos[id - 1]['id']);
-      VideoContainer.appendChild(col);
+      this.createVideoElement(col, videos[id - 1]['poster'], videos[id - 1]['video'], videos[id - 1]['title'], videos[id - 1]['created'], videos[id - 1]['duration'], videos[id - 1]['id']);
+      cont.appendChild(col);
     }
+    VideoContainer.appendChild(cont);
   }
 
   createVideoElement(col, poster, video, title, posted, duration, id) {
@@ -135,11 +139,12 @@ class VideoRentSite {
     col.classList.add('cardlist__col');
     card.classList.add('card');
     aElement.setAttribute('href', 'site.html');
-    aElement.classList.add('cardContent');
+    aElement.classList.add('card__imgCont');
     cardImg.classList.add('card__img');
     cardImg.setAttribute('src', poster);
     since.classList.add('cardText');
     length.classList.add('time');
+    cardHeading.classList.add('headingCard');
     headingCont.appendChild(cardHeading);
     cardHeading.appendChild(document.createTextNode(title));
     since.appendChild(document.createTextNode(this.sincePosted(posted)));

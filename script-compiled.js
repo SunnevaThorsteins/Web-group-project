@@ -118,6 +118,7 @@ var VideoRentSite = function () {
         var divCont = document.createElement('div');
 
         heading.appendChild(document.createTextNode(categories[i]['title']));
+        heading.classList.add('headingH');
         VideoContainer.appendChild(heading);
         this.createCategorylist(VideoContainer, cats, videos);
       }
@@ -125,14 +126,17 @@ var VideoRentSite = function () {
   }, {
     key: 'createCategorylist',
     value: function createCategorylist(VideoContainer, cats, videos) {
+      var cont = document.createElement('div');
       for (var i = 0; i <= cats.videos.length - 1; i++) {
         console.log('*************', [i + 1], '*************');
         var id = cats.videos[i];
         var col = document.createElement('div'); //fast
+        cont.classList.add('vidPost');
         col.classList.add('cardlist__col');
-        var videlement = this.createVideoElement(col, videos[id - 1]['poster'], videos[id - 1]['video'], videos[id - 1]['title'], videos[id - 1]['created'], videos[id - 1]['duration'], videos[id - 1]['id']);
-        VideoContainer.appendChild(col);
+        this.createVideoElement(col, videos[id - 1]['poster'], videos[id - 1]['video'], videos[id - 1]['title'], videos[id - 1]['created'], videos[id - 1]['duration'], videos[id - 1]['id']);
+        cont.appendChild(col);
       }
+      VideoContainer.appendChild(cont);
     }
   }, {
     key: 'createVideoElement',
@@ -153,11 +157,12 @@ var VideoRentSite = function () {
       col.classList.add('cardlist__col');
       card.classList.add('card');
       aElement.setAttribute('href', 'site.html');
-      aElement.classList.add('cardContent');
+      aElement.classList.add('card__imgCont');
       cardImg.classList.add('card__img');
       cardImg.setAttribute('src', poster);
       since.classList.add('cardText');
       length.classList.add('time');
+      cardHeading.classList.add('headingCard');
       headingCont.appendChild(cardHeading);
       cardHeading.appendChild(document.createTextNode(title));
       since.appendChild(document.createTextNode(this.sincePosted(posted)));
