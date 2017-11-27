@@ -277,13 +277,13 @@ class Player {
 
   // spólar framm og til baka
   skip(value) {
-    const video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
+    const video = document.querySelector('.vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
     video.currentTime += value;
   }
 
   // annaðhvort muta-ar eða setur hljóðið aftur á myndbandið
   sound() {
-    const video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
+    const video = document.querySelector('.vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
     if (video.muted) {
       video.muted = false;
     } else {

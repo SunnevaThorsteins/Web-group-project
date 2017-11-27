@@ -312,7 +312,7 @@ var Player = function () {
   }, {
     key: 'skip',
     value: function skip(value) {
-      var video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
+      var video = document.querySelector('.vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
       video.currentTime += value;
     }
 
@@ -321,7 +321,7 @@ var Player = function () {
   }, {
     key: 'sound',
     value: function sound() {
-      var video = document.querySelector('vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
+      var video = document.querySelector('.vid'); // klasinn sem þarf til þess að við vitum hvaða myndb
       if (video.muted) {
         video.muted = false;
       } else {
