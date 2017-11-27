@@ -183,7 +183,6 @@ var VideoRentSite = function () {
   }, {
     key: 'getId',
     value: function getId(data) {
-
       //var images = document.getElementsByName('img');
       //console.log('IMAGES ELEMENTS', images);
 
@@ -207,9 +206,12 @@ var VideoRentSite = function () {
       var name = (this)images.title;
       console.log(name);*/
 
-      var images = document.getElementsByTagName('img');
-      console.log('images', images);
-      document.addEventListener('click', function () {
+      var images = document.getElemntsByTagName('img');
+      console.log(images);
+
+      images.addEventListener('click', function () {
+        var imagesTitle = this.getAttribute('title');
+        console.log('imagesTitle', imagesTitle);
         console.log(this);
         //const title = images[this].getAttribute('title');
         //console.log(title);

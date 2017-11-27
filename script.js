@@ -161,9 +161,6 @@ class VideoRentSite {
   }
 
   getId(data) {
-
-
-
     //var images = document.getElementsByName('img');
     //console.log('IMAGES ELEMENTS', images);
 
@@ -187,9 +184,12 @@ class VideoRentSite {
     var name = (this)images.title;
     console.log(name);*/
 
-    var images = document.getElementsByTagName('img');
-    console.log('images', images);
-    document.addEventListener('click', function() {
+    let images = document.getElemntsByTagName('img');
+    console.log(images);
+
+    images.addEventListener('click', function() {
+      var imagesTitle = this.getAttribute('title');
+      console.log('imagesTitle', imagesTitle);
       console.log(this);
         //const title = images[this].getAttribute('title');
         //console.log(title);
@@ -387,7 +387,7 @@ class Player {
 document.addEventListener('DOMContentLoaded', () => {
   const VideoSite = new VideoRentSite();
   const player = new Player();
-  
+
   const findingClass = document.querySelector('.cardlist');
   if (findingClass) {
     VideoSite.fetchJson();
