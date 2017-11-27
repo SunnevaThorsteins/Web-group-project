@@ -100,6 +100,7 @@ class VideoRentSite {
       //const section = document.getElementsByTagName('section');
       const VideoContainer = document.getElementById(i);
       const heading = document.createElement('h2');
+      const divCont = document.createElement('div');
 
       heading.appendChild(document.createTextNode(categories[i]['title']));
 
@@ -127,7 +128,7 @@ class VideoRentSite {
     console.log('duration', duration);
     console.log('id', id);
     const card = document.createElement('div');
-    const cardContent = document.createElement('div');
+    const headingCont = document.createElement('div');
     const aElement = document.createElement('a');
     const cardImg = document.createElement('img');
     const cardHeading = document.createElement('h3');
@@ -139,19 +140,18 @@ class VideoRentSite {
     aElement.classList.add('card__imgCont');
     cardImg.classList.add('card__img');
     cardImg.setAttribute('src', poster);
-    cardContent.classList.add('cardContent');
     since.classList.add('cardText');
     length.classList.add('time');
+    headingCont.appendChild(cardHeading);
     cardHeading.appendChild(document.createTextNode(title));
     since.appendChild(document.createTextNode(this.sincePosted(posted)));
     length.appendChild(document.createTextNode(this.videoLength(duration)));
     col.appendChild(card);
     aElement.appendChild(length);
     aElement.appendChild(cardImg);
-    aElement.appendChild(cardHeading);
+    aElement.appendChild(headingCont);
     aElement.appendChild(since);
     card.appendChild(aElement);
-    card.appendChild(cardContent);
   }
 
   getId(data) {

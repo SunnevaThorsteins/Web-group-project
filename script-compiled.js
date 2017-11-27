@@ -116,6 +116,7 @@ var VideoRentSite = function () {
         //const section = document.getElementsByTagName('section');
         var VideoContainer = document.getElementById(i);
         var heading = document.createElement('h2');
+        var divCont = document.createElement('div');
 
         heading.appendChild(document.createTextNode(categories[i]['title']));
 
@@ -145,7 +146,7 @@ var VideoRentSite = function () {
       console.log('duration', duration);
       console.log('id', id);
       var card = document.createElement('div');
-      var cardContent = document.createElement('div');
+      var headingCont = document.createElement('div');
       var aElement = document.createElement('a');
       var cardImg = document.createElement('img');
       var cardHeading = document.createElement('h3');
@@ -157,19 +158,18 @@ var VideoRentSite = function () {
       aElement.classList.add('card__imgCont');
       cardImg.classList.add('card__img');
       cardImg.setAttribute('src', poster);
-      cardContent.classList.add('cardContent');
       since.classList.add('cardText');
       length.classList.add('time');
+      headingCont.appendChild(cardHeading);
       cardHeading.appendChild(document.createTextNode(title));
       since.appendChild(document.createTextNode(this.sincePosted(posted)));
       length.appendChild(document.createTextNode(this.videoLength(duration)));
       col.appendChild(card);
       aElement.appendChild(length);
       aElement.appendChild(cardImg);
-      aElement.appendChild(cardHeading);
+      aElement.appendChild(headingCont);
       aElement.appendChild(since);
       card.appendChild(aElement);
-      card.appendChild(cardContent);
     }
   }, {
     key: 'getId',
