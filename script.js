@@ -203,15 +203,17 @@ class Player {
     const vid = document.createElement('video');
     const overButton = document.createElement('button');
     const playImg = document.createElement('img');
+    div.classList.add('vidContainer');
     vid.classList.add('vid');
     vid.setAttribute('src', '/videos/bunny.mp4');
     vid.setAttribute('type', 'video/mp4');
     overButton.classList.add('display');
     playImg.setAttribute('src', '/img/play.svg');
+    playImg.classList.add('button');
     overButton.appendChild(playImg);
-    overButton.addEventListener('click', this.overlayButton.bind());
+    overButton.addEventListener('click', this.playPause.bind());
+    vid.appendChild(overButton);
     div.appendChild(vid);
-    div.appendChild(overButton);
     vidContainer.appendChild(div);
   }
 
@@ -276,35 +278,21 @@ class Player {
     controlContainer.appendChild(divCon);
     controlContainer.appendChild(aEl);
     playingButton.addEventListener('click', this.playPause.bind());
-    forwardButton.addEventListener('click', this.skip.bind(3));
-    backButton.addEventListener('click', this.skip.bind(-3));
+    forwardButton.addEventListener('click', this.skipforward.bind());
+    backButton.addEventListener('click', this.skipbackwards.bind());
     screenButton.addEventListener('click', this.fullscreen.bind());
     soundButton.addEventListener('click', this.sound.bind());
   }
 
-  overlayButton() {
+  // spólar framm og til baka
+  skipforward() {
     const vid = document.querySelector('.vid');
-    if (document.querySelector('.display')) {
-      vid.play();
-      const dis = document.querySelector('.display');
-      dis.classList.remove('display');
-      dis.classList.add('none');
-    } else {
-      vid.pause();
-      const none = document.querySelector('.none');
-      none.classList.remove('none');
-      none.classList.add('display');
-    }
-    return;
+    vid.currentTime += 3;
   }
 
-  // spólar framm og til baka
-  skip(value) {
-    const vid = document.querySelector('.vid'); // klasinn sem þarf til þess að við vitum hvaða mynd
-    const time = vid.currentTime;
-    if (time < 3) {
-      vid.currentTime += value;
-    }
+  skipbackwards() {
+    const vid = document.querySelector('.vid');
+    vid.currentTime -= 3;
   }
 
   // annaðhvort muta-ar eða setur hljóðið aftur á myndbandið
@@ -327,7 +315,7 @@ class Player {
     }
   }
 
-  // gerir skjáinn annaðhvort fullscreen eða tekur það af
+  // gerir skjáinn fullscreen
   fullscreen() {
     const vid = document.querySelector('.vid');
     const rfs = vid.requestFullscreen || vid.webkitRequestFullScreen ||
@@ -335,9 +323,6 @@ class Player {
     rfs.call(vid);
   }
 
-  /* fær inn id af myndbandi og annaðhvort byrjar að spila það
-   * eða setur það á pásu. Ætti líklega líka að breyta play takkanum
-   * í pause takka og öfugt */
   playPause() {
     const vid = document.querySelector('.vid'); // klasinn sem þarf til þess að við vitum hvaða myndband er verið að tala um
     if (vid.paused) {
@@ -347,6 +332,9 @@ class Player {
       play.classList.add('play');
       play.firstChild.removeAttribute('src');
       play.firstChild.setAttribute('src', '/img/pause.svg');
+      const dis = document.querySelector('.display');
+      dis.classList.remove('display');
+      dis.classList.add('none');
     } else {
       vid.pause();
       const pause = document.querySelector('.play');
@@ -354,6 +342,9 @@ class Player {
       pause.classList.add('pause');
       pause.firstChild.removeAttribute('src');
       pause.firstChild.setAttribute('src', '/img/play.svg');
+      const none = document.querySelector('.none');
+      none.classList.remove('none');
+      none.classList.add('display');
     }
   }
 }

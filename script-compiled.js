@@ -231,15 +231,17 @@ var Player = function () {
       var vid = document.createElement('video');
       var overButton = document.createElement('button');
       var playImg = document.createElement('img');
+      div.classList.add('vidContainer');
       vid.classList.add('vid');
       vid.setAttribute('src', '/videos/bunny.mp4');
       vid.setAttribute('type', 'video/mp4');
       overButton.classList.add('display');
       playImg.setAttribute('src', '/img/play.svg');
+      playImg.classList.add('button');
       overButton.appendChild(playImg);
-      overButton.addEventListener('click', this.overlayButton.bind());
+      overButton.addEventListener('click', this.playPause.bind());
+      vid.appendChild(overButton);
       div.appendChild(vid);
-      div.appendChild(overButton);
       vidContainer.appendChild(div);
     }
   }, {
@@ -308,39 +310,25 @@ var Player = function () {
       controlContainer.appendChild(divCon);
       controlContainer.appendChild(aEl);
       playingButton.addEventListener('click', this.playPause.bind());
-      forwardButton.addEventListener('click', this.skip.bind(3));
-      backButton.addEventListener('click', this.skip.bind(-3));
+      forwardButton.addEventListener('click', this.skipforward.bind());
+      backButton.addEventListener('click', this.skipbackwards.bind());
       screenButton.addEventListener('click', this.fullscreen.bind());
       soundButton.addEventListener('click', this.sound.bind());
-    }
-  }, {
-    key: 'overlayButton',
-    value: function overlayButton() {
-      var vid = document.querySelector('.vid');
-      if (document.querySelector('.display')) {
-        vid.play();
-        var dis = document.querySelector('.display');
-        dis.classList.remove('display');
-        dis.classList.add('none');
-      } else {
-        vid.pause();
-        var none = document.querySelector('.none');
-        none.classList.remove('none');
-        none.classList.add('display');
-      }
-      return;
     }
 
     // spólar framm og til baka
 
   }, {
-    key: 'skip',
-    value: function skip(value) {
-      var vid = document.querySelector('.vid'); // klasinn sem þarf til þess að við vitum hvaða mynd
-      var time = vid.currentTime;
-      if (time < 3) {
-        vid.currentTime += value;
-      }
+    key: 'skipforward',
+    value: function skipforward() {
+      var vid = document.querySelector('.vid');
+      vid.currentTime += 3;
+    }
+  }, {
+    key: 'skipbackwards',
+    value: function skipbackwards() {
+      var vid = document.querySelector('.vid');
+      vid.currentTime -= 3;
     }
 
     // annaðhvort muta-ar eða setur hljóðið aftur á myndbandið
@@ -366,7 +354,7 @@ var Player = function () {
       }
     }
 
-    // gerir skjáinn annaðhvort fullscreen eða tekur það af
+    // gerir skjáinn fullscreen
 
   }, {
     key: 'fullscreen',
@@ -375,11 +363,6 @@ var Player = function () {
       var rfs = vid.requestFullscreen || vid.webkitRequestFullScreen || vid.mozRequestFullScreen || vid.msRequestFullscreen;
       rfs.call(vid);
     }
-
-    /* fær inn id af myndbandi og annaðhvort byrjar að spila það
-     * eða setur það á pásu. Ætti líklega líka að breyta play takkanum
-     * í pause takka og öfugt */
-
   }, {
     key: 'playPause',
     value: function playPause() {
@@ -391,6 +374,9 @@ var Player = function () {
         play.classList.add('play');
         play.firstChild.removeAttribute('src');
         play.firstChild.setAttribute('src', '/img/pause.svg');
+        var dis = document.querySelector('.display');
+        dis.classList.remove('display');
+        dis.classList.add('none');
       } else {
         vid.pause();
         var pause = document.querySelector('.play');
@@ -398,6 +384,9 @@ var Player = function () {
         pause.classList.add('pause');
         pause.firstChild.removeAttribute('src');
         pause.firstChild.setAttribute('src', '/img/play.svg');
+        var none = document.querySelector('.none');
+        none.classList.remove('none');
+        none.classList.add('display');
       }
     }
   }]);
