@@ -16,27 +16,18 @@ html { /* stylelint-disable-line */
   background-color: #303030;
 }
 
-body { /* stylelint-disable-line */
-  display: flex;
-  max-width: 1200px;
-  padding-right: 10px;
-  padding-left: 10px;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
 main { /* stylelint-disable-line */
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  padding-right: 10px;
-  padding-left: 10px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 header { /* stylelint-disable-line */
-  max-width: 1200px;
-  //margin: 20px auto;
+  margin: 10px 0;
+}
+
+h1 { /* stylelint-disable-line */
+  margin: 10px 0;
+  font-size: 2em;
 }
 
 @import "scss/button";
