@@ -97,6 +97,7 @@ class VideoRentSite {
     for (let i=0; i<categories.length; i++) {
       console.log('****************TELJARIII****************');
       const cats = categories[i];
+      //const section = document.getElementsByTagName('section');
       const VideoContainer = document.getElementById(i);
       const heading = document.createElement('h2');
       const divCont = document.createElement('div');
@@ -138,7 +139,7 @@ class VideoRentSite {
     const length = document.createElement('p');
     col.classList.add('cardlist__col');
     card.classList.add('card');
-    aElement.setAttribute('href', 'site.html');
+    aElement.setAttribute('href', 'site.html?id=' + id);
     aElement.classList.add('card__imgCont');
     cardImg.classList.add('card__img');
     cardImg.setAttribute('src', poster);
@@ -203,25 +204,54 @@ class Player {
   }
 
   tempVid() {
+    const url = window.location.href;
+    console.log(url);
     const vidContainer = document.querySelector('.video');
     const vid = document.createElement('video');
     const overButton = document.createElement('button');
     const playImg = document.createElement('img');
-    const overlay = document.createElement('div');
+    const over = document.createElement('div');
+    const match = url.match(/id=(\d+)/);
+    console.log(match[1]);
+    const matchid = match[1];
+
+
+
     vid.classList.add('vid');
-    vid.setAttribute('src', '/videos/bunny.mp4');
-    vid.setAttribute('type', 'video/mp4');
-    overButton.classList.add('display');
+
+    //vid.setAttribute('src', '/videos/bunny.mp4');
+    //vid.setAttribute('type', 'video/mp4');
+    const header = document.querySelector('.video__header')
+    if (matchid == 1) {
+      console.log('HÆ');
+      vid.setAttribute('src', '/videos/small.mp4');
+      vid.setAttribute('type', 'video/mp4');
+      header.appendChild(document.createTextNode('Lego!'));
+    } else if (matchid == 2) {
+      vid.setAttribute('src', '/videos/bunny.mp4');
+      vid.setAttribute('type', 'video/mp4');
+      header.appendChild(document.createTextNode('Big Bunny'));
+    } else if (matchid == 3) {
+      vid.setAttribute('src', '/videos/bunny.mp4');
+      vid.setAttribute('type', 'video/mp4');
+      header.appendChild(document.createTextNode('Prufu myndband'));
+    } else if (matchid == 4) {
+      vid.setAttribute('src', '/videos/bunny.mp4');
+      vid.setAttribute('type', 'video/mp4');
+      header.appendChild(document.createTextNode('Prufu myndband með löngum texta sem fer í tvær línur'));
+    }
+
+    overButton.classList.add('lay');
     playImg.setAttribute('src', '/img/play.svg');
-    overlay.classList.add('overlay');
+    over.classList.add('over');
     playImg.classList.add('overlayButton');
     overButton.appendChild(playImg);
-    overlay.appendChild(overButton);
+    over.appendChild(overButton);
     overButton.addEventListener('click', this.playPause.bind());
 
 
-    overlay.appendChild(vid);
-    vidContainer.appendChild(overlay);
+    over.appendChild(vid);
+    vidContainer.appendChild(over);
   }
 
   load() {
@@ -339,8 +369,8 @@ class Player {
       play.classList.add('play');
       play.firstChild.removeAttribute('src');
       play.firstChild.setAttribute('src', '/img/pause.svg');
-      const dis = document.querySelector('.display');
-      dis.classList.remove('display');
+      const dis = document.querySelector('.lay');
+      dis.classList.remove('lay');
       dis.classList.add('none');
     } else {
       vid.pause();
@@ -351,7 +381,7 @@ class Player {
       pause.firstChild.setAttribute('src', '/img/play.svg');
       const none = document.querySelector('.none');
       none.classList.remove('none');
-      none.classList.add('display');
+      none.classList.add('lay');
     }
   }
 }

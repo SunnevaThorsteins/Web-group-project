@@ -6,11 +6,11 @@
   width: 100%;
 }
 
-.overlay {
+.over {
   position: relative;
 }
 
-.display {
+.lay {
   position: absolute;
   top: 0;
   left: 0;
@@ -28,4 +28,8 @@
   cursor: pointer;
   flex-direction: column;
   background-size: 32px 32px;
+}
+
+.none {
+  display: none;
 }
