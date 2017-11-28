@@ -30,10 +30,8 @@ h1 { /* stylelint-disable-line */
   font-size: 2em;
 }
 
-@import "scss/button";
 @import "scss/heading";
-@import "scss/card";
 @import "scss/cardlist";
+@import "scss/card";
 @import "scss/video";
-@import "scss/pagelist";
-@import "scss/watching";
+@import "scss/overlay";
