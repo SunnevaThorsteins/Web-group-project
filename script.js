@@ -3,14 +3,10 @@ class VideoRentSite {
     this.container = document.querySelector('.videos');
   }
 
-  /* þetta er fallið sem vil lendum fyrst í þegar við byrjum */
   load() {
+    this.fetchJsonOne();
   }
 
-
-  /* sér um að littli kassinn sem er með lengd myndbandsins sé
-   * settur rétt inn, fær inn lengdina í sekúndum og skilar
-   * á forminu mín:sek */
   videoLength(duration) {
     if (duration < 60) {
       if (duration < 10) {
@@ -28,9 +24,6 @@ class VideoRentSite {
     }
   }
 
-  /* sér um að það sé rétt lengd frá því myndbandið var birt.
-     *fær inn lengdina í millisekúndum og skilar streng sem segir til um hversu
-     *langt er síðan myndbandið var birt */
   sincePosted(made) {
     const current = new Date().getTime();
     const created = current - made;
@@ -101,6 +94,7 @@ class VideoRentSite {
       const id = cats.videos[i];
       const col = document.createElement('div');
       col.classList.add('cardlist__col');
+
       this.createVideoElement(col, videos[id - 1]['poster'], videos[id - 1]['video'], videos[id - 1]['title'], videos[id - 1]['created'], videos[id - 1]['duration'], videos[id - 1]['id']);
       videoContainer.appendChild(col);
     }
@@ -135,15 +129,13 @@ class VideoRentSite {
     card.appendChild(aElement);
   }
 
-  fetchJson() {
+  fetchJsonOne() {
     const json = 'videos.json';
     const r = new XMLHttpRequest();
-
     r.open('GET', json, true);
     r.onload = () => {
       if (r.status >= 200 && r.status < 400) {
         const data = JSON.parse(r.response);
-        console.log(data);
         this.createVideolist(data);
       } else {
         console.log('villa!', r);
@@ -157,8 +149,7 @@ class VideoRentSite {
 }
 
 class Player {
-/* hér á að skilgreina tilviksbreytur, allar breytur sem við viljum upphafsstilla
- *þarf að vera this. á undan þeim */
+
   constructor() {
     this.keyName = 'player';
     this.player = document.querySelector('.player');
@@ -166,7 +157,30 @@ class Player {
     this.back = document.querySelector('.back');
   }
 
-  tempVid() {
+  load() {
+    this.fetchJsonTwo();
+  }
+
+  fetchJsonTwo() {
+    const json = 'videos.json';
+    const r = new XMLHttpRequest();
+    r.open('GET', json, true);
+    r.onload = () => {
+      if (r.status >= 200 && r.status < 400) {
+        const data = JSON.parse(r.response);
+        this.Video(data);
+      } else {
+        console.log('villa!', r);
+      }
+    };
+    r.onerror = () => {
+      console.log('villa í tengingu');
+    };
+    r.send();
+  }
+
+  Video(data) {
+    const Videos = data.videos;
     const url = window.location.href;
     const vidContainer = document.querySelector('.video');
     const vid = document.createElement('video');
@@ -175,25 +189,25 @@ class Player {
     const over = document.createElement('div');
     const match = url.match(/id=(\d+)/);
     const matchid = match[1];
-
     vid.classList.add('vid');
-    const header = document.querySelector('.video__header')
+    const header = document.querySelector('.video__header');
+
     if (matchid == 1) {
-      vid.setAttribute('src', '/videos/small.mp4');
+      vid.setAttribute('src', Videos[0]['video']);
       vid.setAttribute('type', 'video/mp4');
-      header.appendChild(document.createTextNode('Lego!'));
+      header.appendChild(document.createTextNode(Videos[0]['title']));
     } else if (matchid == 2) {
-      vid.setAttribute('src', '/videos/bunny.mp4');
+      vid.setAttribute('src', Videos[1]['video']);
       vid.setAttribute('type', 'video/mp4');
-      header.appendChild(document.createTextNode('Big Bunny'));
+      header.appendChild(document.createTextNode(Videos[1]['title']));
     } else if (matchid == 3) {
-      vid.setAttribute('src', '/videos/bunny.mp4');
+      vid.setAttribute('src', Videos[2]['video']);
       vid.setAttribute('type', 'video/mp4');
-      header.appendChild(document.createTextNode('Prufu myndband'));
+      header.appendChild(document.createTextNode(Videos[2]['title']));
     } else if (matchid == 4) {
-      vid.setAttribute('src', '/videos/bunny.mp4');
+      vid.setAttribute('src', Videos[3]['video']);
       vid.setAttribute('type', 'video/mp4');
-      header.appendChild(document.createTextNode('Prufu myndband með löngum texta sem fer í tvær línur'));
+      header.appendChild(document.createTextNode(Videos[3]['title']));
     } else {
       const error = document.createTextNode('Myndband finnst ekki');
       header.appendChild(error);
@@ -206,14 +220,9 @@ class Player {
     overButton.appendChild(playImg);
     over.appendChild(overButton);
     overButton.addEventListener('click', this.playPause.bind());
-
-
     over.appendChild(vid);
     vidContainer.appendChild(over);
-  }
 
-  load() {
-    this.tempVid();
     this.createControls();
   }
 
@@ -242,7 +251,7 @@ class Player {
     forwardButton.classList.add('forward');
     backButton.classList.add('back');
     soundButton.classList.add('unmute');
-    screenButton.classList.add('normalSize'); // þegar myndbandið er venjulegt
+    screenButton.classList.add('normalSize');
     soundButton.appendChild(soundImg);
     playingButton.appendChild(playImg);
     forwardButton.appendChild(forwardImg);
@@ -341,7 +350,7 @@ class Player {
 document.addEventListener('DOMContentLoaded', () => {
   const VideoSite = new VideoRentSite();
   const player = new Player();
-  VideoSite.fetchJson();
+
   const findingClass = document.querySelector('.cardlist');
   if (findingClass) {
     VideoSite.load();

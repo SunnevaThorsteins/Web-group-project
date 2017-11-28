@@ -45,10 +45,7 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.time a:active, /* stylelint-disable-line */
-a:visited, /* stylelint-disable-line */
-a:hover, /* stylelint-disable-line */
-a:link { /* stylelint-disable-line */
+.time a:active, a:visited, a:hover, a:link { /* stylelint-disable-line */
   text-decoration: none;
 }
 

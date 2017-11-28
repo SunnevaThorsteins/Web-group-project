@@ -62,6 +62,14 @@ h3 { /* stylelint-disable-line */
   }
 }
 
+@media (min-width: 600px) {
+  .cardlist__col {
+    width: 50%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
 .card {
   width: 100%;
   min-width: 200px;
@@ -109,10 +117,7 @@ h3 { /* stylelint-disable-line */
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.time a:active, /* stylelint-disable-line */
-a:visited, /* stylelint-disable-line */
-a:hover, /* stylelint-disable-line */
-a:link { /* stylelint-disable-line */
+.time a:active, a:visited, a:hover, a:link { /* stylelint-disable-line */
   text-decoration: none;
 }
 
@@ -191,11 +196,7 @@ button:focus { /* stylelint-disable-line */
   margin: 20px 0;
 }
 
-.back--button a, /* stylelint-disable-line */
-a:active, /* stylelint-disable-line */
-a:visited, /* stylelint-disable-line */
-a:hover, /* stylelint-disable-line */
-a:link { /* stylelint-disable-line */
+.back--button a, a:active, a:visited, a:hover, a:link { /* stylelint-disable-line */
   color: #fff;
   text-decoration: none;
 }
